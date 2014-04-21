@@ -34,12 +34,21 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.isToScanDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.isFavoriteDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dsCandidateToMerge1 = new WinFormsCandidateToMerge.DsCandidateToMerge();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.isToScanDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.projectDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProjectsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.isToScanDataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.branchSourceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.branchDestinationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BranchsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtTfsUrl = new System.Windows.Forms.TextBox();
             this.dgvResult = new System.Windows.Forms.DataGridView();
@@ -52,15 +61,6 @@
             this.isToDisplayDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mergeResultBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnLaunch = new System.Windows.Forms.Button();
-            this.isToScanDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.isFavoriteDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isToScanDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.projectDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isToScanDataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.branchSourceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.branchDestinationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
@@ -109,7 +109,6 @@
             // 
             this.splitContainer3.Panel1.Controls.Add(this.splitContainer1);
             this.splitContainer3.Panel1.Controls.Add(this.txtTfsUrl);
-            this.splitContainer3.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer3_Panel1_Paint);
             // 
             // splitContainer3.Panel2
             // 
@@ -157,6 +156,29 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(357, 111);
             this.dataGridView2.TabIndex = 0;
+            // 
+            // isToScanDataGridViewCheckBoxColumn
+            // 
+            this.isToScanDataGridViewCheckBoxColumn.DataPropertyName = "IsToScan";
+            this.isToScanDataGridViewCheckBoxColumn.HeaderText = "V";
+            this.isToScanDataGridViewCheckBoxColumn.Name = "isToScanDataGridViewCheckBoxColumn";
+            this.isToScanDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.isToScanDataGridViewCheckBoxColumn.Width = 25;
+            // 
+            // isFavoriteDataGridViewCheckBoxColumn
+            // 
+            this.isFavoriteDataGridViewCheckBoxColumn.DataPropertyName = "IsFavorite";
+            this.isFavoriteDataGridViewCheckBoxColumn.HeaderText = "F";
+            this.isFavoriteDataGridViewCheckBoxColumn.Name = "isFavoriteDataGridViewCheckBoxColumn";
+            this.isFavoriteDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.isFavoriteDataGridViewCheckBoxColumn.Width = 25;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             // 
             // usersBindingSource
             // 
@@ -207,6 +229,20 @@
             this.dataGridView3.Size = new System.Drawing.Size(357, 92);
             this.dataGridView3.TabIndex = 0;
             // 
+            // isToScanDataGridViewCheckBoxColumn1
+            // 
+            this.isToScanDataGridViewCheckBoxColumn1.DataPropertyName = "IsToScan";
+            this.isToScanDataGridViewCheckBoxColumn1.HeaderText = "A";
+            this.isToScanDataGridViewCheckBoxColumn1.Name = "isToScanDataGridViewCheckBoxColumn1";
+            this.isToScanDataGridViewCheckBoxColumn1.Width = 25;
+            // 
+            // projectDataGridViewTextBoxColumn
+            // 
+            this.projectDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.projectDataGridViewTextBoxColumn.DataPropertyName = "Project";
+            this.projectDataGridViewTextBoxColumn.HeaderText = "Project";
+            this.projectDataGridViewTextBoxColumn.Name = "projectDataGridViewTextBoxColumn";
+            // 
             // ProjectsBindingSource
             // 
             this.ProjectsBindingSource.DataMember = "Projects";
@@ -230,7 +266,33 @@
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.Size = new System.Drawing.Size(357, 140);
             this.dataGridView4.TabIndex = 1;
-            this.dataGridView4.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellContentClick);
+            // 
+            // isToScanDataGridViewCheckBoxColumn2
+            // 
+            this.isToScanDataGridViewCheckBoxColumn2.DataPropertyName = "IsToScan";
+            this.isToScanDataGridViewCheckBoxColumn2.HeaderText = "A";
+            this.isToScanDataGridViewCheckBoxColumn2.Name = "isToScanDataGridViewCheckBoxColumn2";
+            this.isToScanDataGridViewCheckBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.isToScanDataGridViewCheckBoxColumn2.Width = 25;
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            this.nameDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn1.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            // 
+            // branchSourceDataGridViewTextBoxColumn
+            // 
+            this.branchSourceDataGridViewTextBoxColumn.DataPropertyName = "BranchSource";
+            this.branchSourceDataGridViewTextBoxColumn.HeaderText = "BranchSource";
+            this.branchSourceDataGridViewTextBoxColumn.Name = "branchSourceDataGridViewTextBoxColumn";
+            // 
+            // branchDestinationDataGridViewTextBoxColumn
+            // 
+            this.branchDestinationDataGridViewTextBoxColumn.DataPropertyName = "BranchDestination";
+            this.branchDestinationDataGridViewTextBoxColumn.HeaderText = "BranchDestination";
+            this.branchDestinationDataGridViewTextBoxColumn.Name = "branchDestinationDataGridViewTextBoxColumn";
             // 
             // BranchsBindingSource
             // 
@@ -337,70 +399,6 @@
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
-            // isToScanDataGridViewCheckBoxColumn
-            // 
-            this.isToScanDataGridViewCheckBoxColumn.DataPropertyName = "IsToScan";
-            this.isToScanDataGridViewCheckBoxColumn.HeaderText = "V";
-            this.isToScanDataGridViewCheckBoxColumn.Name = "isToScanDataGridViewCheckBoxColumn";
-            this.isToScanDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.isToScanDataGridViewCheckBoxColumn.Width = 25;
-            // 
-            // isFavoriteDataGridViewCheckBoxColumn
-            // 
-            this.isFavoriteDataGridViewCheckBoxColumn.DataPropertyName = "IsFavorite";
-            this.isFavoriteDataGridViewCheckBoxColumn.HeaderText = "F";
-            this.isFavoriteDataGridViewCheckBoxColumn.Name = "isFavoriteDataGridViewCheckBoxColumn";
-            this.isFavoriteDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.isFavoriteDataGridViewCheckBoxColumn.Width = 25;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // isToScanDataGridViewCheckBoxColumn1
-            // 
-            this.isToScanDataGridViewCheckBoxColumn1.DataPropertyName = "IsToScan";
-            this.isToScanDataGridViewCheckBoxColumn1.HeaderText = "A";
-            this.isToScanDataGridViewCheckBoxColumn1.Name = "isToScanDataGridViewCheckBoxColumn1";
-            this.isToScanDataGridViewCheckBoxColumn1.Width = 25;
-            // 
-            // projectDataGridViewTextBoxColumn
-            // 
-            this.projectDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.projectDataGridViewTextBoxColumn.DataPropertyName = "Project";
-            this.projectDataGridViewTextBoxColumn.HeaderText = "Project";
-            this.projectDataGridViewTextBoxColumn.Name = "projectDataGridViewTextBoxColumn";
-            // 
-            // isToScanDataGridViewCheckBoxColumn2
-            // 
-            this.isToScanDataGridViewCheckBoxColumn2.DataPropertyName = "IsToScan";
-            this.isToScanDataGridViewCheckBoxColumn2.HeaderText = "A";
-            this.isToScanDataGridViewCheckBoxColumn2.Name = "isToScanDataGridViewCheckBoxColumn2";
-            this.isToScanDataGridViewCheckBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.isToScanDataGridViewCheckBoxColumn2.Width = 25;
-            // 
-            // nameDataGridViewTextBoxColumn1
-            // 
-            this.nameDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn1.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
-            // 
-            // branchSourceDataGridViewTextBoxColumn
-            // 
-            this.branchSourceDataGridViewTextBoxColumn.DataPropertyName = "BranchSource";
-            this.branchSourceDataGridViewTextBoxColumn.HeaderText = "BranchSource";
-            this.branchSourceDataGridViewTextBoxColumn.Name = "branchSourceDataGridViewTextBoxColumn";
-            // 
-            // branchDestinationDataGridViewTextBoxColumn
-            // 
-            this.branchDestinationDataGridViewTextBoxColumn.DataPropertyName = "BranchDestination";
-            this.branchDestinationDataGridViewTextBoxColumn.HeaderText = "BranchDestination";
-            this.branchDestinationDataGridViewTextBoxColumn.Name = "branchDestinationDataGridViewTextBoxColumn";
-            // 
             // CandidateToMerge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -440,42 +438,42 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.TextBox txtTfsUrl;
-        private System.Windows.Forms.Button btnLaunch;
-        private System.Windows.Forms.DataGridView dgvResult;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.DataGridView dataGridView4;
-        private System.Windows.Forms.BindingSource usersBindingSource;
-        private DsCandidateToMerge dsCandidateToMerge1;
-        private System.Windows.Forms.BindingSource ProjectsBindingSource;
-        private System.Windows.Forms.BindingSource BranchsBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProjectsDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idBranchDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource mergeResultBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProjectsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn changesetIdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ownerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn creationDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn projectDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn branchNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn isToDisplayDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isToScanDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isFavoriteDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isToScanDataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn projectDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isToScanDataGridViewCheckBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn branchSourceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn branchDestinationDataGridViewTextBoxColumn;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        internal System.Windows.Forms.Panel panel2;
+        internal System.Windows.Forms.SplitContainer splitContainer3;
+        internal System.Windows.Forms.SplitContainer splitContainer1;
+        internal System.Windows.Forms.SplitContainer splitContainer2;
+        internal System.Windows.Forms.Button btnLaunch;
+        internal System.Windows.Forms.DataGridView dgvResult;
+        internal System.Windows.Forms.DataGridView dataGridView2;
+        internal System.Windows.Forms.DataGridView dataGridView3;
+        internal System.Windows.Forms.DataGridView dataGridView4;
+        internal System.Windows.Forms.BindingSource usersBindingSource;
+        internal DsCandidateToMerge dsCandidateToMerge1;
+        internal System.Windows.Forms.BindingSource ProjectsBindingSource;
+        internal System.Windows.Forms.BindingSource BranchsBindingSource;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn ProjectsDataGridViewTextBoxColumn1;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn idBranchDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.BindingSource mergeResultBindingSource;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn ProjectsDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn changesetIdDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn ownerDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn creationDateDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn projectDataGridViewTextBoxColumn1;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn branchNameDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn isToDisplayDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.DataGridViewCheckBoxColumn isToScanDataGridViewCheckBoxColumn;
+        internal System.Windows.Forms.DataGridViewCheckBoxColumn isFavoriteDataGridViewCheckBoxColumn;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.DataGridViewCheckBoxColumn isToScanDataGridViewCheckBoxColumn1;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn projectDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.DataGridViewCheckBoxColumn isToScanDataGridViewCheckBoxColumn2;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn branchSourceDataGridViewTextBoxColumn;
+        internal System.Windows.Forms.DataGridViewTextBoxColumn branchDestinationDataGridViewTextBoxColumn;
+        internal System.ComponentModel.BackgroundWorker backgroundWorker1;
+        internal System.Windows.Forms.TextBox txtTfsUrl;
     }
 }
 

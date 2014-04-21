@@ -64,6 +64,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSerializer.cs" />
+    <Compile Include="DataSetManipulator.cs" />
+    <Compile Include="UiSerializeColumnState.cs" />
     <Compile Include="DsCandidateToMerge.cs">
       <DependentUpon>DsCandidateToMerge.xsd</DependentUpon>
     </Compile>
@@ -80,7 +83,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SaveState.cs" />
+    <Compile Include="GetMergeCandidateProcess.cs" />
+    <Compile Include="DataExchangeBackgroundWorker.cs" />
+    <Compile Include="GetMergeCandidateResponse.cs" />
+    <Compile Include="GetMergeCandidateRequest.cs" />
+    <Compile Include="UiSerializer.cs" />
+    <Compile Include="UiSerializeRoot.cs" />
     <Compile Include="WaitForms.cs">
       <SubType>Form</SubType>
     </Compile>
