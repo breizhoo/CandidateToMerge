@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace WinFormsCandidateToMerge
 {
@@ -19,5 +20,19 @@ namespace WinFormsCandidateToMerge
         public Size FormSize { get; set; }
 
         public Point FormPosition { get; set; }
+
+        public FormWindowState WindowState { get; set; }
+
+        public SortOrder dgvResultSortOrder { get; set; }
+
+        public string dgvResultSortedColumn { get; set; }
+
+        public SortOrder dataGridView2SortOrder { get; set; }
+
+        public string dataGridView2SortedColumn { get; set; }
+
+        
+
+
     }
 }

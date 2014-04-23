@@ -7,25 +7,13 @@
 <DiagramLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ex:showrelationlabel="False" ViewPortX="-10" ViewPortY="-16" xmlns:ex="urn:schemas-microsoft-com:xml-msdatasource-layout-extended" xmlns="urn:schemas-microsoft-com:xml-msdatasource-layout">
   <Shapes>
     <Shape ID="DesignTable:Users" ZOrder="8" X="44" Y="134" Height="78" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="74" />
-    <Shape ID="DesignTable:MergeResult" ZOrder="7" X="299" Y="181" Height="146" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="142" />
-    <Shape ID="DesignTable:Projects" ZOrder="5" X="45" Y="235" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="57" />
-    <Shape ID="DesignTable:Branchs" ZOrder="3" X="46" Y="306" Height="95" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="91" />
-    <Shape ID="DesignTable:Configuration" ZOrder="2" X="301" Y="101" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="57" />
+    <Shape ID="DesignTable:MergeResult" ZOrder="1" X="299" Y="181" Height="146" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="142" />
+    <Shape ID="DesignTable:Projects" ZOrder="6" X="45" Y="235" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="57" />
+    <Shape ID="DesignTable:Branchs" ZOrder="4" X="46" Y="306" Height="95" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="91" />
+    <Shape ID="DesignTable:Configuration" ZOrder="3" X="301" Y="101" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="57" />
   </Shapes>
   <Connectors>
-    <Connector ID="DesignRelation:FK_Project_MergeResult" ZOrder="4" LineWidth="11">
-      <RoutePoints>
-        <Point>
-          <X>195</X>
-          <Y>253</Y>
-        </Point>
-        <Point>
-          <X>299</X>
-          <Y>253</Y>
-        </Point>
-      </RoutePoints>
-    </Connector>
-    <Connector ID="DesignRelation:FK_Users_MergeResult" ZOrder="6" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Users_MergeResult" ZOrder="7" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>194</X>
@@ -37,7 +25,19 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:Branching_MergeResult" ZOrder="1" LineWidth="11">
+    <Connector ID="DesignRelation:FK_Project_MergeResult" ZOrder="5" LineWidth="11">
+      <RoutePoints>
+        <Point>
+          <X>195</X>
+          <Y>253</Y>
+        </Point>
+        <Point>
+          <X>299</X>
+          <Y>253</Y>
+        </Point>
+      </RoutePoints>
+    </Connector>
+    <Connector ID="DesignRelation:Branching_MergeResult" ZOrder="2" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>196</X>

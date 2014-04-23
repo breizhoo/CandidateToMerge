@@ -36,7 +36,7 @@
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.isToScanDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.isFavoriteDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dsCandidateToMerge1 = new WinFormsCandidateToMerge.DsCandidateToMerge();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -53,7 +53,7 @@
             this.txtTfsUrl = new System.Windows.Forms.TextBox();
             this.dgvResult = new System.Windows.Forms.DataGridView();
             this.changesetIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ownerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOwner = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.creationDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.projectDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -148,13 +148,15 @@
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.isToScanDataGridViewCheckBoxColumn,
             this.isFavoriteDataGridViewCheckBoxColumn,
-            this.nameDataGridViewTextBoxColumn});
+            this.colName});
             this.dataGridView2.DataSource = this.usersBindingSource;
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView2.Location = new System.Drawing.Point(0, 0);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(357, 111);
             this.dataGridView2.TabIndex = 0;
+            this.dataGridView2.CurrentCellChanged += new System.EventHandler(this.dataGridView2_CurrentCellChanged);
+            this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
             // isToScanDataGridViewCheckBoxColumn
             // 
@@ -172,12 +174,12 @@
             this.isFavoriteDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.isFavoriteDataGridViewCheckBoxColumn.Width = 25;
             // 
-            // nameDataGridViewTextBoxColumn
+            // colName
             // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "Name";
+            this.colName.HeaderText = "Name";
+            this.colName.Name = "colName";
             // 
             // usersBindingSource
             // 
@@ -314,7 +316,7 @@
             this.dgvResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResult.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.changesetIdDataGridViewTextBoxColumn,
-            this.ownerDataGridViewTextBoxColumn,
+            this.colOwner,
             this.creationDateDataGridViewTextBoxColumn,
             this.commentDataGridViewTextBoxColumn,
             this.projectDataGridViewTextBoxColumn1,
@@ -327,6 +329,7 @@
             this.dgvResult.ReadOnly = true;
             this.dgvResult.Size = new System.Drawing.Size(430, 385);
             this.dgvResult.TabIndex = 1;
+            this.dgvResult.DataSourceChanged += new System.EventHandler(this.dgvResult_DataSourceChanged);
             // 
             // changesetIdDataGridViewTextBoxColumn
             // 
@@ -335,12 +338,12 @@
             this.changesetIdDataGridViewTextBoxColumn.Name = "changesetIdDataGridViewTextBoxColumn";
             this.changesetIdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // ownerDataGridViewTextBoxColumn
+            // colOwner
             // 
-            this.ownerDataGridViewTextBoxColumn.DataPropertyName = "Owner";
-            this.ownerDataGridViewTextBoxColumn.HeaderText = "Owner";
-            this.ownerDataGridViewTextBoxColumn.Name = "ownerDataGridViewTextBoxColumn";
-            this.ownerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.colOwner.DataPropertyName = "Owner";
+            this.colOwner.HeaderText = "Owner";
+            this.colOwner.Name = "colOwner";
+            this.colOwner.ReadOnly = true;
             // 
             // creationDateDataGridViewTextBoxColumn
             // 
@@ -451,16 +454,6 @@
         internal System.Windows.Forms.BindingSource mergeResultBindingSource;
         internal System.Windows.Forms.DataGridViewTextBoxColumn ProjectsDataGridViewTextBoxColumn;
         internal System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn changesetIdDataGridViewTextBoxColumn;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn ownerDataGridViewTextBoxColumn;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn creationDateDataGridViewTextBoxColumn;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn projectDataGridViewTextBoxColumn1;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn branchNameDataGridViewTextBoxColumn;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn isToDisplayDataGridViewTextBoxColumn;
-        internal System.Windows.Forms.DataGridViewCheckBoxColumn isToScanDataGridViewCheckBoxColumn;
-        internal System.Windows.Forms.DataGridViewCheckBoxColumn isFavoriteDataGridViewCheckBoxColumn;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         internal System.Windows.Forms.DataGridViewCheckBoxColumn isToScanDataGridViewCheckBoxColumn1;
         internal System.Windows.Forms.DataGridViewTextBoxColumn projectDataGridViewTextBoxColumn;
         internal System.Windows.Forms.DataGridViewCheckBoxColumn isToScanDataGridViewCheckBoxColumn2;
@@ -469,6 +462,16 @@
         internal System.Windows.Forms.DataGridViewTextBoxColumn branchDestinationDataGridViewTextBoxColumn;
         internal System.ComponentModel.BackgroundWorker backgroundWorker1;
         internal System.Windows.Forms.TextBox txtTfsUrl;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isToScanDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isFavoriteDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn changesetIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOwner;
+        private System.Windows.Forms.DataGridViewTextBoxColumn creationDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn projectDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn branchNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn isToDisplayDataGridViewTextBoxColumn;
     }
 }
 
