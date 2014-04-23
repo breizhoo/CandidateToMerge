@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -23,6 +24,12 @@ namespace WinFormsCandidateToMerge
                 {
                     var p = xs.Deserialize(rd) as UiSerializeRoot;
 
+                    if (p.FormSize != Size.Empty)
+                        _ui.Size = p.FormSize;
+
+                    if (p.FormPosition != Point.Empty)
+                        _ui.Location = p.FormPosition;
+
                     _ui.splitContainer1.SplitterDistance = p.SplitterDistance1;
                     _ui.splitContainer2.SplitterDistance = p.SplitterDistance2;
                     _ui.splitContainer3.SplitterDistance = p.SplitterDistance3;
@@ -31,6 +38,8 @@ namespace WinFormsCandidateToMerge
                     SetColumnState(_ui.dataGridView2.Columns, p.DataGridView2);
                     SetColumnState(_ui.dataGridView3.Columns, p.DataGridView3);
                     SetColumnState(_ui.dataGridView4.Columns, p.DataGridView4);
+
+
                 }
             }
         }
@@ -46,7 +55,11 @@ namespace WinFormsCandidateToMerge
                 DataGridView2 = GetColumnState(_ui.dataGridView2.Columns),
                 DataGridView3 = GetColumnState(_ui.dataGridView3.Columns),
                 DataGridView4 = GetColumnState(_ui.dataGridView4.Columns),
-                DataGridView1 = GetColumnState(_ui.dgvResult.Columns)
+                DataGridView1 = GetColumnState(_ui.dgvResult.Columns),
+
+                FormSize = _ui.Size,
+                FormPosition = _ui.Location
+
             };
 
             var xs = new XmlSerializer(typeof(UiSerializeRoot));

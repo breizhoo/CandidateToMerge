@@ -38,7 +38,7 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Project" msprop:Generator_ColumnVarNameInTable="columnProject" msprop:Generator_ColumnPropNameInRow="Project" msprop:Generator_ColumnPropNameInTable="ProjectColumn" msprop:Generator_UserColumnName="Project" type="xs:string" />
-              <xs:element name="IsToScan" msprop:Generator_ColumnVarNameInTable="columnIsToScan" msprop:Generator_ColumnPropNameInRow="IsToScan" msprop:Generator_ColumnPropNameInTable="IsToScanColumn" msprop:Generator_UserColumnName="IsToScan" type="xs:boolean" minOccurs="0" />
+              <xs:element name="IsToScan" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="IsToScan" msprop:Generator_ColumnVarNameInTable="columnIsToScan" msprop:Generator_ColumnPropNameInTable="IsToScanColumn" msprop:Generator_UserColumnName="IsToScan" type="xs:boolean" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -65,10 +65,6 @@
     <xs:unique name="UsersKey" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Users" />
       <xs:field xpath="mstns:Name" />
-    </xs:unique>
-    <xs:unique name="MergeResultKey1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:MergeResult" />
-      <xs:field xpath="mstns:ChangesetId" />
     </xs:unique>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Projects" />

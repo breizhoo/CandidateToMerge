@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace WinFormsCandidateToMerge
 {
     public class UiSerializeRoot
@@ -14,6 +16,8 @@ namespace WinFormsCandidateToMerge
 
         public UiSerializeColumnState[] DataGridView4 { get; set; }
 
+        public Size FormSize { get; set; }
 
+        public Point FormPosition { get; set; }
     }
 }

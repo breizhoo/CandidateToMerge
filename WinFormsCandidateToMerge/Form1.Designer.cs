@@ -129,7 +129,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.Maroon;
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel1.Controls.Add(this.dataGridView2);
             // 
             // splitContainer1.Panel2
@@ -143,8 +143,7 @@
             // 
             this.dataGridView2.AllowUserToOrderColumns = true;
             this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.isToScanDataGridViewCheckBoxColumn,
@@ -201,12 +200,12 @@
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.BackColor = System.Drawing.Color.LightCoral;
+            this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel1.Controls.Add(this.dataGridView3);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.BackColor = System.Drawing.Color.OrangeRed;
+            this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.dataGridView4);
             this.splitContainer2.Size = new System.Drawing.Size(357, 236);
             this.splitContainer2.SplitterDistance = 92;
@@ -216,8 +215,7 @@
             // 
             this.dataGridView3.AllowUserToOrderColumns = true;
             this.dataGridView3.AutoGenerateColumns = false;
-            this.dataGridView3.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView3.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.isToScanDataGridViewCheckBoxColumn1,
@@ -252,8 +250,7 @@
             // 
             this.dataGridView4.AllowUserToOrderColumns = true;
             this.dataGridView4.AutoGenerateColumns = false;
-            this.dataGridView4.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView4.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.isToScanDataGridViewCheckBoxColumn2,
@@ -311,11 +308,9 @@
             // dgvResult
             // 
             this.dgvResult.AllowUserToAddRows = false;
-            this.dgvResult.AllowUserToDeleteRows = false;
             this.dgvResult.AllowUserToOrderColumns = true;
             this.dgvResult.AutoGenerateColumns = false;
-            this.dgvResult.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvResult.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResult.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.changesetIdDataGridViewTextBoxColumn,

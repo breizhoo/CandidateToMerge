@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.VersionControl.Client;
 
@@ -21,6 +22,7 @@ namespace WinFormsCandidateToMerge
         {
             var listResponseProject = new List<GetMergeCandidateResponse>();
 
+            //var teamProjectCollection = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(_tfsUrl, true, true);
             var teamProjectCollection = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(new Uri(_tfsUrl));
             foreach (var resquestOfMerge in _resquestOfMerge)
             {
