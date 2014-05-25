@@ -20,9 +20,17 @@ namespace WinFormsCandidateToMerge
 
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.WorkerReportsProgress = true;
             _dataSetManipulator = new DataSetManipulator(dsCandidateToMerge1);
             _uiSerializer = new UiSerializer(this);
             _dataSerializer = new DataSerializer(dsCandidateToMerge1);
+        }
+
+        void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            _waitForms.progressBar1.Value = e.ProgressPercentage;
+            _waitForms.txtCurrent.Text = currentProject;
         }
 
         private void btnLaunch_Click(object sender, EventArgs e)
@@ -46,14 +54,27 @@ namespace WinFormsCandidateToMerge
         }
 
 
-
+        private string currentProject;
         void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             var response = new DataExchangeBackgroundWorker();
-
+            var list = _dataSetManipulator.GetMergeCandidateRequest().ToList();
+            if (list.Count > 0)
+            {
+                currentProject = list.ElementAt(0).Project;
+                backgroundWorker1.ReportProgress(0);
+            }
             var reponseOfMerge = new GetMergeCandidateProcess(txtTfsUrl.Text,
-                _dataSetManipulator.GetMergeCandidateRequest())
-                .GetMergeResult();
+                list)
+                .GetMergeResult(x =>
+                {
+                    var index = list.IndexOf(x);
+                    var percent = (int)((decimal)100 / list.Count * index);
+                    currentProject = list.ElementAt(index).Project;
+                    if (percent > 0)
+                        backgroundWorker1.ReportProgress(percent);
+
+                });
 
             response.Owners = (from items in reponseOfMerge
                                from mergeItem in items.MergeCandidates
@@ -133,5 +154,11 @@ namespace WinFormsCandidateToMerge
             ChangeColorRow(userName);
         }
 
+        private void dgvResult_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Ignore.DisplayIndex == e.ColumnIndex)
+                _dataSetManipulator.Ignore((DsCandidateToMerge.MergeResultRow)
+                    ((DataRowView)(dgvResult.CurrentRow.DataBoundItem)).Row);
+        }
     }
 }

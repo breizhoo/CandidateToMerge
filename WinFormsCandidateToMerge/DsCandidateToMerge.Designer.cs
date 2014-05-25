@@ -34,11 +34,15 @@ namespace WinFormsCandidateToMerge {
         
         private ConfigurationDataTable tableConfiguration;
         
-        private global::System.Data.DataRelation relationFK_Project_MergeResult;
+        private MergeIgnoreDataTable tableMergeIgnore;
         
         private global::System.Data.DataRelation relationFK_Users_MergeResult;
         
+        private global::System.Data.DataRelation relationFK_Project_MergeResult;
+        
         private global::System.Data.DataRelation relationBranching_MergeResult;
+        
+        private global::System.Data.DataRelation relationMergeIgnore_MergeResult;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -86,6 +90,9 @@ namespace WinFormsCandidateToMerge {
                 }
                 if ((ds.Tables["Configuration"] != null)) {
                     base.Tables.Add(new ConfigurationDataTable(ds.Tables["Configuration"]));
+                }
+                if ((ds.Tables["MergeIgnore"] != null)) {
+                    base.Tables.Add(new MergeIgnoreDataTable(ds.Tables["MergeIgnore"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -153,6 +160,16 @@ namespace WinFormsCandidateToMerge {
         public ConfigurationDataTable Configuration {
             get {
                 return this.tableConfiguration;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public MergeIgnoreDataTable MergeIgnore {
+            get {
+                return this.tableMergeIgnore;
             }
         }
         
@@ -239,6 +256,9 @@ namespace WinFormsCandidateToMerge {
                 if ((ds.Tables["Configuration"] != null)) {
                     base.Tables.Add(new ConfigurationDataTable(ds.Tables["Configuration"]));
                 }
+                if ((ds.Tables["MergeIgnore"] != null)) {
+                    base.Tables.Add(new MergeIgnoreDataTable(ds.Tables["MergeIgnore"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -302,9 +322,16 @@ namespace WinFormsCandidateToMerge {
                     this.tableConfiguration.InitVars();
                 }
             }
-            this.relationFK_Project_MergeResult = this.Relations["FK_Project_MergeResult"];
+            this.tableMergeIgnore = ((MergeIgnoreDataTable)(base.Tables["MergeIgnore"]));
+            if ((initTable == true)) {
+                if ((this.tableMergeIgnore != null)) {
+                    this.tableMergeIgnore.InitVars();
+                }
+            }
             this.relationFK_Users_MergeResult = this.Relations["FK_Users_MergeResult"];
+            this.relationFK_Project_MergeResult = this.Relations["FK_Project_MergeResult"];
             this.relationBranching_MergeResult = this.Relations["Branching_MergeResult"];
+            this.relationMergeIgnore_MergeResult = this.Relations["MergeIgnore_MergeResult"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -325,14 +352,9 @@ namespace WinFormsCandidateToMerge {
             base.Tables.Add(this.tableBranchs);
             this.tableConfiguration = new ConfigurationDataTable();
             base.Tables.Add(this.tableConfiguration);
+            this.tableMergeIgnore = new MergeIgnoreDataTable();
+            base.Tables.Add(this.tableMergeIgnore);
             global::System.Data.ForeignKeyConstraint fkc;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_Project_MergeResult", new global::System.Data.DataColumn[] {
-                        this.tableProjects.ProjectColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMergeResult.ProjectColumn});
-            this.tableMergeResult.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.Cascade;
-            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_Users_MergeResult", new global::System.Data.DataColumn[] {
                         this.tableUsers.NameColumn}, new global::System.Data.DataColumn[] {
                         this.tableMergeResult.OwnerColumn});
@@ -340,18 +362,33 @@ namespace WinFormsCandidateToMerge {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            this.relationFK_Project_MergeResult = new global::System.Data.DataRelation("FK_Project_MergeResult", new global::System.Data.DataColumn[] {
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_Project_MergeResult", new global::System.Data.DataColumn[] {
                         this.tableProjects.ProjectColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMergeResult.ProjectColumn}, false);
-            this.Relations.Add(this.relationFK_Project_MergeResult);
+                        this.tableMergeResult.ProjectColumn});
+            this.tableMergeResult.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             this.relationFK_Users_MergeResult = new global::System.Data.DataRelation("FK_Users_MergeResult", new global::System.Data.DataColumn[] {
                         this.tableUsers.NameColumn}, new global::System.Data.DataColumn[] {
                         this.tableMergeResult.OwnerColumn}, false);
             this.Relations.Add(this.relationFK_Users_MergeResult);
+            this.relationFK_Project_MergeResult = new global::System.Data.DataRelation("FK_Project_MergeResult", new global::System.Data.DataColumn[] {
+                        this.tableProjects.ProjectColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMergeResult.ProjectColumn}, false);
+            this.Relations.Add(this.relationFK_Project_MergeResult);
             this.relationBranching_MergeResult = new global::System.Data.DataRelation("Branching_MergeResult", new global::System.Data.DataColumn[] {
                         this.tableBranchs.NameColumn}, new global::System.Data.DataColumn[] {
                         this.tableMergeResult.BranchNameColumn}, false);
             this.Relations.Add(this.relationBranching_MergeResult);
+            this.relationMergeIgnore_MergeResult = new global::System.Data.DataRelation("MergeIgnore_MergeResult", new global::System.Data.DataColumn[] {
+                        this.tableMergeIgnore.ChangesetIdColumn,
+                        this.tableMergeIgnore.BranchNameColumn,
+                        this.tableMergeIgnore.ProjectColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMergeResult.ChangesetIdColumn,
+                        this.tableMergeResult.BranchNameColumn,
+                        this.tableMergeResult.ProjectColumn}, false);
+            this.Relations.Add(this.relationMergeIgnore_MergeResult);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -381,6 +418,12 @@ namespace WinFormsCandidateToMerge {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeConfiguration() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeMergeIgnore() {
             return false;
         }
         
@@ -442,7 +485,8 @@ namespace WinFormsCandidateToMerge {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitExpressions() {
-            this.MergeResult.IsToDisplayColumn.Expression = "Parent(FK_Users_MergeResult).IsToScan";
+            this.MergeResult.IsToDisplayColumn.Expression = "Parent(FK_Users_MergeResult).IsToScan AND ISNULL(Parent(MergeIgnore_MergeResult)." +
+                "Ignore, 0) = 0";
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -459,6 +503,9 @@ namespace WinFormsCandidateToMerge {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void ConfigurationRowChangeEventHandler(object sender, ConfigurationRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void MergeIgnoreRowChangeEventHandler(object sender, MergeIgnoreRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -955,6 +1002,15 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MergeResultRow FindByChangesetIdBranchNameProject(int ChangesetId, string BranchName, string Project) {
+                return ((MergeResultRow)(this.Rows.Find(new object[] {
+                            ChangesetId,
+                            BranchName,
+                            Project})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 MergeResultDataTable cln = ((MergeResultDataTable)(base.Clone()));
                 cln.InitVars();
@@ -996,7 +1052,13 @@ namespace WinFormsCandidateToMerge {
                 base.Columns.Add(this.columnBranchName);
                 this.columnIsToDisplay = new global::System.Data.DataColumn("IsToDisplay", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIsToDisplay);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnChangesetId,
+                                this.columnBranchName,
+                                this.columnProject}, true));
                 this.columnChangesetId.AllowDBNull = false;
+                this.columnProject.AllowDBNull = false;
+                this.columnBranchName.AllowDBNull = false;
                 this.columnIsToDisplay.ReadOnly = true;
             }
             
@@ -1021,7 +1083,8 @@ namespace WinFormsCandidateToMerge {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitExpressions() {
-                this.IsToDisplayColumn.Expression = "Parent(FK_Users_MergeResult).IsToScan";
+                this.IsToDisplayColumn.Expression = "Parent(FK_Users_MergeResult).IsToScan AND ISNULL(Parent(MergeIgnore_MergeResult)." +
+                    "Ignore, 0) = 0";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1975,6 +2038,312 @@ namespace WinFormsCandidateToMerge {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class MergeIgnoreDataTable : global::System.Data.TypedTableBase<MergeIgnoreRow> {
+            
+            private global::System.Data.DataColumn columnChangesetId;
+            
+            private global::System.Data.DataColumn columnProject;
+            
+            private global::System.Data.DataColumn columnBranchName;
+            
+            private global::System.Data.DataColumn columnIgnore;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MergeIgnoreDataTable() {
+                this.TableName = "MergeIgnore";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal MergeIgnoreDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected MergeIgnoreDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChangesetIdColumn {
+                get {
+                    return this.columnChangesetId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ProjectColumn {
+                get {
+                    return this.columnProject;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BranchNameColumn {
+                get {
+                    return this.columnBranchName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IgnoreColumn {
+                get {
+                    return this.columnIgnore;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MergeIgnoreRow this[int index] {
+                get {
+                    return ((MergeIgnoreRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event MergeIgnoreRowChangeEventHandler MergeIgnoreRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event MergeIgnoreRowChangeEventHandler MergeIgnoreRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event MergeIgnoreRowChangeEventHandler MergeIgnoreRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event MergeIgnoreRowChangeEventHandler MergeIgnoreRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddMergeIgnoreRow(MergeIgnoreRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MergeIgnoreRow AddMergeIgnoreRow(int ChangesetId, string Project, string BranchName, bool Ignore) {
+                MergeIgnoreRow rowMergeIgnoreRow = ((MergeIgnoreRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        ChangesetId,
+                        Project,
+                        BranchName,
+                        Ignore};
+                rowMergeIgnoreRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowMergeIgnoreRow);
+                return rowMergeIgnoreRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MergeIgnoreRow FindByChangesetIdBranchNameProject(int ChangesetId, string BranchName, string Project) {
+                return ((MergeIgnoreRow)(this.Rows.Find(new object[] {
+                            ChangesetId,
+                            BranchName,
+                            Project})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                MergeIgnoreDataTable cln = ((MergeIgnoreDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new MergeIgnoreDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnChangesetId = base.Columns["ChangesetId"];
+                this.columnProject = base.Columns["Project"];
+                this.columnBranchName = base.Columns["BranchName"];
+                this.columnIgnore = base.Columns["Ignore"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnChangesetId = new global::System.Data.DataColumn("ChangesetId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChangesetId);
+                this.columnProject = new global::System.Data.DataColumn("Project", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProject);
+                this.columnBranchName = new global::System.Data.DataColumn("BranchName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBranchName);
+                this.columnIgnore = new global::System.Data.DataColumn("Ignore", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIgnore);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnChangesetId,
+                                this.columnBranchName,
+                                this.columnProject}, true));
+                this.columnChangesetId.AllowDBNull = false;
+                this.columnProject.AllowDBNull = false;
+                this.columnBranchName.AllowDBNull = false;
+                this.columnIgnore.DefaultValue = ((bool)(true));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MergeIgnoreRow NewMergeIgnoreRow() {
+                return ((MergeIgnoreRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new MergeIgnoreRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(MergeIgnoreRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.MergeIgnoreRowChanged != null)) {
+                    this.MergeIgnoreRowChanged(this, new MergeIgnoreRowChangeEvent(((MergeIgnoreRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.MergeIgnoreRowChanging != null)) {
+                    this.MergeIgnoreRowChanging(this, new MergeIgnoreRowChangeEvent(((MergeIgnoreRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.MergeIgnoreRowDeleted != null)) {
+                    this.MergeIgnoreRowDeleted(this, new MergeIgnoreRowChangeEvent(((MergeIgnoreRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.MergeIgnoreRowDeleting != null)) {
+                    this.MergeIgnoreRowDeleting(this, new MergeIgnoreRowChangeEvent(((MergeIgnoreRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveMergeIgnoreRow(MergeIgnoreRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DsCandidateToMerge ds = new DsCandidateToMerge();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "MergeIgnoreDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class UsersRow : global::System.Data.DataRow {
@@ -2144,12 +2513,7 @@ namespace WinFormsCandidateToMerge {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Project {
                 get {
-                    try {
-                        return ((string)(this[this.tableMergeResult.ProjectColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("La valeur pour la colonne \'Project\' dans la table \'MergeResult\' est DBNull.", e);
-                    }
+                    return ((string)(this[this.tableMergeResult.ProjectColumn]));
                 }
                 set {
                     this[this.tableMergeResult.ProjectColumn] = value;
@@ -2160,12 +2524,7 @@ namespace WinFormsCandidateToMerge {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string BranchName {
                 get {
-                    try {
-                        return ((string)(this[this.tableMergeResult.BranchNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("La valeur pour la colonne \'BranchName\' dans la table \'MergeResult\' est DBNull.", e);
-                    }
+                    return ((string)(this[this.tableMergeResult.BranchNameColumn]));
                 }
                 set {
                     this[this.tableMergeResult.BranchNameColumn] = value;
@@ -2190,17 +2549,6 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ProjectsRow ProjectsRow {
-                get {
-                    return ((ProjectsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Project_MergeResult"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Project_MergeResult"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public UsersRow UsersRow {
                 get {
                     return ((UsersRow)(this.GetParentRow(this.Table.ParentRelations["FK_Users_MergeResult"])));
@@ -2212,12 +2560,34 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ProjectsRow ProjectsRow {
+                get {
+                    return ((ProjectsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Project_MergeResult"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Project_MergeResult"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BranchsRow BranchsRow {
                 get {
                     return ((BranchsRow)(this.GetParentRow(this.Table.ParentRelations["Branching_MergeResult"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["Branching_MergeResult"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MergeIgnoreRow MergeIgnoreRowParent {
+                get {
+                    return ((MergeIgnoreRow)(this.GetParentRow(this.Table.ParentRelations["MergeIgnore_MergeResult"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["MergeIgnore_MergeResult"]);
                 }
             }
             
@@ -2255,30 +2625,6 @@ namespace WinFormsCandidateToMerge {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCommentNull() {
                 this[this.tableMergeResult.CommentColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsProjectNull() {
-                return this.IsNull(this.tableMergeResult.ProjectColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetProjectNull() {
-                this[this.tableMergeResult.ProjectColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsBranchNameNull() {
-                return this.IsNull(this.tableMergeResult.BranchNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetBranchNameNull() {
-                this[this.tableMergeResult.BranchNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2536,6 +2882,93 @@ namespace WinFormsCandidateToMerge {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class MergeIgnoreRow : global::System.Data.DataRow {
+            
+            private MergeIgnoreDataTable tableMergeIgnore;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal MergeIgnoreRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableMergeIgnore = ((MergeIgnoreDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ChangesetId {
+                get {
+                    return ((int)(this[this.tableMergeIgnore.ChangesetIdColumn]));
+                }
+                set {
+                    this[this.tableMergeIgnore.ChangesetIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Project {
+                get {
+                    return ((string)(this[this.tableMergeIgnore.ProjectColumn]));
+                }
+                set {
+                    this[this.tableMergeIgnore.ProjectColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string BranchName {
+                get {
+                    return ((string)(this[this.tableMergeIgnore.BranchNameColumn]));
+                }
+                set {
+                    this[this.tableMergeIgnore.BranchNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Ignore {
+                get {
+                    if (this.IsIgnoreNull()) {
+                        return true;
+                    }
+                    else {
+                        return ((bool)(this[this.tableMergeIgnore.IgnoreColumn]));
+                    }
+                }
+                set {
+                    this[this.tableMergeIgnore.IgnoreColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIgnoreNull() {
+                return this.IsNull(this.tableMergeIgnore.IgnoreColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIgnoreNull() {
+                this[this.tableMergeIgnore.IgnoreColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MergeResultRow[] GetMergeResultRows() {
+                if ((this.Table.ChildRelations["MergeIgnore_MergeResult"] == null)) {
+                    return new MergeResultRow[0];
+                }
+                else {
+                    return ((MergeResultRow[])(base.GetChildRows(this.Table.ChildRelations["MergeIgnore_MergeResult"])));
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -2691,6 +3124,40 @@ namespace WinFormsCandidateToMerge {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ConfigurationRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class MergeIgnoreRowChangeEvent : global::System.EventArgs {
+            
+            private MergeIgnoreRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MergeIgnoreRowChangeEvent(MergeIgnoreRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MergeIgnoreRow Row {
                 get {
                     return this.eventRow;
                 }

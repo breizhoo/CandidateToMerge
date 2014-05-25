@@ -52,16 +52,17 @@
             this.BranchsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtTfsUrl = new System.Windows.Forms.TextBox();
             this.dgvResult = new System.Windows.Forms.DataGridView();
-            this.changesetIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOwner = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.creationDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.projectDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.branchNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isToDisplayDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mergeResultBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnLaunch = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.Ignore = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.projectDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isToDisplayDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.branchNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.creationDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOwner = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.changesetIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
@@ -315,13 +316,14 @@
             this.dgvResult.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResult.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.projectDataGridViewTextBoxColumn1,
             this.changesetIdDataGridViewTextBoxColumn,
             this.colOwner,
             this.creationDateDataGridViewTextBoxColumn,
             this.commentDataGridViewTextBoxColumn,
-            this.projectDataGridViewTextBoxColumn1,
             this.branchNameDataGridViewTextBoxColumn,
-            this.isToDisplayDataGridViewTextBoxColumn});
+            this.isToDisplayDataGridViewTextBoxColumn,
+            this.Ignore});
             this.dgvResult.DataSource = this.mergeResultBindingSource;
             this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResult.Location = new System.Drawing.Point(0, 0);
@@ -330,56 +332,7 @@
             this.dgvResult.Size = new System.Drawing.Size(430, 385);
             this.dgvResult.TabIndex = 1;
             this.dgvResult.DataSourceChanged += new System.EventHandler(this.dgvResult_DataSourceChanged);
-            // 
-            // changesetIdDataGridViewTextBoxColumn
-            // 
-            this.changesetIdDataGridViewTextBoxColumn.DataPropertyName = "ChangesetId";
-            this.changesetIdDataGridViewTextBoxColumn.HeaderText = "ChangesetId";
-            this.changesetIdDataGridViewTextBoxColumn.Name = "changesetIdDataGridViewTextBoxColumn";
-            this.changesetIdDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // colOwner
-            // 
-            this.colOwner.DataPropertyName = "Owner";
-            this.colOwner.HeaderText = "Owner";
-            this.colOwner.Name = "colOwner";
-            this.colOwner.ReadOnly = true;
-            // 
-            // creationDateDataGridViewTextBoxColumn
-            // 
-            this.creationDateDataGridViewTextBoxColumn.DataPropertyName = "CreationDate";
-            this.creationDateDataGridViewTextBoxColumn.HeaderText = "CreationDate";
-            this.creationDateDataGridViewTextBoxColumn.Name = "creationDateDataGridViewTextBoxColumn";
-            this.creationDateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // commentDataGridViewTextBoxColumn
-            // 
-            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
-            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
-            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
-            this.commentDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // projectDataGridViewTextBoxColumn1
-            // 
-            this.projectDataGridViewTextBoxColumn1.DataPropertyName = "Project";
-            this.projectDataGridViewTextBoxColumn1.HeaderText = "Project";
-            this.projectDataGridViewTextBoxColumn1.Name = "projectDataGridViewTextBoxColumn1";
-            this.projectDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // branchNameDataGridViewTextBoxColumn
-            // 
-            this.branchNameDataGridViewTextBoxColumn.DataPropertyName = "BranchName";
-            this.branchNameDataGridViewTextBoxColumn.HeaderText = "BranchName";
-            this.branchNameDataGridViewTextBoxColumn.Name = "branchNameDataGridViewTextBoxColumn";
-            this.branchNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // isToDisplayDataGridViewTextBoxColumn
-            // 
-            this.isToDisplayDataGridViewTextBoxColumn.DataPropertyName = "IsToDisplay";
-            this.isToDisplayDataGridViewTextBoxColumn.HeaderText = "IsToDisplay";
-            this.isToDisplayDataGridViewTextBoxColumn.Name = "isToDisplayDataGridViewTextBoxColumn";
-            this.isToDisplayDataGridViewTextBoxColumn.ReadOnly = true;
-            this.isToDisplayDataGridViewTextBoxColumn.Visible = false;
+            this.dgvResult.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResult_CellContentClick);
             // 
             // mergeResultBindingSource
             // 
@@ -396,6 +349,63 @@
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
+            // 
+            // Ignore
+            // 
+            this.Ignore.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.Ignore.HeaderText = "Ignore";
+            this.Ignore.Name = "Ignore";
+            this.Ignore.ReadOnly = true;
+            // 
+            // projectDataGridViewTextBoxColumn1
+            // 
+            this.projectDataGridViewTextBoxColumn1.DataPropertyName = "Project";
+            this.projectDataGridViewTextBoxColumn1.HeaderText = "Project";
+            this.projectDataGridViewTextBoxColumn1.Name = "projectDataGridViewTextBoxColumn1";
+            this.projectDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // isToDisplayDataGridViewTextBoxColumn
+            // 
+            this.isToDisplayDataGridViewTextBoxColumn.DataPropertyName = "IsToDisplay";
+            this.isToDisplayDataGridViewTextBoxColumn.HeaderText = "IsToDisplay";
+            this.isToDisplayDataGridViewTextBoxColumn.Name = "isToDisplayDataGridViewTextBoxColumn";
+            this.isToDisplayDataGridViewTextBoxColumn.ReadOnly = true;
+            this.isToDisplayDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // branchNameDataGridViewTextBoxColumn
+            // 
+            this.branchNameDataGridViewTextBoxColumn.DataPropertyName = "BranchName";
+            this.branchNameDataGridViewTextBoxColumn.HeaderText = "BranchName";
+            this.branchNameDataGridViewTextBoxColumn.Name = "branchNameDataGridViewTextBoxColumn";
+            this.branchNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // commentDataGridViewTextBoxColumn
+            // 
+            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
+            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
+            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
+            this.commentDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // creationDateDataGridViewTextBoxColumn
+            // 
+            this.creationDateDataGridViewTextBoxColumn.DataPropertyName = "CreationDate";
+            this.creationDateDataGridViewTextBoxColumn.HeaderText = "CreationDate";
+            this.creationDateDataGridViewTextBoxColumn.Name = "creationDateDataGridViewTextBoxColumn";
+            this.creationDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // colOwner
+            // 
+            this.colOwner.DataPropertyName = "Owner";
+            this.colOwner.HeaderText = "Owner";
+            this.colOwner.Name = "colOwner";
+            this.colOwner.ReadOnly = true;
+            // 
+            // changesetIdDataGridViewTextBoxColumn
+            // 
+            this.changesetIdDataGridViewTextBoxColumn.DataPropertyName = "ChangesetId";
+            this.changesetIdDataGridViewTextBoxColumn.HeaderText = "ChangesetId";
+            this.changesetIdDataGridViewTextBoxColumn.Name = "changesetIdDataGridViewTextBoxColumn";
+            this.changesetIdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // CandidateToMerge
             // 
@@ -465,11 +475,12 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn isToScanDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isFavoriteDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewButtonColumn Ignore;
+        private System.Windows.Forms.DataGridViewTextBoxColumn projectDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn changesetIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwner;
         private System.Windows.Forms.DataGridViewTextBoxColumn creationDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn projectDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn branchNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn isToDisplayDataGridViewTextBoxColumn;
     }

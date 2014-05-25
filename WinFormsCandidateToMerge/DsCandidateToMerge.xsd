@@ -12,7 +12,7 @@
   <xs:element name="DsCandidateToMerge" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DsCandidateToMerge" msprop:Generator_UserDSName="DsCandidateToMerge">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Users" msprop:Generator_TableClassName="UsersDataTable" msprop:Generator_TableVarName="tableUsers" msprop:Generator_TablePropName="Users" msprop:Generator_RowDeletingName="UsersRowDeleting" msprop:Generator_RowChangingName="UsersRowChanging" msprop:Generator_RowEvHandlerName="UsersRowChangeEventHandler" msprop:Generator_RowDeletedName="UsersRowDeleted" msprop:Generator_UserTableName="Users" msprop:Generator_RowChangedName="UsersRowChanged" msprop:Generator_RowEvArgName="UsersRowChangeEvent" msprop:Generator_RowClassName="UsersRow">
+        <xs:element name="Users" msprop:Generator_TableClassName="UsersDataTable" msprop:Generator_TableVarName="tableUsers" msprop:Generator_RowChangedName="UsersRowChanged" msprop:Generator_TablePropName="Users" msprop:Generator_RowDeletingName="UsersRowDeleting" msprop:Generator_RowChangingName="UsersRowChanging" msprop:Generator_RowEvHandlerName="UsersRowChangeEventHandler" msprop:Generator_RowDeletedName="UsersRowDeleted" msprop:Generator_RowClassName="UsersRow" msprop:Generator_UserTableName="Users" msprop:Generator_RowEvArgName="UsersRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" />
@@ -21,20 +21,20 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="MergeResult" msprop:Generator_TableClassName="MergeResultDataTable" msprop:Generator_TableVarName="tableMergeResult" msprop:Generator_TablePropName="MergeResult" msprop:Generator_RowDeletingName="MergeResultRowDeleting" msprop:Generator_RowChangingName="MergeResultRowChanging" msprop:Generator_RowEvHandlerName="MergeResultRowChangeEventHandler" msprop:Generator_RowDeletedName="MergeResultRowDeleted" msprop:Generator_UserTableName="MergeResult" msprop:Generator_RowChangedName="MergeResultRowChanged" msprop:Generator_RowEvArgName="MergeResultRowChangeEvent" msprop:Generator_RowClassName="MergeResultRow">
+        <xs:element name="MergeResult" msprop:Generator_TableClassName="MergeResultDataTable" msprop:Generator_TableVarName="tableMergeResult" msprop:Generator_RowChangedName="MergeResultRowChanged" msprop:Generator_TablePropName="MergeResult" msprop:Generator_RowDeletingName="MergeResultRowDeleting" msprop:Generator_RowChangingName="MergeResultRowChanging" msprop:Generator_RowEvHandlerName="MergeResultRowChangeEventHandler" msprop:Generator_RowDeletedName="MergeResultRowDeleted" msprop:Generator_RowClassName="MergeResultRow" msprop:Generator_UserTableName="MergeResult" msprop:Generator_RowEvArgName="MergeResultRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ChangesetId" msprop:Generator_ColumnVarNameInTable="columnChangesetId" msprop:Generator_ColumnPropNameInRow="ChangesetId" msprop:Generator_ColumnPropNameInTable="ChangesetIdColumn" msprop:Generator_UserColumnName="ChangesetId" type="xs:int" />
               <xs:element name="Owner" msprop:Generator_ColumnVarNameInTable="columnOwner" msprop:Generator_ColumnPropNameInRow="Owner" msprop:Generator_ColumnPropNameInTable="OwnerColumn" msprop:Generator_UserColumnName="Owner" type="xs:string" minOccurs="0" />
               <xs:element name="CreationDate" msprop:Generator_ColumnVarNameInTable="columnCreationDate" msprop:Generator_ColumnPropNameInRow="CreationDate" msprop:Generator_ColumnPropNameInTable="CreationDateColumn" msprop:Generator_UserColumnName="CreationDate" type="xs:dateTime" minOccurs="0" />
               <xs:element name="Comment" msprop:Generator_ColumnVarNameInTable="columnComment" msprop:Generator_ColumnPropNameInRow="Comment" msprop:Generator_ColumnPropNameInTable="CommentColumn" msprop:Generator_UserColumnName="Comment" type="xs:string" minOccurs="0" />
-              <xs:element name="Project" msprop:Generator_ColumnVarNameInTable="columnProject" msprop:Generator_ColumnPropNameInRow="Project" msprop:Generator_ColumnPropNameInTable="ProjectColumn" msprop:Generator_UserColumnName="Project" type="xs:string" minOccurs="0" />
-              <xs:element name="BranchName" msprop:Generator_ColumnVarNameInTable="columnBranchName" msprop:Generator_ColumnPropNameInRow="BranchName" msprop:Generator_ColumnPropNameInTable="BranchNameColumn" msprop:Generator_UserColumnName="BranchName" type="xs:string" minOccurs="0" />
-              <xs:element name="IsToDisplay" msdata:ReadOnly="true" msdata:Expression="Parent(FK_Users_MergeResult).IsToScan" msprop:Generator_ColumnVarNameInTable="columnIsToDisplay" msprop:Generator_ColumnPropNameInRow="IsToDisplay" msprop:Generator_ColumnPropNameInTable="IsToDisplayColumn" msprop:Generator_UserColumnName="IsToDisplay" type="xs:string" minOccurs="0" />
+              <xs:element name="Project" msprop:Generator_ColumnVarNameInTable="columnProject" msprop:Generator_ColumnPropNameInRow="Project" msprop:Generator_ColumnPropNameInTable="ProjectColumn" msprop:Generator_UserColumnName="Project" type="xs:string" />
+              <xs:element name="BranchName" msprop:Generator_ColumnVarNameInTable="columnBranchName" msprop:Generator_ColumnPropNameInRow="BranchName" msprop:Generator_ColumnPropNameInTable="BranchNameColumn" msprop:Generator_UserColumnName="BranchName" type="xs:string" />
+              <xs:element name="IsToDisplay" msdata:ReadOnly="true" msdata:Expression="Parent(FK_Users_MergeResult).IsToScan AND ISNULL(Parent(MergeIgnore_MergeResult).Ignore, 0) = 0" msprop:Generator_ColumnVarNameInTable="columnIsToDisplay" msprop:Generator_ColumnPropNameInRow="IsToDisplay" msprop:Generator_ColumnPropNameInTable="IsToDisplayColumn" msprop:Generator_UserColumnName="IsToDisplay" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Projects" msprop:Generator_TableClassName="ProjectsDataTable" msprop:Generator_TableVarName="tableProjects" msprop:Generator_TablePropName="Projects" msprop:Generator_RowDeletingName="ProjectsRowDeleting" msprop:Generator_RowChangingName="ProjectsRowChanging" msprop:Generator_RowEvHandlerName="ProjectsRowChangeEventHandler" msprop:Generator_RowDeletedName="ProjectsRowDeleted" msprop:Generator_UserTableName="Projects" msprop:Generator_RowChangedName="ProjectsRowChanged" msprop:Generator_RowEvArgName="ProjectsRowChangeEvent" msprop:Generator_RowClassName="ProjectsRow">
+        <xs:element name="Projects" msprop:Generator_TableClassName="ProjectsDataTable" msprop:Generator_TableVarName="tableProjects" msprop:Generator_RowChangedName="ProjectsRowChanged" msprop:Generator_TablePropName="Projects" msprop:Generator_RowDeletingName="ProjectsRowDeleting" msprop:Generator_RowChangingName="ProjectsRowChanging" msprop:Generator_RowEvHandlerName="ProjectsRowChangeEventHandler" msprop:Generator_RowDeletedName="ProjectsRowDeleted" msprop:Generator_RowClassName="ProjectsRow" msprop:Generator_UserTableName="Projects" msprop:Generator_RowEvArgName="ProjectsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Project" msprop:Generator_ColumnVarNameInTable="columnProject" msprop:Generator_ColumnPropNameInRow="Project" msprop:Generator_ColumnPropNameInTable="ProjectColumn" msprop:Generator_UserColumnName="Project" type="xs:string" />
@@ -42,7 +42,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Branchs" msprop:Generator_TableClassName="BranchsDataTable" msprop:Generator_TableVarName="tableBranchs" msprop:Generator_TablePropName="Branchs" msprop:Generator_RowDeletingName="BranchsRowDeleting" msprop:Generator_RowChangingName="BranchsRowChanging" msprop:Generator_RowEvHandlerName="BranchsRowChangeEventHandler" msprop:Generator_RowDeletedName="BranchsRowDeleted" msprop:Generator_UserTableName="Branchs" msprop:Generator_RowChangedName="BranchsRowChanged" msprop:Generator_RowEvArgName="BranchsRowChangeEvent" msprop:Generator_RowClassName="BranchsRow">
+        <xs:element name="Branchs" msprop:Generator_TableClassName="BranchsDataTable" msprop:Generator_TableVarName="tableBranchs" msprop:Generator_RowChangedName="BranchsRowChanged" msprop:Generator_TablePropName="Branchs" msprop:Generator_RowDeletingName="BranchsRowDeleting" msprop:Generator_RowChangingName="BranchsRowChanging" msprop:Generator_RowEvHandlerName="BranchsRowChangeEventHandler" msprop:Generator_RowDeletedName="BranchsRowDeleted" msprop:Generator_RowClassName="BranchsRow" msprop:Generator_UserTableName="Branchs" msprop:Generator_RowEvArgName="BranchsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" />
@@ -52,11 +52,21 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Configuration" msprop:Generator_TableClassName="ConfigurationDataTable" msprop:Generator_TableVarName="tableConfiguration" msprop:Generator_TablePropName="Configuration" msprop:Generator_RowDeletingName="ConfigurationRowDeleting" msprop:Generator_RowChangingName="ConfigurationRowChanging" msprop:Generator_RowEvHandlerName="ConfigurationRowChangeEventHandler" msprop:Generator_RowDeletedName="ConfigurationRowDeleted" msprop:Generator_UserTableName="Configuration" msprop:Generator_RowChangedName="ConfigurationRowChanged" msprop:Generator_RowEvArgName="ConfigurationRowChangeEvent" msprop:Generator_RowClassName="ConfigurationRow">
+        <xs:element name="Configuration" msprop:Generator_TableClassName="ConfigurationDataTable" msprop:Generator_TableVarName="tableConfiguration" msprop:Generator_RowChangedName="ConfigurationRowChanged" msprop:Generator_TablePropName="Configuration" msprop:Generator_RowDeletingName="ConfigurationRowDeleting" msprop:Generator_RowChangingName="ConfigurationRowChanging" msprop:Generator_RowEvHandlerName="ConfigurationRowChangeEventHandler" msprop:Generator_RowDeletedName="ConfigurationRowDeleted" msprop:Generator_RowClassName="ConfigurationRow" msprop:Generator_UserTableName="Configuration" msprop:Generator_RowEvArgName="ConfigurationRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" />
               <xs:element name="Value" msprop:Generator_ColumnVarNameInTable="columnValue" msprop:Generator_ColumnPropNameInRow="Value" msprop:Generator_ColumnPropNameInTable="ValueColumn" msprop:Generator_UserColumnName="Value" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MergeIgnore" msprop:Generator_TableClassName="MergeIgnoreDataTable" msprop:Generator_TableVarName="tableMergeIgnore" msprop:Generator_TablePropName="MergeIgnore" msprop:Generator_RowDeletingName="MergeIgnoreRowDeleting" msprop:Generator_RowChangingName="MergeIgnoreRowChanging" msprop:Generator_RowEvHandlerName="MergeIgnoreRowChangeEventHandler" msprop:Generator_RowDeletedName="MergeIgnoreRowDeleted" msprop:Generator_UserTableName="MergeIgnore" msprop:Generator_RowChangedName="MergeIgnoreRowChanged" msprop:Generator_RowEvArgName="MergeIgnoreRowChangeEvent" msprop:Generator_RowClassName="MergeIgnoreRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ChangesetId" msprop:Generator_ColumnVarNameInTable="columnChangesetId" msprop:Generator_ColumnPropNameInRow="ChangesetId" msprop:Generator_ColumnPropNameInTable="ChangesetIdColumn" msprop:Generator_UserColumnName="ChangesetId" type="xs:int" />
+              <xs:element name="Project" msprop:Generator_ColumnVarNameInTable="columnProject" msprop:Generator_ColumnPropNameInRow="Project" msprop:Generator_ColumnPropNameInTable="ProjectColumn" msprop:Generator_UserColumnName="Project" type="xs:string" />
+              <xs:element name="BranchName" msprop:Generator_ColumnVarNameInTable="columnBranchName" msprop:Generator_ColumnPropNameInRow="BranchName" msprop:Generator_ColumnPropNameInTable="BranchNameColumn" msprop:Generator_UserColumnName="BranchName" type="xs:string" />
+              <xs:element name="Ignore" msprop:nullValue="1" msprop:Generator_ColumnPropNameInRow="Ignore" msprop:Generator_ColumnVarNameInTable="columnIgnore" msprop:Generator_ColumnPropNameInTable="IgnoreColumn" msprop:Generator_UserColumnName="Ignore" type="xs:boolean" default="true" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -67,6 +77,12 @@
       <xs:field xpath="mstns:Name" />
     </xs:unique>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:MergeResult" />
+      <xs:field xpath="mstns:ChangesetId" />
+      <xs:field xpath="mstns:BranchName" />
+      <xs:field xpath="mstns:Project" />
+    </xs:unique>
+    <xs:unique name="Projects_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Projects" />
       <xs:field xpath="mstns:Project" />
     </xs:unique>
@@ -78,18 +94,25 @@
       <xs:selector xpath=".//mstns:Configuration" />
       <xs:field xpath="mstns:Name" />
     </xs:unique>
-    <xs:keyref name="FK_Project_MergeResult" refer="Constraint1" msprop:rel_Generator_UserChildTable="MergeResult" msprop:rel_Generator_ChildPropName="GetMergeResultRows" msprop:rel_Generator_UserRelationName="FK_Project_MergeResult" msprop:rel_Generator_RelationVarName="relationFK_Project_MergeResult" msprop:rel_Generator_UserParentTable="Projects" msprop:rel_Generator_ParentPropName="ProjectsRow">
-      <xs:selector xpath=".//mstns:MergeResult" />
+    <xs:unique name="MergeIgnore_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:MergeIgnore" />
+      <xs:field xpath="mstns:ChangesetId" />
+      <xs:field xpath="mstns:BranchName" />
       <xs:field xpath="mstns:Project" />
-    </xs:keyref>
-    <xs:keyref name="FK_Users_MergeResult" refer="UsersKey" msprop:rel_Generator_UserChildTable="MergeResult" msprop:rel_Generator_ChildPropName="GetMergeResultRows" msprop:rel_Generator_UserRelationName="FK_Users_MergeResult" msprop:rel_Generator_ParentPropName="UsersRow" msprop:rel_Generator_RelationVarName="relationFK_Users_MergeResult" msprop:rel_Generator_UserParentTable="Users">
+    </xs:unique>
+    <xs:keyref name="FK_Users_MergeResult" refer="UsersKey" msprop:rel_Generator_UserChildTable="MergeResult" msprop:rel_Generator_ChildPropName="GetMergeResultRows" msprop:rel_Generator_UserRelationName="FK_Users_MergeResult" msprop:rel_Generator_RelationVarName="relationFK_Users_MergeResult" msprop:rel_Generator_UserParentTable="Users" msprop:rel_Generator_ParentPropName="UsersRow">
       <xs:selector xpath=".//mstns:MergeResult" />
       <xs:field xpath="mstns:Owner" />
+    </xs:keyref>
+    <xs:keyref name="FK_Project_MergeResult" refer="Projects_Constraint1" msprop:rel_Generator_UserChildTable="MergeResult" msprop:rel_Generator_ChildPropName="GetMergeResultRows" msprop:rel_Generator_UserRelationName="FK_Project_MergeResult" msprop:rel_Generator_ParentPropName="ProjectsRow" msprop:rel_Generator_RelationVarName="relationFK_Project_MergeResult" msprop:rel_Generator_UserParentTable="Projects">
+      <xs:selector xpath=".//mstns:MergeResult" />
+      <xs:field xpath="mstns:Project" />
     </xs:keyref>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="Branching_MergeResult" msdata:parent="Branchs" msdata:child="MergeResult" msdata:parentkey="Name" msdata:childkey="BranchName" msprop:Generator_UserChildTable="MergeResult" msprop:Generator_ChildPropName="GetMergeResultRows" msprop:Generator_UserRelationName="Branching_MergeResult" msprop:Generator_RelationVarName="relationBranching_MergeResult" msprop:Generator_UserParentTable="Branchs" msprop:Generator_ParentPropName="BranchsRow" />
+      <msdata:Relationship name="Branching_MergeResult" msdata:parent="Branchs" msdata:child="MergeResult" msdata:parentkey="Name" msdata:childkey="BranchName" msprop:Generator_UserChildTable="MergeResult" msprop:Generator_ChildPropName="GetMergeResultRows" msprop:Generator_UserRelationName="Branching_MergeResult" msprop:Generator_ParentPropName="BranchsRow" msprop:Generator_RelationVarName="relationBranching_MergeResult" msprop:Generator_UserParentTable="Branchs" />
+      <msdata:Relationship name="MergeIgnore_MergeResult" msdata:parent="MergeIgnore" msdata:child="MergeResult" msdata:parentkey="ChangesetId BranchName Project" msdata:childkey="ChangesetId BranchName Project" msprop:Generator_UserChildTable="MergeResult" msprop:Generator_ChildPropName="GetMergeResultRows" msprop:Generator_UserRelationName="MergeIgnore_MergeResult" msprop:Generator_RelationVarName="relationMergeIgnore_MergeResult" msprop:Generator_UserParentTable="MergeIgnore" msprop:Generator_ParentPropName="MergeIgnoreRowParent" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

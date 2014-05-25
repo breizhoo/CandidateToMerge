@@ -66,13 +66,13 @@
   <ItemGroup>
     <Compile Include="DataSerializer.cs" />
     <Compile Include="DataSetManipulator.cs" />
-    <Compile Include="UiSerializeColumnState.cs" />
-    <Compile Include="DsCandidateToMerge.cs">
-      <DependentUpon>DsCandidateToMerge.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DsCandidateToMerge.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>DsCandidateToMerge.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="UiSerializeColumnState.cs" />
+    <Compile Include="DsCandidateToMerge.cs">
       <DependentUpon>DsCandidateToMerge.xsd</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">

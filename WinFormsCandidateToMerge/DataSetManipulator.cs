@@ -51,6 +51,12 @@ namespace WinFormsCandidateToMerge
             _dsCandidateToMerge.MergeResult.AcceptChanges();
         }
 
+        public void Ignore(DsCandidateToMerge.MergeResultRow mergeCandidates)
+        {
+            _dsCandidateToMerge.MergeIgnore.AddMergeIgnoreRow(
+                mergeCandidates.ChangesetId, mergeCandidates.Project, mergeCandidates.BranchName, true);
+        }
+
         public void AddMergeCandidate(IEnumerable<GetMergeCandidateResponse> mergeCandidates)
         {
             foreach (var resProj in mergeCandidates)

@@ -15,6 +15,9 @@ namespace WinFormsCandidateToMerge
         public WaitForms()
         {
             InitializeComponent();
+
+            progressBar1.Maximum = 100;
+            progressBar1.Minimum = 0;
         }
 
         private void label1_Click(object sender, EventArgs e)

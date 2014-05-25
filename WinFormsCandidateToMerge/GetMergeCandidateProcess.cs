@@ -18,7 +18,7 @@ namespace WinFormsCandidateToMerge
             _resquestOfMerge = resquestOfMerge;
         }
 
-        public List<GetMergeCandidateResponse> GetMergeResult()
+        public List<GetMergeCandidateResponse> GetMergeResult(Action<GetMergeCandidateRequest> processing = null)
         {
             var listResponseProject = new List<GetMergeCandidateResponse>();
 
@@ -26,6 +26,9 @@ namespace WinFormsCandidateToMerge
             var teamProjectCollection = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(new Uri(_tfsUrl));
             foreach (var resquestOfMerge in _resquestOfMerge)
             {
+                if (processing != null)
+                    processing(resquestOfMerge);
+
                 var project = resquestOfMerge.Project;
                 var branchDestination = resquestOfMerge.BranchDestination;
                 var branchSource = resquestOfMerge.BranchSource;

@@ -30,6 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtCurrent = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,19 +48,36 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.txtCurrent);
+            this.panel1.Controls.Add(this.progressBar1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(171, 60);
+            this.panel1.Size = new System.Drawing.Size(171, 92);
             this.panel1.TabIndex = 1;
+            // 
+            // txtCurrent
+            // 
+            this.txtCurrent.AutoSize = true;
+            this.txtCurrent.Location = new System.Drawing.Point(12, 70);
+            this.txtCurrent.Name = "txtCurrent";
+            this.txtCurrent.Size = new System.Drawing.Size(0, 13);
+            this.txtCurrent.TabIndex = 2;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(12, 40);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(146, 23);
+            this.progressBar1.TabIndex = 1;
             // 
             // WaitForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(171, 60);
+            this.ClientSize = new System.Drawing.Size(171, 92);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "WaitForms";
@@ -76,5 +95,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.ProgressBar progressBar1;
+        public System.Windows.Forms.Label txtCurrent;
     }
 }
