@@ -37,17 +37,18 @@ namespace WinFormsCandidateToMerge
                 try
                 {
                     var versionControl = teamProjectCollection.GetService<VersionControlServer>();
-                    var mergeCandidates =
-                        versionControl.GetMergeCandidates(project + branchSource,
-                            project + branchDestination, RecursionType.Full);
 
-
-                    listResponseProject.Add(new GetMergeCandidateResponse()
+                    if (versionControl.ServerItemExists(project + branchDestination, VersionSpec.Latest, DeletedState.NonDeleted, ItemType.Any))
                     {
-                        BranchName = branchName,
-                        MergeCandidates = mergeCandidates,
-                        Project = project
-                    });
+                        var mergeCandidates = versionControl.GetMergeCandidates(project + branchSource, project + branchDestination, RecursionType.Full);
+
+                        listResponseProject.Add(new GetMergeCandidateResponse()
+                        {
+                            BranchName = branchName,
+                            MergeCandidates = mergeCandidates,
+                            Project = project
+                        });
+                    }
                 }
                 catch (Exception ex)
                 {
