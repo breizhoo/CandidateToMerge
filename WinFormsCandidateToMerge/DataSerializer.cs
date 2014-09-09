@@ -13,16 +13,20 @@ namespace WinFormsCandidateToMerge
 
         public void Save()
         {
-            _dsCandidateToMerge.AcceptChanges();
+            if (_dsCandidateToMerge.HasChanges())
+                _dsCandidateToMerge.AcceptChanges();
             _dsCandidateToMerge.WriteXml(@"Data.xml");
         }
 
         public void Restore()
         {
             var f = new FileInfo(@"Data.xml");
-            if (f.Exists)
-                _dsCandidateToMerge.ReadXml(@"Data.xml");
 
+            if (!f.Exists) return;
+
+            _dsCandidateToMerge.ReadXml(@"Data.xml");
+            if (_dsCandidateToMerge.HasChanges())
+                _dsCandidateToMerge.AcceptChanges();
         }
 
     }
