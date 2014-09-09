@@ -46,8 +46,8 @@ namespace WinFormsCandidateToMerge
                     var item = _ui.dataGridView2.Columns
                         .Cast<DataGridViewColumn>().FirstOrDefault(x => x.Name == p.dataGridView2SortedColumn);
                     if (item != null)
-                        _ui.dataGridView2.Sort(item, p.dataGridView2SortOrder == SortOrder.Descending 
-                            ? ListSortDirection.Descending 
+                        _ui.dataGridView2.Sort(item, p.dataGridView2SortOrder == SortOrder.Descending
+                            ? ListSortDirection.Descending
                             : ListSortDirection.Ascending
                             );
                 }
@@ -71,9 +71,11 @@ namespace WinFormsCandidateToMerge
                 FormPosition = _ui.Location,
                 WindowState = _ui.WindowState,
 
-                dataGridView2SortOrder = _ui.dataGridView2.SortOrder,
-                dataGridView2SortedColumn = _ui.dataGridView2.SortedColumn.Name,
+                dataGridView2SortOrder = _ui.dataGridView2.SortOrder
+                
             };
+            if (_ui.dataGridView2.SortedColumn != null)
+                s.dataGridView2SortedColumn = _ui.dataGridView2.SortedColumn.Name;
 
             var xs = new XmlSerializer(typeof(UiSerializeRoot));
             using (var wr = new StreamWriter("SaveState.xml"))
