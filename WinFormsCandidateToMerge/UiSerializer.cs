@@ -71,9 +71,11 @@ namespace WinFormsCandidateToMerge
                 FormPosition = _ui.Location,
                 WindowState = _ui.WindowState,
 
-                dataGridView2SortOrder = _ui.dgvUsers.SortOrder,
-                dataGridView2SortedColumn = _ui.dgvUsers.SortedColumn.Name,
+                dataGridView2SortOrder = _ui.dgvUsers.SortOrder
+                
             };
+            if (_ui.dgvUsers.SortedColumn != null)
+                s.dataGridView2SortedColumn = _ui.dgvUsers.SortedColumn.Name;
 
             var xs = new XmlSerializer(typeof(UiSerializeRoot));
             using (var wr = new StreamWriter("SaveState.xml"))

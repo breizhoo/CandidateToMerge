@@ -96,10 +96,11 @@ namespace WinFormsCandidateToMerge
                 tfsUrl = _dsCandidateToMerge.Configuration.NewConfigurationRow();
                 tfsUrl.Name = "TfsUrl";
             }
-
-            tfsUrl.Value = url;
+            if (isNewRow || tfsUrl.Value != url)
+                tfsUrl.Value = url;
             if (isNewRow)
                 _dsCandidateToMerge.Configuration.AddConfigurationRow(tfsUrl);
+            tfsUrl.AcceptChanges();
         }
 
     }
