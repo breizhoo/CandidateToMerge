@@ -32,25 +32,30 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CandidateToMerge));
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtTfsUrl = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dgvUsers = new System.Windows.Forms.DataGridView();
             this.isToScanDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.isFavoriteDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dsCandidateToMerge1 = new WinFormsCandidateToMerge.DsCandidateToMerge();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dgvProjects = new System.Windows.Forms.DataGridView();
             this.isToScanDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.projectDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProjectsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.dgvBranches = new System.Windows.Forms.DataGridView();
             this.isToScanDataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.branchSourceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.branchDestinationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BranchsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.txtTfsUrl = new System.Windows.Forms.TextBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.dgvResult = new System.Windows.Forms.DataGridView();
             this.projectDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.changesetIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,38 +68,33 @@
             this.mergeResultBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnLaunch = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProjectsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBranches)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BranchsBindingSource)).BeginInit();
+            this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mergeResultBindingSource)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -129,6 +129,27 @@
             this.splitContainer3.SplitterDistance = 369;
             this.splitContainer3.TabIndex = 4;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.txtTfsUrl);
+            this.groupBox1.Location = new System.Drawing.Point(0, 2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(366, 45);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Url of the TFS server :";
+            // 
+            // txtTfsUrl
+            // 
+            this.txtTfsUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTfsUrl.Location = new System.Drawing.Point(6, 19);
+            this.txtTfsUrl.Name = "txtTfsUrl";
+            this.txtTfsUrl.Size = new System.Drawing.Size(354, 20);
+            this.txtTfsUrl.TabIndex = 0;
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -150,24 +171,35 @@
             this.splitContainer1.SplitterDistance = 110;
             this.splitContainer1.TabIndex = 4;
             // 
-            // dataGridView2
+            // groupBox2
             // 
-            this.dataGridView2.AllowUserToOrderColumns = true;
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.groupBox2.Controls.Add(this.dgvUsers);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(366, 110);
+            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Users :";
+            // 
+            // dgvUsers
+            // 
+            this.dgvUsers.AllowUserToOrderColumns = true;
+            this.dgvUsers.AutoGenerateColumns = false;
+            this.dgvUsers.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.isToScanDataGridViewCheckBoxColumn,
             this.isFavoriteDataGridViewCheckBoxColumn,
             this.colName});
-            this.dataGridView2.DataSource = this.usersBindingSource;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(360, 91);
-            this.dataGridView2.TabIndex = 0;
-            this.dataGridView2.CurrentCellChanged += new System.EventHandler(this.dataGridView2_CurrentCellChanged);
-            this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
+            this.dgvUsers.DataSource = this.usersBindingSource;
+            this.dgvUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvUsers.Location = new System.Drawing.Point(3, 16);
+            this.dgvUsers.Name = "dgvUsers";
+            this.dgvUsers.Size = new System.Drawing.Size(360, 91);
+            this.dgvUsers.TabIndex = 0;
+            this.dgvUsers.CurrentCellChanged += new System.EventHandler(this.dgvUsers_CurrentCellChanged);
+            this.dgvUsers.SelectionChanged += new System.EventHandler(this.dgvUsers_SelectionChanged);
             // 
             // isToScanDataGridViewCheckBoxColumn
             // 
@@ -222,21 +254,33 @@
             this.splitContainer2.SplitterDistance = 92;
             this.splitContainer2.TabIndex = 4;
             // 
-            // dataGridView3
+            // groupBox3
             // 
-            this.dataGridView3.AllowUserToOrderColumns = true;
-            this.dataGridView3.AutoGenerateColumns = false;
-            this.dataGridView3.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.groupBox3.Controls.Add(this.dgvProjects);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(366, 92);
+            this.groupBox3.TabIndex = 6;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Projects :";
+            // 
+            // dgvProjects
+            // 
+            this.dgvProjects.AllowUserToOrderColumns = true;
+            this.dgvProjects.AutoGenerateColumns = false;
+            this.dgvProjects.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.dgvProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProjects.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.isToScanDataGridViewCheckBoxColumn1,
             this.projectDataGridViewTextBoxColumn});
-            this.dataGridView3.DataSource = this.ProjectsBindingSource;
-            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView3.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(360, 73);
-            this.dataGridView3.TabIndex = 0;
+            this.dgvProjects.DataSource = this.ProjectsBindingSource;
+            this.dgvProjects.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvProjects.Location = new System.Drawing.Point(3, 16);
+            this.dgvProjects.Name = "dgvProjects";
+            this.dgvProjects.Size = new System.Drawing.Size(360, 73);
+            this.dgvProjects.TabIndex = 0;
+            this.dgvProjects.CurrentCellChanged += new System.EventHandler(this.dgvProjects_CurrentCellChanged);
             // 
             // isToScanDataGridViewCheckBoxColumn1
             // 
@@ -257,23 +301,34 @@
             this.ProjectsBindingSource.DataMember = "Projects";
             this.ProjectsBindingSource.DataSource = this.dsCandidateToMerge1;
             // 
-            // dataGridView4
+            // groupBox4
             // 
-            this.dataGridView4.AllowUserToOrderColumns = true;
-            this.dataGridView4.AutoGenerateColumns = false;
-            this.dataGridView4.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.groupBox4.Controls.Add(this.dgvBranches);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(0, 0);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(366, 142);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Branchs :";
+            // 
+            // dgvBranches
+            // 
+            this.dgvBranches.AllowUserToOrderColumns = true;
+            this.dgvBranches.AutoGenerateColumns = false;
+            this.dgvBranches.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.dgvBranches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBranches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.isToScanDataGridViewCheckBoxColumn2,
             this.nameDataGridViewTextBoxColumn1,
             this.branchSourceDataGridViewTextBoxColumn,
             this.branchDestinationDataGridViewTextBoxColumn});
-            this.dataGridView4.DataSource = this.BranchsBindingSource;
-            this.dataGridView4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView4.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(360, 123);
-            this.dataGridView4.TabIndex = 1;
+            this.dgvBranches.DataSource = this.BranchsBindingSource;
+            this.dgvBranches.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvBranches.Location = new System.Drawing.Point(3, 16);
+            this.dgvBranches.Name = "dgvBranches";
+            this.dgvBranches.Size = new System.Drawing.Size(360, 123);
+            this.dgvBranches.TabIndex = 1;
             // 
             // isToScanDataGridViewCheckBoxColumn2
             // 
@@ -307,14 +362,16 @@
             this.BranchsBindingSource.DataMember = "Branchs";
             this.BranchsBindingSource.DataSource = this.dsCandidateToMerge1;
             // 
-            // txtTfsUrl
+            // groupBox5
             // 
-            this.txtTfsUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTfsUrl.Location = new System.Drawing.Point(6, 19);
-            this.txtTfsUrl.Name = "txtTfsUrl";
-            this.txtTfsUrl.Size = new System.Drawing.Size(354, 20);
-            this.txtTfsUrl.TabIndex = 0;
+            this.groupBox5.Controls.Add(this.dgvResult);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox5.Location = new System.Drawing.Point(0, 0);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(444, 458);
+            this.groupBox5.TabIndex = 6;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "ChangeSet cadidate to merge :";
             // 
             // dgvResult
             // 
@@ -341,6 +398,7 @@
             this.dgvResult.TabIndex = 1;
             this.dgvResult.DataSourceChanged += new System.EventHandler(this.dgvResult_DataSourceChanged);
             this.dgvResult.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResult_CellContentClick);
+            this.dgvResult.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvResult_MouseDown);
             // 
             // projectDataGridViewTextBoxColumn1
             // 
@@ -415,62 +473,6 @@
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.txtTfsUrl);
-            this.groupBox1.Location = new System.Drawing.Point(0, 2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(366, 45);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Url of the TFS server :";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.dataGridView2);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(366, 110);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Users :";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.dataGridView3);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(366, 92);
-            this.groupBox3.TabIndex = 6;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Projects :";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.dataGridView4);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(0, 0);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(366, 142);
-            this.groupBox4.TabIndex = 7;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Branchs :";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.dgvResult);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox5.Location = new System.Drawing.Point(0, 0);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(444, 458);
-            this.groupBox5.TabIndex = 6;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "ChangeSet cadidate to merge :";
-            // 
             // CandidateToMerge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -486,29 +488,29 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge1)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProjectsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBranches)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BranchsBindingSource)).EndInit();
+            this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mergeResultBindingSource)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -521,9 +523,9 @@
         internal System.Windows.Forms.SplitContainer splitContainer2;
         internal System.Windows.Forms.Button btnLaunch;
         internal System.Windows.Forms.DataGridView dgvResult;
-        internal System.Windows.Forms.DataGridView dataGridView2;
-        internal System.Windows.Forms.DataGridView dataGridView3;
-        internal System.Windows.Forms.DataGridView dataGridView4;
+        internal System.Windows.Forms.DataGridView dgvUsers;
+        internal System.Windows.Forms.DataGridView dgvProjects;
+        internal System.Windows.Forms.DataGridView dgvBranches;
         internal System.Windows.Forms.BindingSource usersBindingSource;
         internal DsCandidateToMerge dsCandidateToMerge1;
         internal System.Windows.Forms.BindingSource ProjectsBindingSource;
