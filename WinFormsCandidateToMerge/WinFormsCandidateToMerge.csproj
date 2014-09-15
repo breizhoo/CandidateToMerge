@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangesetVisualizer.cs" />
     <Compile Include="DataSerializer.cs" />
     <Compile Include="DataSetManipulator.cs" />
     <Compile Include="DsCandidateToMerge.Designer.cs">

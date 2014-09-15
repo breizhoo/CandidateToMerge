@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WinFormsCandidateToMerge
@@ -17,6 +13,7 @@ namespace WinFormsCandidateToMerge
         private WaitForms _waitForms;
         private readonly UiSerializer _uiSerializer;
         private readonly DataSerializer _dataSerializer;
+        private readonly ChangesetVisualizer _changesetVisualizer;
 
         public CandidateToMerge()
         {
@@ -29,6 +26,7 @@ namespace WinFormsCandidateToMerge
             _dataSetManipulator = new DataSetManipulator(dsCandidateToMerge1);
             _uiSerializer = new UiSerializer(this);
             _dataSerializer = new DataSerializer(dsCandidateToMerge1);
+            _changesetVisualizer = new ChangesetVisualizer();
         }
 
         void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -191,16 +189,16 @@ namespace WinFormsCandidateToMerge
         {
             var isOnlyOneRowSelected = dgvResult.SelectedRows.Count == 1;
             var allCellsAreFromTheSameRow = dgvResult.SelectedCells.Cast<DataGridViewCell>().GroupBy(c => c.RowIndex).Count() == 1;
-            
+
             return isOnlyOneRowSelected || allCellsAreFromTheSameRow;
         }
 
 
-        private bool TryGetSelectedChangetSetId(out int? outChangesetId)
+        private bool TryGetSelectedChangetSetId(out int outChangesetId)
         {
             if (!CanShowChangesetDetails())
             {
-                outChangesetId = null;
+                outChangesetId = 0;
                 return false;
             }
 
@@ -218,9 +216,10 @@ namespace WinFormsCandidateToMerge
 
         private void dgvResult_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right && 
-                CanShowChangesetDetails() && 
-                IsHoveringSelectedRow(e))
+            if (e.Button == MouseButtons.Right &&
+                CanShowChangesetDetails() &&
+                IsHoveringSelectedRow(e) &&
+                _changesetVisualizer.IsVisualizerAvailable)
             {
                 var menuItemCSDetails = new MenuItem("Changeset details");
                 menuItemCSDetails.Click += dgvResult_MenuItemCsDetailsOnClick;
@@ -233,29 +232,16 @@ namespace WinFormsCandidateToMerge
 
         private void dgvResult_MenuItemCsDetailsOnClick(object sender, EventArgs eventArgs)
         {
-            if (CanShowChangesetDetails())
+            int csId;
+            if (TryGetSelectedChangetSetId(out csId))
             {
-                int? csId = null;
-                if (TryGetSelectedChangetSetId(out csId))
+                try
                 {
-                    var arguments = string.Format("changeset {0}", csId.Value);
-                    //var tfexe = @"%programfiles(x86)%\Microsoft Visual Studio 12.0\Common7\IDE\tf.exe";
-                    var tfexe = @"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\tf.exe";
-
-                    var process = new Process();
-                    process.StartInfo.FileName = tfexe;
-                    process.StartInfo.Arguments = arguments;
-                    process.StartInfo.UseShellExecute = false;
-                    process.StartInfo.CreateNoWindow = true;
-
-                    try
-                    {
-                        process.Start();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error while starting tf.exe\r\n\r\n" + ex.ToString(), "Arf !");
-                    }
+                    _changesetVisualizer.Execute(csId);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error while starting tf.exe\r\n\r\n" + ex.ToString(), "Arf !");
                 }
             }
         }
