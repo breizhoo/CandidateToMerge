@@ -2,26 +2,41 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace WinFormsCandidateToMerge
 {
     public class ChangesetVisualizer
     {
+        public bool IsVisualizerAvailable { get; private set; }
+        private string _currentTfPath;
+
+        public ChangesetVisualizer()
+        {
+            IsVisualizerAvailable = File.Exists(this.GetTfexePath());
+        }
+
         string GetTfexePath()
         {
             var programFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-            const string tfexe = @"\Microsoft Visual Studio 12.0\Common7\IDE\tf.exe";
+            var possibleTfExePath = new List<String>
+            {
+                @"Microsoft Visual Studio 13.0\Common7\IDE\tf.exe",
+                @"Microsoft Visual Studio 12.0\Common7\IDE\tf.exe",
+                @"Microsoft Visual Studio 11.0\Common7\IDE\tf.exe",
 
-            return Path.Combine(programFilesPath, tfexe);
-        }
+            };
 
-        public bool IsVisualizerAvailable
-        {
-            get { return File.Exists(this.GetTfexePath()); }
+            foreach (var tfExePath in possibleTfExePath)
+            {
+                var tfFullPath = Path.Combine(programFilesPath, tfExePath);
+                if (File.Exists(tfFullPath))
+                {
+                    _currentTfPath = tfFullPath;
+                    return tfFullPath;
+                }
+            }
+
+            return null;
         }
 
         public void Execute(int changesetId)
@@ -29,7 +44,7 @@ namespace WinFormsCandidateToMerge
             var arguments = string.Format("changeset {0}", changesetId);
 
             var process = new Process();
-            process.StartInfo.FileName = this.GetTfexePath();
+            process.StartInfo.FileName = _currentTfPath;
             process.StartInfo.Arguments = arguments;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
