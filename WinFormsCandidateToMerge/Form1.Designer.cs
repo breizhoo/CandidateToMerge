@@ -56,6 +56,11 @@
             this.branchDestinationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BranchsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.dataListView1 = new BrightIdeasSoftware.DataListView();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.dgvResult = new System.Windows.Forms.DataGridView();
             this.projectDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.changesetIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,6 +73,8 @@
             this.mergeResultBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnLaunch = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
@@ -93,8 +100,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvBranches)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BranchsBindingSource)).BeginInit();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataListView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mergeResultBindingSource)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -364,6 +373,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.dataListView1);
             this.groupBox5.Controls.Add(this.dgvResult);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(0, 0);
@@ -372,6 +382,61 @@
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "ChangeSet cadidate to merge :";
+            // 
+            // dataListView1
+            // 
+            this.dataListView1.AllColumns.Add(this.olvColumn1);
+            this.dataListView1.AllColumns.Add(this.olvColumn2);
+            this.dataListView1.AllColumns.Add(this.olvColumn3);
+            this.dataListView1.AllColumns.Add(this.olvColumn4);
+            this.dataListView1.AutoGenerateColumns = false;
+            this.dataListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1,
+            this.olvColumn2,
+            this.olvColumn3,
+            this.olvColumn4});
+            this.dataListView1.DataSource = null;
+            this.dataListView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataListView1.FullRowSelect = true;
+            this.dataListView1.GridLines = true;
+            this.dataListView1.Location = new System.Drawing.Point(3, 16);
+            this.dataListView1.Name = "dataListView1";
+            this.dataListView1.RenderNonEditableCheckboxesAsDisabled = true;
+            this.dataListView1.ShowCommandMenuOnRightClick = true;
+            this.dataListView1.Size = new System.Drawing.Size(438, 220);
+            this.dataListView1.TabIndex = 2;
+            this.dataListView1.UseCompatibleStateImageBehavior = false;
+            this.dataListView1.UseFiltering = true;
+            this.dataListView1.View = System.Windows.Forms.View.Details;
+            this.dataListView1.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.dataListView1_CellRightClick);
+            // 
+            // olvColumn1
+            // 
+            this.olvColumn1.AspectName = "Project";
+            this.olvColumn1.Text = "Project";
+            // 
+            // olvColumn2
+            // 
+            this.olvColumn2.AspectName = "Owner";
+            this.olvColumn2.Text = "Owner";
+            // 
+            // olvColumn3
+            // 
+            this.olvColumn3.AspectName = "Comment";
+            this.olvColumn3.Text = "Comment";
+            // 
+            // olvColumn4
+            // 
+            this.olvColumn4.AspectName = "";
+            this.olvColumn4.AutoCompleteEditor = false;
+            this.olvColumn4.AutoCompleteEditorMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.olvColumn4.CheckBoxes = true;
+            this.olvColumn4.Groupable = false;
+            this.olvColumn4.Searchable = false;
+            this.olvColumn4.ShowTextInHeader = false;
+            this.olvColumn4.Sortable = false;
+            this.olvColumn4.Text = "Ignore";
+            this.olvColumn4.UseFiltering = false;
             // 
             // dgvResult
             // 
@@ -390,11 +455,11 @@
             this.isToDisplayDataGridViewTextBoxColumn,
             this.Ignore});
             this.dgvResult.DataSource = this.mergeResultBindingSource;
-            this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvResult.Location = new System.Drawing.Point(3, 16);
+            this.dgvResult.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvResult.Location = new System.Drawing.Point(3, 236);
             this.dgvResult.Name = "dgvResult";
             this.dgvResult.ReadOnly = true;
-            this.dgvResult.Size = new System.Drawing.Size(438, 439);
+            this.dgvResult.Size = new System.Drawing.Size(438, 219);
             this.dgvResult.TabIndex = 1;
             this.dgvResult.DataSourceChanged += new System.EventHandler(this.dgvResult_DataSourceChanged);
             this.dgvResult.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResult_CellContentClick);
@@ -473,6 +538,20 @@
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Text = "Ignorer";
+            // 
             // CandidateToMerge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -509,8 +588,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvBranches)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BranchsBindingSource)).EndInit();
             this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataListView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mergeResultBindingSource)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -559,6 +640,13 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
+        private BrightIdeasSoftware.DataListView dataListView1;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.OLVColumn olvColumn4;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 

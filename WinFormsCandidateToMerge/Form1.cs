@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using BrightIdeasSoftware;
 
 namespace WinFormsCandidateToMerge
 {
@@ -109,6 +110,8 @@ namespace WinFormsCandidateToMerge
             txtTfsUrl.Text = _dataSetManipulator.GetTfsUrl();
 
             dgvResult.DataSource = new DataView(dsCandidateToMerge1.MergeResult, "IsToDisplay = true", "", DataViewRowState.CurrentRows);
+            //objectListView1.SetObjects(new DataView(dsCandidateToMerge1.MergeResult, "IsToDisplay = true", "", DataViewRowState.CurrentRows));
+            dataListView1.DataSource = new DataView(dsCandidateToMerge1.MergeResult, "IsToDisplay = true", "", DataViewRowState.CurrentRows);
         }
 
         private void dgvResult_DataSourceChanged(object sender, EventArgs e)
@@ -242,6 +245,27 @@ namespace WinFormsCandidateToMerge
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error while starting tf.exe\r\n\r\n" + ex.ToString(), "Arf !");
+                }
+            }
+        }
+
+        private void dataListView1_CellRightClick(object sender, CellRightClickEventArgs e)
+        {
+            e.MenuStrip = this.contextMenuStrip1;
+        }
+
+        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem == toolStripMenuItem1)
+            {
+
+                foreach (var obj in dataListView1.SelectedObjects)
+                {
+                    if (!(obj is DataRowView))
+                        continue;
+                    
+                    _dataSetManipulator.Ignore((DsCandidateToMerge.MergeResultRow)
+                         ((DataRowView)(obj)).Row);
                 }
             }
         }
