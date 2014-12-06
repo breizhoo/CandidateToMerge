@@ -71,6 +71,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BranchsForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BranchsForms.Designer.cs">
+      <DependentUpon>BranchsForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeSetForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeSetForms.Designer.cs">
+      <DependentUpon>ChangeSetForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChangesetVisualizer.cs" />
     <Compile Include="DataSerializer.cs" />
     <Compile Include="DataSetManipulator.cs" />
@@ -78,6 +90,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DsCandidateToMerge.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ParametersForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParametersForms.Designer.cs">
+      <DependentUpon>ParametersForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectsForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectsForms.Designer.cs">
+      <DependentUpon>ProjectsForms.cs</DependentUpon>
     </Compile>
     <Compile Include="UiSerializeColumnState.cs" />
     <Compile Include="DsCandidateToMerge.cs">
@@ -97,14 +121,32 @@
     <Compile Include="GetMergeCandidateRequest.cs" />
     <Compile Include="UiSerializer.cs" />
     <Compile Include="UiSerializeRoot.cs" />
+    <Compile Include="UsersForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersForms.Designer.cs">
+      <DependentUpon>UsersForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="WaitForms.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WaitForms.Designer.cs">
       <DependentUpon>WaitForms.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="BranchsForms.resx">
+      <DependentUpon>BranchsForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeSetForms.resx">
+      <DependentUpon>ChangeSetForms.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ParametersForms.resx">
+      <DependentUpon>ParametersForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectsForms.resx">
+      <DependentUpon>ProjectsForms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -115,6 +157,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UsersForms.resx">
+      <DependentUpon>UsersForms.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WaitForms.resx">
       <DependentUpon>WaitForms.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,6 +175,7 @@
       <DependentUpon>DsCandidateToMerge.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\DsCandidateToMerge.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -145,6 +191,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WinFormsUI\WinFormsUI.csproj">
+      <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
+      <Name>WinFormsUI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace WinFormsCandidateToMerge
 {
@@ -20,6 +21,8 @@ namespace WinFormsCandidateToMerge
         {
             InitializeComponent();
 
+            IsMdiContainer = true;
+
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
@@ -28,6 +31,23 @@ namespace WinFormsCandidateToMerge
             _uiSerializer = new UiSerializer(this);
             _dataSerializer = new DataSerializer(dsCandidateToMerge1);
             _changesetVisualizer = new ChangesetVisualizer();
+
+            _parametersForms = new ParametersForms(_dataSetManipulator);
+            _parametersForms.Show(dockPanel1, DockState.DockLeftAutoHide);
+
+            _usersFroms = new UsersForms(_dataSetManipulator);
+            _usersFroms.Show(dockPanel1, DockState.DockLeftAutoHide);
+
+            _projectForms = new ProjectsForms(_dataSetManipulator);
+            _projectForms.Show(dockPanel1, DockState.DockLeftAutoHide);
+
+            _branchsForms = new BranchsForms(_dataSetManipulator);
+            _branchsForms.Show(dockPanel1, DockState.DockLeftAutoHide);
+
+            _changesetForms = new ChangeSetForms(_dataSetManipulator);
+            _changesetForms.Show(dockPanel1, DockState.Document);
+
+
         }
 
         void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -67,7 +87,7 @@ namespace WinFormsCandidateToMerge
                 currentProject = list.ElementAt(0).Project;
                 backgroundWorker1.ReportProgress(0);
             }
-            var reponseOfMerge = new GetMergeCandidateProcess(txtTfsUrl.Text,
+            var reponseOfMerge = new GetMergeCandidateProcess(_dataSetManipulator.GetTfsUrl(),
                 list)
                 .GetMergeResult(x =>
                 {
@@ -96,7 +116,6 @@ namespace WinFormsCandidateToMerge
         {
             base.OnClosing(e);
 
-            _dataSetManipulator.SetTfsUrl(txtTfsUrl.Text);
             _uiSerializer.Save();
             _dataSerializer.Save();
         }
@@ -107,10 +126,11 @@ namespace WinFormsCandidateToMerge
 
             _dataSerializer.Restore();
             _uiSerializer.Restore();
-            txtTfsUrl.Text = _dataSetManipulator.GetTfsUrl();
+
+            _parametersForms.Initialise();
+            _changesetForms.Initialise();
 
             dgvResult.DataSource = new DataView(dsCandidateToMerge1.MergeResult, "IsToDisplay = true", "", DataViewRowState.CurrentRows);
-            //objectListView1.SetObjects(new DataView(dsCandidateToMerge1.MergeResult, "IsToDisplay = true", "", DataViewRowState.CurrentRows));
             dataListView1.DataSource = new DataView(dsCandidateToMerge1.MergeResult, "IsToDisplay = true", "", DataViewRowState.CurrentRows);
         }
 
@@ -152,24 +172,30 @@ namespace WinFormsCandidateToMerge
 
         private void dgvUsers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            userName = dgvUsers.Rows[e.RowIndex]
-                .Cells[colName.Name].Value.ToString();
+            //userName = dgvUsers.Rows[e.RowIndex]
+            //    .Cells[colName.Name].Value.ToString();
 
-            ChangeColorRowByOwner(userName);
+            //ChangeColorRowByOwner(userName);
         }
 
         private void dgvUsers_CurrentCellChanged(object sender, EventArgs e)
         {
-            userName = string.Empty;
-            if (dgvUsers.CurrentCell != null &&
-                dgvUsers.CurrentCell.RowIndex >= 0)
-                userName = dgvUsers.Rows[dgvUsers.CurrentCell.RowIndex]
-                    .Cells[colName.Name].Value.ToString();
+            //userName = string.Empty;
+            //if (dgvUsers.CurrentCell != null &&
+            //    dgvUsers.CurrentCell.RowIndex >= 0)
+            //    userName = dgvUsers.Rows[dgvUsers.CurrentCell.RowIndex]
+            //        .Cells[colName.Name].Value.ToString();
 
-            ChangeColorRowByOwner(userName);
+            //ChangeColorRowByOwner(userName);
         }
 
         private string project;
+        private readonly ParametersForms _parametersForms;
+        private readonly UsersForms _usersFroms;
+        private readonly ProjectsForms _projectForms;
+        private readonly BranchsForms _branchsForms;
+        private readonly ChangeSetForms _changesetForms;
+
         private void dgvProjects_CurrentCellChanged(object sender, EventArgs e)
         {
             project = string.Empty;
@@ -212,6 +238,21 @@ namespace WinFormsCandidateToMerge
             return tryGetSelectedChangetSetId;
         }
 
+        private bool TryGetSelectedChangetSetId2(out int outChangesetId)
+        {
+            outChangesetId = 0;
+            var data = dataListView1.SelectedObject as DataRowView;
+            if (data == null)
+                return false;
+
+            var row = (DsCandidateToMerge.MergeResultRow)
+                ((DataRowView) (data)).Row;
+
+
+            outChangesetId = row.ChangesetId;
+            return true;
+        }
+
         private bool IsHoveringSelectedRow(MouseEventArgs e)
         {
             return dgvResult.HitTest(e.X, e.Y).RowIndex == dgvResult.CurrentRow.Index;
@@ -251,6 +292,9 @@ namespace WinFormsCandidateToMerge
 
         private void dataListView1_CellRightClick(object sender, CellRightClickEventArgs e)
         {
+
+            toolStripDetail.Visible = dataListView1.SelectedObjects.Count == 1;
+            toolStripSeparatorDetail.Visible = dataListView1.SelectedObjects.Count == 1;
             e.MenuStrip = this.contextMenuStrip1;
         }
 
@@ -258,16 +302,34 @@ namespace WinFormsCandidateToMerge
         {
             if (e.ClickedItem == toolStripMenuItem1)
             {
+                var confirmResult = MessageBox.Show("Are you sure to ignore this item ?",
+                                     "Confirm Ignorer!",
+                                     MessageBoxButtons.YesNo);
+                if (confirmResult != DialogResult.Yes)
+                    return;
 
-                foreach (var obj in dataListView1.SelectedObjects)
+                foreach (DataRowView obj in dataListView1.SelectedObjects.OfType<DataRowView>())
                 {
-                    if (!(obj is DataRowView))
-                        continue;
-                    
                     _dataSetManipulator.Ignore((DsCandidateToMerge.MergeResultRow)
-                         ((DataRowView)(obj)).Row);
+                        ((DataRowView)(obj)).Row);
                 }
+            }
+            if (e.ClickedItem == toolStripDetail)
+            {
+                int csId;
+                if (TryGetSelectedChangetSetId2(out csId))
+                {
+                    try
+                    {
+                        _changesetVisualizer.Execute(csId);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error while starting tf.exe\r\n\r\n" + ex.ToString(), "Arf !");
+                    }
+                }   
             }
         }
     }
+
 }

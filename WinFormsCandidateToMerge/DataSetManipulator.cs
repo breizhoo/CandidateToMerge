@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinFormsCandidateToMerge
 {
-    class DataSetManipulator
+    public class DataSetManipulator
     {
         private readonly DsCandidateToMerge _dsCandidateToMerge;
 
@@ -15,10 +15,15 @@ namespace WinFormsCandidateToMerge
             _dsCandidateToMerge = dsCandidateToMerge;
         }
 
+        public DsCandidateToMerge DsCandidateToMerge
+        {
+            get { return _dsCandidateToMerge; }
+        }
+
         public IEnumerable<GetMergeCandidateRequest> GetMergeCandidateRequest()
         {
-            return (from project in _dsCandidateToMerge.Projects.Rows.Cast<DsCandidateToMerge.ProjectsRow>()
-                    from branch in _dsCandidateToMerge.Branchs.Rows.Cast<DsCandidateToMerge.BranchsRow>()
+            return (from project in DsCandidateToMerge.Projects.Rows.Cast<DsCandidateToMerge.ProjectsRow>()
+                    from branch in DsCandidateToMerge.Branchs.Rows.Cast<DsCandidateToMerge.BranchsRow>()
                     where project.IsToScan && branch.IsToScan
                     select new GetMergeCandidateRequest
                     {
@@ -34,26 +39,26 @@ namespace WinFormsCandidateToMerge
             foreach (var owner in owners)
             {
 
-                if (_dsCandidateToMerge.Users.FindByName(owner) != null)
+                if (DsCandidateToMerge.Users.FindByName(owner) != null)
                     continue;
 
-                var row = _dsCandidateToMerge.Users.NewUsersRow();
+                var row = DsCandidateToMerge.Users.NewUsersRow();
                 row.Name = owner;
                 row.IsToScan = true;
-                _dsCandidateToMerge.Users.AddUsersRow(row);
+                DsCandidateToMerge.Users.AddUsersRow(row);
             }
-            _dsCandidateToMerge.AcceptChanges();
+            DsCandidateToMerge.AcceptChanges();
         }
 
         public void ClearMergeCandidate()
         {
-            _dsCandidateToMerge.MergeResult.Clear();
-            _dsCandidateToMerge.MergeResult.AcceptChanges();
+            DsCandidateToMerge.MergeResult.Clear();
+            DsCandidateToMerge.MergeResult.AcceptChanges();
         }
 
         public void Ignore(DsCandidateToMerge.MergeResultRow mergeCandidates)
         {
-            _dsCandidateToMerge.MergeIgnore.AddMergeIgnoreRow(
+            DsCandidateToMerge.MergeIgnore.AddMergeIgnoreRow(
                 mergeCandidates.ChangesetId, mergeCandidates.Project, mergeCandidates.BranchName, true);
         }
 
@@ -63,7 +68,7 @@ namespace WinFormsCandidateToMerge
             {
                 foreach (var mergeCandidate in resProj.MergeCandidates)
                 {
-                    var row = _dsCandidateToMerge.MergeResult.NewMergeResultRow();
+                    var row = DsCandidateToMerge.MergeResult.NewMergeResultRow();
 
                     row.ChangesetId = mergeCandidate.Changeset.ChangesetId;
                     row.Owner = mergeCandidate.Changeset.Owner;
@@ -72,16 +77,16 @@ namespace WinFormsCandidateToMerge
                     row.BranchName = resProj.BranchName;
                     row.Project = resProj.Project;
 
-                    _dsCandidateToMerge.MergeResult.AddMergeResultRow(row);
+                    DsCandidateToMerge.MergeResult.AddMergeResultRow(row);
                 }
 
             }
-            _dsCandidateToMerge.AcceptChanges();
+            DsCandidateToMerge.AcceptChanges();
         }
 
         public string GetTfsUrl()
         {
-            var tfsUrl = _dsCandidateToMerge.Configuration.FindByName("TfsUrl");
+            var tfsUrl = DsCandidateToMerge.Configuration.FindByName("TfsUrl");
             if (tfsUrl != null)
                 return tfsUrl.Value;
             return string.Empty;
@@ -89,17 +94,17 @@ namespace WinFormsCandidateToMerge
 
         public void SetTfsUrl(string url)
         {
-            var tfsUrl = _dsCandidateToMerge.Configuration.FindByName("TfsUrl");
+            var tfsUrl = DsCandidateToMerge.Configuration.FindByName("TfsUrl");
             var isNewRow = (tfsUrl == null);
             if (isNewRow)
             {
-                tfsUrl = _dsCandidateToMerge.Configuration.NewConfigurationRow();
+                tfsUrl = DsCandidateToMerge.Configuration.NewConfigurationRow();
                 tfsUrl.Name = "TfsUrl";
             }
             if (isNewRow || tfsUrl.Value != url)
                 tfsUrl.Value = url;
             if (isNewRow)
-                _dsCandidateToMerge.Configuration.AddConfigurationRow(tfsUrl);
+                DsCandidateToMerge.Configuration.AddConfigurationRow(tfsUrl);
             tfsUrl.AcceptChanges();
         }
 
