@@ -30,7 +30,7 @@ namespace WinFormsCandidateToMerge
                 _dataSetManipulator.DsCandidateToMerge.MergeResult, 
                 "IsToDisplay = true", "", 
                 DataViewRowState.CurrentRows);
-            AutosizeColumns();
+            //AutosizeColumns();
         }
 
         private void AutosizeColumns()

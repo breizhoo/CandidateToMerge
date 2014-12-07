@@ -39,10 +39,13 @@
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mergeResultBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge2)).BeginInit();
@@ -89,13 +92,20 @@
             // dataListView1
             // 
             this.dataListView1.AllColumns.Add(this.olvColumn1);
+            this.dataListView1.AllColumns.Add(this.olvColumn6);
             this.dataListView1.AllColumns.Add(this.olvColumn2);
             this.dataListView1.AllColumns.Add(this.olvColumn3);
+            this.dataListView1.AllColumns.Add(this.olvColumn4);
+            this.dataListView1.AllColumns.Add(this.olvColumn5);
+            this.dataListView1.AllowColumnReorder = true;
             this.dataListView1.AutoGenerateColumns = false;
             this.dataListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
+            this.olvColumn6,
             this.olvColumn2,
-            this.olvColumn3});
+            this.olvColumn3,
+            this.olvColumn4,
+            this.olvColumn5});
             this.dataListView1.DataSource = null;
             this.dataListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataListView1.FullRowSelect = true;
@@ -103,7 +113,7 @@
             this.dataListView1.Name = "dataListView1";
             this.dataListView1.ShowCommandMenuOnRightClick = true;
             this.dataListView1.ShowItemCountOnGroups = true;
-            this.dataListView1.Size = new System.Drawing.Size(560, 523);
+            this.dataListView1.Size = new System.Drawing.Size(1276, 523);
             this.dataListView1.TabIndex = 3;
             this.dataListView1.UseCompatibleStateImageBehavior = false;
             this.dataListView1.UseFiltering = true;
@@ -114,16 +124,27 @@
             // 
             this.olvColumn1.AspectName = "Project";
             this.olvColumn1.Text = "Project";
+            this.olvColumn1.Width = 200;
             // 
             // olvColumn2
             // 
             this.olvColumn2.AspectName = "Owner";
             this.olvColumn2.Text = "Owner";
+            this.olvColumn2.Width = 120;
             // 
             // olvColumn3
             // 
             this.olvColumn3.AspectName = "Comment";
+            this.olvColumn3.Groupable = false;
             this.olvColumn3.Text = "Comment";
+            this.olvColumn3.Width = 300;
+            // 
+            // olvColumn4
+            // 
+            this.olvColumn4.AspectName = "ChangesetId";
+            this.olvColumn4.Groupable = false;
+            this.olvColumn4.Text = "ChangesetId";
+            this.olvColumn4.Width = 75;
             // 
             // contextMenuStrip2
             // 
@@ -152,11 +173,24 @@
             this.toolStripMenuItem3.Size = new System.Drawing.Size(167, 22);
             this.toolStripMenuItem3.Text = "Changeset details";
             // 
+            // olvColumn5
+            // 
+            this.olvColumn5.AspectName = "CreationDate";
+            this.olvColumn5.Groupable = false;
+            this.olvColumn5.Text = "Creation date";
+            this.olvColumn5.Width = 120;
+            // 
+            // olvColumn6
+            // 
+            this.olvColumn6.AspectName = "BranchName";
+            this.olvColumn6.Text = "BranchName";
+            this.olvColumn6.Width = 90;
+            // 
             // ChangeSetForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 523);
+            this.ClientSize = new System.Drawing.Size(1276, 523);
             this.Controls.Add(this.dataListView1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ChangeSetForms";
@@ -186,5 +220,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private BrightIdeasSoftware.OLVColumn olvColumn4;
+        private BrightIdeasSoftware.OLVColumn olvColumn5;
+        private BrightIdeasSoftware.OLVColumn olvColumn6;
     }
 }
