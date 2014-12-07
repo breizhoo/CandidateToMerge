@@ -35,9 +35,13 @@
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.dsCandidateToMerge2 = new System.Windows.Forms.BindingSource(this.components);
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripCheckSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripUncheckSelected = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataListView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge2)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // usersBindingSource
@@ -58,6 +62,7 @@
             this.olvColumn2,
             this.olvColumn3,
             this.olvColumn1});
+            this.dataListView1.ContextMenuStrip = this.contextMenuStrip2;
             this.dataListView1.DataSource = this.usersBindingSource;
             this.dataListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataListView1.Location = new System.Drawing.Point(0, 0);
@@ -96,6 +101,28 @@
             this.dsCandidateToMerge2.Position = 0;
             this.dsCandidateToMerge2.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
             // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripCheckSelected,
+            this.toolStripUncheckSelected});
+            this.contextMenuStrip2.Name = "contextMenuStrip1";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(167, 48);
+            // 
+            // toolStripCheckSelected
+            // 
+            this.toolStripCheckSelected.Name = "toolStripCheckSelected";
+            this.toolStripCheckSelected.Size = new System.Drawing.Size(166, 22);
+            this.toolStripCheckSelected.Text = "Check selected";
+            this.toolStripCheckSelected.Click += new System.EventHandler(this.toolStripCheckSelected_Click);
+            // 
+            // toolStripUncheckSelected
+            // 
+            this.toolStripUncheckSelected.Name = "toolStripUncheckSelected";
+            this.toolStripUncheckSelected.Size = new System.Drawing.Size(166, 22);
+            this.toolStripUncheckSelected.Text = "Uncheck selected";
+            this.toolStripUncheckSelected.Click += new System.EventHandler(this.toolStripUncheckSelected_Click);
+            // 
             // UsersForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -108,6 +135,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataListView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge2)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -120,6 +148,9 @@
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvColumn3;
         public BrightIdeasSoftware.DataListView dataListView1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripCheckSelected;
+        private System.Windows.Forms.ToolStripMenuItem toolStripUncheckSelected;
 
     }
 }

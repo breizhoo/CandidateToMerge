@@ -19,13 +19,14 @@ namespace WinFormsCandidateToMerge
         {
             _dataSetManipulator = dataSetManipulator;
             InitializeComponent();
-            dsCandidateToMerge2.DataSource = dataSetManipulator.DsCandidateToMerge;
 
             CloseButtonVisible = false;
         }
 
         public void Initialise()
         {
+            dsCandidateToMerge2.DataSource = _dataSetManipulator.DsCandidateToMerge;
+
             dataListView1.DataSource = new DataView(
                 _dataSetManipulator.DsCandidateToMerge.MergeResult, 
                 "IsToDisplay = true", "", 

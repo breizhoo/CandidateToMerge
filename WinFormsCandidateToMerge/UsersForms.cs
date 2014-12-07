@@ -20,19 +20,40 @@ namespace WinFormsCandidateToMerge
             _dataSetManipulator = dataSetManipulator;
 
             InitializeComponent();
-            dsCandidateToMerge2.DataSource = dataSetManipulator.DsCandidateToMerge;
+
             CloseButtonVisible = false;
 
         }
 
         public void Initialise()
         {
-
+            dsCandidateToMerge2.DataSource = _dataSetManipulator.DsCandidateToMerge;
         }
 
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripCheckSelected_Click(object sender, EventArgs e)
+        {
+            CheckUncheckUsers(true);
+        }
+
+        private void CheckUncheckUsers(bool check)
+        {
+            foreach (DataRowView obj in dataListView1.SelectedObjects.OfType<DataRowView>())
+            {
+                var item = ((DsCandidateToMerge.UsersRow)
+                    ((DataRowView) (obj)).Row);
+
+                item.IsToScan = check;
+            }
+        }
+
+        private void toolStripUncheckSelected_Click(object sender, EventArgs e)
+        {
+            CheckUncheckUsers(false);
         }
     }
 }

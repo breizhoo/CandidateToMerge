@@ -19,8 +19,11 @@ namespace WinFormsCandidateToMerge
 
         public CandidateToMerge()
         {
-            InitializeComponent();
 
+            
+            InitializeComponent();
+            _dataSerializer = new DataSerializer(dsCandidateToMerge1);
+            
             IsMdiContainer = true;
 
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
@@ -29,7 +32,7 @@ namespace WinFormsCandidateToMerge
             backgroundWorker1.WorkerReportsProgress = true;
             _dataSetManipulator = new DataSetManipulator(dsCandidateToMerge1);
             _uiSerializer = new UiSerializer(this);
-            _dataSerializer = new DataSerializer(dsCandidateToMerge1);
+
             _changesetVisualizer = new ChangesetVisualizer();
 
             ParametersForms = new ParametersForms(_dataSetManipulator);
@@ -114,13 +117,12 @@ namespace WinFormsCandidateToMerge
 
         protected override void OnLoad(EventArgs e)
         {
-            base.OnLoad(e);
-
             _dataSerializer.Restore();
             _uiSerializer.Restore();
 
-            ParametersForms.Initialise();
-            ChangesetForms.Initialise();
+            base.OnLoad(e);
+
+
 
             if (UsersFroms.DockPanel == null)
                 UsersFroms.Show(dockPanel1, DockState.DockLeftAutoHide);
@@ -132,6 +134,12 @@ namespace WinFormsCandidateToMerge
                 BranchsForms.Show(dockPanel1, DockState.DockLeftAutoHide);
             if (ChangesetForms.DockPanel == null) 
                 ChangesetForms.Show(dockPanel1, DockState.Document);
+
+            ParametersForms.Initialise();
+            ChangesetForms.Initialise();
+            UsersFroms.Initialise();
+            BranchsForms.Initialise();
+            ProjectForms.Initialise();
 
         }
 

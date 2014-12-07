@@ -106,7 +106,7 @@
             this.olvColumn3,
             this.olvColumn4,
             this.olvColumn5});
-            this.dataListView1.DataSource = null;
+            this.dataListView1.DataSource = this.mergeResultBindingSource;
             this.dataListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataListView1.FullRowSelect = true;
             this.dataListView1.Location = new System.Drawing.Point(0, 0);
