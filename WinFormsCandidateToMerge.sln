@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsCandidateToMerge", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsUI", "WinFormsUI\WinFormsUI.csproj", "{C75532C4-765B-418E-B09B-46D36B2ABDB1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bin", "bin", "{B1D4EA28-D995-46F9-8FA0-C24331642F33}"
+	ProjectSection(SolutionItems) = preProject
+		bin\ComponentFactory.Krypton.Toolkit.dll = bin\ComponentFactory.Krypton.Toolkit.dll
+		bin\JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.dll = bin\JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

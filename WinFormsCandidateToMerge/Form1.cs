@@ -32,20 +32,12 @@ namespace WinFormsCandidateToMerge
             _dataSerializer = new DataSerializer(dsCandidateToMerge1);
             _changesetVisualizer = new ChangesetVisualizer();
 
-            _parametersForms = new ParametersForms(_dataSetManipulator);
-            _parametersForms.Show(dockPanel1, DockState.DockLeftAutoHide);
+            ParametersForms = new ParametersForms(_dataSetManipulator);
 
-            _usersFroms = new UsersForms(_dataSetManipulator);
-            _usersFroms.Show(dockPanel1, DockState.DockLeftAutoHide);
-
-            _projectForms = new ProjectsForms(_dataSetManipulator);
-            _projectForms.Show(dockPanel1, DockState.DockLeftAutoHide);
-
-            _branchsForms = new BranchsForms(_dataSetManipulator);
-            _branchsForms.Show(dockPanel1, DockState.DockLeftAutoHide);
-
-            _changesetForms = new ChangeSetForms(_dataSetManipulator);
-            _changesetForms.Show(dockPanel1, DockState.Document);
+            UsersFroms = new UsersForms(_dataSetManipulator);
+            ProjectForms = new ProjectsForms(_dataSetManipulator);
+            BranchsForms = new BranchsForms(_dataSetManipulator);
+            ChangesetForms = new ChangeSetFormsOld(_dataSetManipulator);
 
 
         }
@@ -127,209 +119,29 @@ namespace WinFormsCandidateToMerge
             _dataSerializer.Restore();
             _uiSerializer.Restore();
 
-            _parametersForms.Initialise();
-            _changesetForms.Initialise();
+            ParametersForms.Initialise();
+            ChangesetForms.Initialise();
 
-            dgvResult.DataSource = new DataView(dsCandidateToMerge1.MergeResult, "IsToDisplay = true", "", DataViewRowState.CurrentRows);
-            dataListView1.DataSource = new DataView(dsCandidateToMerge1.MergeResult, "IsToDisplay = true", "", DataViewRowState.CurrentRows);
+            if (UsersFroms.DockPanel == null)
+                UsersFroms.Show(dockPanel1, DockState.DockLeftAutoHide);
+            if (ParametersForms.DockPanel == null) 
+                ParametersForms.Show(dockPanel1, DockState.DockLeftAutoHide);
+            if (ProjectForms.DockPanel == null) 
+                ProjectForms.Show(dockPanel1, DockState.DockLeftAutoHide);
+            if (BranchsForms.DockPanel == null) 
+                BranchsForms.Show(dockPanel1, DockState.DockLeftAutoHide);
+            if (ChangesetForms.DockPanel == null) 
+                ChangesetForms.Show(dockPanel1, DockState.Document);
+
         }
 
-        private void dgvResult_DataSourceChanged(object sender, EventArgs e)
-        {
-            ChangeColorRowByOwner(userName);
-        }
-
-        private string userName;
-        private void dgvUsers_SelectionChanged(object sender, EventArgs e)
-        {
-            //userName = string.Empty;
-            //if (dgvUsers.SelectedRows.Count > 0)
-            //    userName = dgvUsers.SelectedRows[0]
-            //        .Cells[colName.Name].Value.ToString();
-
-            //ChangeColorRow(userName);
-        }
-
-        private void ChangeColorRowByProject(string projectName)
-        {
-            foreach (var row in dgvResult.Rows.Cast<DataGridViewRow>())
-            {
-                row.DefaultCellStyle.BackColor = row.Cells[projectDataGridViewTextBoxColumn1.Name].Value.ToString() == projectName
-                    ? Color.Khaki
-                    : Color.White;
-            }
-        }
-
-        private void ChangeColorRowByOwner(string name)
-        {
-            foreach (var row in dgvResult.Rows.Cast<DataGridViewRow>())
-            {
-                row.DefaultCellStyle.BackColor = row.Cells[colOwner.Name].Value.ToString() == name
-                    ? Color.Khaki
-                    : Color.White;
-            }
-        }
-
-        private void dgvUsers_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //userName = dgvUsers.Rows[e.RowIndex]
-            //    .Cells[colName.Name].Value.ToString();
-
-            //ChangeColorRowByOwner(userName);
-        }
-
-        private void dgvUsers_CurrentCellChanged(object sender, EventArgs e)
-        {
-            //userName = string.Empty;
-            //if (dgvUsers.CurrentCell != null &&
-            //    dgvUsers.CurrentCell.RowIndex >= 0)
-            //    userName = dgvUsers.Rows[dgvUsers.CurrentCell.RowIndex]
-            //        .Cells[colName.Name].Value.ToString();
-
-            //ChangeColorRowByOwner(userName);
-        }
 
         private string project;
-        private readonly ParametersForms _parametersForms;
-        private readonly UsersForms _usersFroms;
-        private readonly ProjectsForms _projectForms;
-        private readonly BranchsForms _branchsForms;
-        private readonly ChangeSetForms _changesetForms;
-
-        private void dgvProjects_CurrentCellChanged(object sender, EventArgs e)
-        {
-            project = string.Empty;
-            if (dgvProjects.CurrentCell != null &&
-                dgvProjects.CurrentCell.RowIndex >= 0)
-                project = dgvProjects.Rows[dgvProjects.CurrentCell.RowIndex]
-                    .Cells[projectDataGridViewTextBoxColumn.Name].Value.ToString();
-
-            ChangeColorRowByProject(project);
-        }
-
-        private void dgvResult_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (Ignore.DisplayIndex == e.ColumnIndex)
-                _dataSetManipulator.Ignore((DsCandidateToMerge.MergeResultRow)
-                    ((DataRowView)(dgvResult.CurrentRow.DataBoundItem)).Row);
-        }
-
-        private bool CanShowChangesetDetails()
-        {
-            var isOnlyOneRowSelected = dgvResult.SelectedRows.Count == 1;
-            var allCellsAreFromTheSameRow = dgvResult.SelectedCells.Cast<DataGridViewCell>().GroupBy(c => c.RowIndex).Count() == 1;
-
-            return isOnlyOneRowSelected || allCellsAreFromTheSameRow;
-        }
-
-
-        private bool TryGetSelectedChangetSetId(out int outChangesetId)
-        {
-            if (!CanShowChangesetDetails())
-            {
-                outChangesetId = 0;
-                return false;
-            }
-
-            int csId;
-            var tryGetSelectedChangetSetId = int.TryParse(dgvResult.CurrentRow.Cells[changesetIdDataGridViewTextBoxColumn.Name].Value.ToString(), out csId);
-            outChangesetId = csId;
-
-            return tryGetSelectedChangetSetId;
-        }
-
-        private bool TryGetSelectedChangetSetId2(out int outChangesetId)
-        {
-            outChangesetId = 0;
-            var data = dataListView1.SelectedObject as DataRowView;
-            if (data == null)
-                return false;
-
-            var row = (DsCandidateToMerge.MergeResultRow)
-                ((DataRowView) (data)).Row;
-
-
-            outChangesetId = row.ChangesetId;
-            return true;
-        }
-
-        private bool IsHoveringSelectedRow(MouseEventArgs e)
-        {
-            return dgvResult.HitTest(e.X, e.Y).RowIndex == dgvResult.CurrentRow.Index;
-        }
-
-        private void dgvResult_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right &&
-                CanShowChangesetDetails() &&
-                IsHoveringSelectedRow(e) &&
-                _changesetVisualizer.IsVisualizerAvailable)
-            {
-                var menuItemCSDetails = new MenuItem("Changeset details");
-                menuItemCSDetails.Click += dgvResult_MenuItemCsDetailsOnClick;
-                var menu = new ContextMenu();
-                menu.MenuItems.Add(menuItemCSDetails);
-
-                menu.Show(dgvResult, new Point(e.X, e.Y));
-            }
-        }
-
-        private void dgvResult_MenuItemCsDetailsOnClick(object sender, EventArgs eventArgs)
-        {
-            int csId;
-            if (TryGetSelectedChangetSetId(out csId))
-            {
-                try
-                {
-                    _changesetVisualizer.Execute(csId);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error while starting tf.exe\r\n\r\n" + ex.ToString(), "Arf !");
-                }
-            }
-        }
-
-        private void dataListView1_CellRightClick(object sender, CellRightClickEventArgs e)
-        {
-
-            toolStripDetail.Visible = dataListView1.SelectedObjects.Count == 1;
-            toolStripSeparatorDetail.Visible = dataListView1.SelectedObjects.Count == 1;
-            e.MenuStrip = this.contextMenuStrip1;
-        }
-
-        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            if (e.ClickedItem == toolStripMenuItem1)
-            {
-                var confirmResult = MessageBox.Show("Are you sure to ignore this item ?",
-                                     "Confirm Ignorer!",
-                                     MessageBoxButtons.YesNo);
-                if (confirmResult != DialogResult.Yes)
-                    return;
-
-                foreach (DataRowView obj in dataListView1.SelectedObjects.OfType<DataRowView>())
-                {
-                    _dataSetManipulator.Ignore((DsCandidateToMerge.MergeResultRow)
-                        ((DataRowView)(obj)).Row);
-                }
-            }
-            if (e.ClickedItem == toolStripDetail)
-            {
-                int csId;
-                if (TryGetSelectedChangetSetId2(out csId))
-                {
-                    try
-                    {
-                        _changesetVisualizer.Execute(csId);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error while starting tf.exe\r\n\r\n" + ex.ToString(), "Arf !");
-                    }
-                }   
-            }
-        }
+        public readonly ParametersForms ParametersForms;
+        public readonly UsersForms UsersFroms;
+        public readonly ProjectsForms ProjectForms;
+        public readonly BranchsForms BranchsForms;
+        public readonly ChangeSetFormsOld ChangesetForms;
     }
 
 }

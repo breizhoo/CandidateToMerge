@@ -30,13 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dsCandidateToMerge2 = new System.Windows.Forms.BindingSource(this.components);
             this.dataListView1 = new BrightIdeasSoftware.DataListView();
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.dsCandidateToMerge2 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataListView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge2)).BeginInit();
             this.SuspendLayout();
             // 
             // usersBindingSource
@@ -44,21 +45,18 @@
             this.usersBindingSource.DataMember = "Users";
             this.usersBindingSource.DataSource = this.dsCandidateToMerge2;
             // 
-            // dsCandidateToMerge2
-            // 
-            this.dsCandidateToMerge2.DataSource = typeof(WinFormsCandidateToMerge.DsCandidateToMerge);
-            this.dsCandidateToMerge2.Position = 0;
-            this.dsCandidateToMerge2.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
-            // 
             // dataListView1
             // 
             this.dataListView1.AllColumns.Add(this.olvColumn2);
+            this.dataListView1.AllColumns.Add(this.olvColumn3);
             this.dataListView1.AllColumns.Add(this.olvColumn1);
             this.dataListView1.AutoGenerateColumns = false;
+            this.dataListView1.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
             this.dataListView1.CheckBoxes = true;
             this.dataListView1.CheckedAspectName = "IsToScan";
             this.dataListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn2,
+            this.olvColumn3,
             this.olvColumn1});
             this.dataListView1.DataSource = this.usersBindingSource;
             this.dataListView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -68,7 +66,6 @@
             this.dataListView1.ShowItemCountOnGroups = true;
             this.dataListView1.Size = new System.Drawing.Size(284, 261);
             this.dataListView1.TabIndex = 2;
-            this.dataListView1.TriStateCheckBoxes = true;
             this.dataListView1.UseCompatibleStateImageBehavior = false;
             this.dataListView1.View = System.Windows.Forms.View.Details;
             // 
@@ -79,13 +76,25 @@
             this.olvColumn2.Groupable = false;
             this.olvColumn2.IsEditable = false;
             this.olvColumn2.Text = "Name";
-            this.olvColumn2.Width = 200;
+            this.olvColumn2.Width = 150;
             // 
             // olvColumn1
             // 
             this.olvColumn1.AspectName = "IsToScan";
             this.olvColumn1.IsEditable = false;
             this.olvColumn1.Text = "Visible";
+            // 
+            // olvColumn3
+            // 
+            this.olvColumn3.AspectName = "TeamName";
+            this.olvColumn3.Text = "Team name";
+            this.olvColumn3.Width = 150;
+            // 
+            // dsCandidateToMerge2
+            // 
+            this.dsCandidateToMerge2.DataSource = typeof(WinFormsCandidateToMerge.DsCandidateToMerge);
+            this.dsCandidateToMerge2.Position = 0;
+            this.dsCandidateToMerge2.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
             // 
             // UsersForms
             // 
@@ -97,8 +106,8 @@
             this.Name = "UsersForms";
             this.Text = "Users";
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataListView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -107,9 +116,10 @@
 
         internal System.Windows.Forms.BindingSource usersBindingSource;
         private System.Windows.Forms.BindingSource dsCandidateToMerge2;
-        private BrightIdeasSoftware.DataListView dataListView1;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        public BrightIdeasSoftware.DataListView dataListView1;
 
     }
 }

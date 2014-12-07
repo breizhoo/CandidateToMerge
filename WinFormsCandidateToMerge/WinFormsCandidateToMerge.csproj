@@ -36,6 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ComponentFactory.Krypton.Toolkit">
+      <HintPath>..\bin\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid">
+      <HintPath>..\bin\JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.TeamFoundation.Client, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\ReferenceAssemblies\v2.0\Microsoft.TeamFoundation.Client.dll</HintPath>
@@ -77,11 +83,17 @@
     <Compile Include="BranchsForms.Designer.cs">
       <DependentUpon>BranchsForms.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChangeSetForms.cs">
+    <Compile Include="ChangeSetFormsNew.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangeSetForms.Designer.cs">
-      <DependentUpon>ChangeSetForms.cs</DependentUpon>
+    <Compile Include="ChangeSetFormsNew.Designer.cs">
+      <DependentUpon>ChangeSetFormsNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeSetFormsOld.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeSetFormsOld.Designer.cs">
+      <DependentUpon>ChangeSetFormsOld.cs</DependentUpon>
     </Compile>
     <Compile Include="ChangesetVisualizer.cs" />
     <Compile Include="DataSerializer.cs" />
@@ -136,8 +148,11 @@
     <EmbeddedResource Include="BranchsForms.resx">
       <DependentUpon>BranchsForms.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChangeSetForms.resx">
-      <DependentUpon>ChangeSetForms.cs</DependentUpon>
+    <EmbeddedResource Include="ChangeSetFormsNew.resx">
+      <DependentUpon>ChangeSetFormsNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeSetFormsOld.resx">
+      <DependentUpon>ChangeSetFormsOld.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

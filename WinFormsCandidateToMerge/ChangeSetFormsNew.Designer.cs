@@ -1,6 +1,6 @@
 ﻿namespace WinFormsCandidateToMerge
 {
-    partial class ChangeSetForms
+    partial class ChangeSetFormsNew
     {
         /// <summary>
         /// Required designer variable.

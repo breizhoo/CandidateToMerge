@@ -11,11 +11,11 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace WinFormsCandidateToMerge
 {
-    public partial class ChangeSetForms : DockContent
+    public partial class ChangeSetFormsOld : DockContent
     {
         private readonly DataSetManipulator _dataSetManipulator;
 
-        public ChangeSetForms(DataSetManipulator dataSetManipulator)
+        public ChangeSetFormsOld(DataSetManipulator dataSetManipulator)
         {
             _dataSetManipulator = dataSetManipulator;
             InitializeComponent();
@@ -66,8 +66,8 @@ namespace WinFormsCandidateToMerge
 
         private void dataListView1_CellRightClick(object sender, BrightIdeasSoftware.CellRightClickEventArgs e)
         {
-            toolStripDetail.Visible = dataListView1.SelectedObjects.Count == 1;
-            toolStripSeparatorDetail.Visible = dataListView1.SelectedObjects.Count == 1;
+            toolStripMenuItem1.Enabled = dataListView1.SelectedObjects.Count > 0;
+            toolStripDetail.Enabled = dataListView1.SelectedObjects.Count == 1;
             e.MenuStrip = this.contextMenuStrip1;
 
         }
