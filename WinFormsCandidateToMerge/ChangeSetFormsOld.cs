@@ -14,11 +14,16 @@ namespace WinFormsCandidateToMerge
     public partial class ChangeSetFormsOld : DockContent
     {
         private readonly DataSetManipulator _dataSetManipulator;
+        private readonly ChangesetVisualizer _changesetVisualizer;
+
 
         public ChangeSetFormsOld(DataSetManipulator dataSetManipulator)
         {
             _dataSetManipulator = dataSetManipulator;
+            _changesetVisualizer = new ChangesetVisualizer();
+
             InitializeComponent();
+
 
             CloseButtonVisible = false;
         }
@@ -67,15 +72,24 @@ namespace WinFormsCandidateToMerge
 
         private void dataListView1_CellRightClick(object sender, BrightIdeasSoftware.CellRightClickEventArgs e)
         {
-            toolStripMenuItem1.Enabled = dataListView1.SelectedObjects.Count > 0;
+            toolStripIgnore.Enabled = dataListView1.SelectedObjects.Count > 0;
             toolStripDetail.Enabled = dataListView1.SelectedObjects.Count == 1;
             e.MenuStrip = this.contextMenuStrip1;
 
         }
 
+        private bool TryGetSelectedChangetSetId2(out int outChangesetId)
+        {
+            outChangesetId = ((DsCandidateToMerge.MergeResultRow)
+             (dataListView1.SelectedObjects.OfType<DataRowView>().First().Row))
+                .ChangesetId;
+
+            return true;
+        }
+
         private void contextMenuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if (e.ClickedItem == toolStripMenuItem1)
+            if (e.ClickedItem == toolStripIgnore)
             {
                 var confirmResult = MessageBox.Show("Are you sure to ignore this item ?",
                                      "Confirm Ignorer!",
@@ -89,21 +103,21 @@ namespace WinFormsCandidateToMerge
                         ((DataRowView)(obj)).Row);
                 }
             }
-            //if (e.ClickedItem == toolStripDetail)
-            //{
-            //    int csId;
-            //    if (TryGetSelectedChangetSetId2(out csId))
-            //    {
-            //        try
-            //        {
-            //            _changesetVisualizer.Execute(csId);
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            MessageBox.Show("Error while starting tf.exe\r\n\r\n" + ex.ToString(), "Arf !");
-            //        }
-            //    }
-            //}
+            if (e.ClickedItem == toolStripDetail)
+            {
+                int csId;
+                if (TryGetSelectedChangetSetId2(out csId))
+                {
+                    try
+                    {
+                        _changesetVisualizer.Execute(csId);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error while starting tf.exe\r\n\r\n" + ex.ToString(), "Arf !");
+                    }
+                }
+            }
 
         }
     }
