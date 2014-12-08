@@ -79,6 +79,29 @@ namespace WinFormsCandidateToMerge
 
     }
 
+    public class LambdaComparer<T> : IEqualityComparer<T>
+    {
+        private readonly Func<T, T, bool> _comparer;
+        private readonly Func<T, int> _hash;
+        public LambdaComparer(Func<T, T, bool> comparer) :
+            this(comparer, o => 0) { }
+        public LambdaComparer(Func<T, T, bool> comparer, Func<T, int> hash)
+        {
+            if (comparer == null) throw new ArgumentNullException("comparer");
+            if (hash == null) throw new ArgumentNullException("hash");
+            _comparer = comparer;
+            _hash = hash;
+        }
+        public bool Equals(T x, T y)
+        {
+            return _comparer(x, y);
+        }
+        public int GetHashCode(T obj)
+        {
+            return _hash(obj);
+        }
+    }
+
     public class GetMergeCandidateProcess
     {
         private readonly IEnumerable<GetMergeCandidateRequest> _resquestOfMerge;
@@ -145,53 +168,43 @@ namespace WinFormsCandidateToMerge
                                .SelectMany(x => x.AssociatedWorkItems)
                                .ToList();
 
-
             try
             {
-                var ids = changeSetId
-                    .Select(x => x.Id.ToString())
-                    .Distinct()
-                    .ToList();
+                //var ids = changeSetId
+                //    .Select(x => x.Id)
+                //    .Distinct()
+                //    .ToList();
 
-                var workItems = workItemStore.Query(string.Format(@"
-                    SELECT *
-                    FROM WorkItems 
-                    WHERE [System.Id] in ({0})
-                ", string.Join(",", ids))).Cast<WorkItem>().Distinct().ToList();
+                //var wiTrees1 = GetParentIds(ids, workItemStore);
+                //var idsss1 = wiTrees1.Select(x => x.SourceId).Distinct();
+                //var wiTrees2 = GetParentIds(idsss1, workItemStore);
+                //var idsss2 = wiTrees2.Select(x => x.SourceId).Distinct();
 
-                var queryy = string.Format(@"
-                    SELECT *
-                    FROM WorkItemLinks  
-                    WHERE ([Target].[System.Id] in ({0}))
-                    order by [System.Id] mode(mustcontain)
-                ", string.Join(",", ids));
-
-                Query wiQuery = new Query(workItemStore, queryy);
-                WorkItemLinkInfo[] wiTrees = wiQuery.RunLinkQuery();
-                WorkItemLinkInfo[] wiTrees2 = wiTrees.Where(x => x.SourceId > 0).ToArray();
-                var idsss = wiTrees2.Select(x => x.SourceId).Distinct().ToArray();
-
-                var userStories = workItemStore.Query(string.Format(@"
-                    SELECT *
-                    FROM WorkItems 
-                    WHERE [System.Id] in ({0})
-                ", string.Join(",", idsss))).Cast<WorkItem>().Distinct().ToList();
+                //var allLiaison = wiTrees1.Union(wiTrees2).Distinct(
+                //    new LambdaComparer<WorkItemLinkInfo>((x1, x2) 
+                //        => x1.SourceId == x2.SourceId 
+                //        && x1.TargetId == x2.TargetId));
+                //var allWorkItems = allLiaison.Select(x => x.SourceId)
+                //    .Union(allLiaison.Select(x => x.TargetId))
+                //    .Distinct();
+                //var workItems = GetWorkItems(workItemStore, allWorkItems);
 
 
-                foreach (var getMergeCandidateResponse in listResponseProject)
-                {
-                    foreach (var changesetInterne in getMergeCandidateResponse.MergeCandidates)
-                    {
-                        changesetInterne.UserStory = 
-                        wiTrees2
-                            .SelectMany(x => changesetInterne
-                                                 .AssociatedWorkItems.Where(y => y.Id == x.TargetId)
-                                                 .Select(y => x.SourceId)
-                            ).Select(j =>
-                                     userStories.FirstOrDefault(t => t.Id == j)
-                            ).ToArray();
-                    }
-                }
+
+                //foreach (var getMergeCandidateResponse in listResponseProject)
+                //{
+                //    foreach (var changesetInterne in getMergeCandidateResponse.MergeCandidates)
+                //    {
+                //        changesetInterne.UserStory = 
+                //        wiTrees2
+                //            .SelectMany(x => changesetInterne
+                //                                 .AssociatedWorkItems.Where(y => y.Id == x.TargetId)
+                //                                 .Select(y => x.SourceId)
+                //            ).Select(j =>
+                //                     userStories.FirstOrDefault(t => t.Id == j)
+                //            ).ToArray();
+                //    }
+                //}
             }
             catch (Exception ex)
             {
@@ -200,6 +213,35 @@ namespace WinFormsCandidateToMerge
 
 
             return listResponseProject;
+        }
+
+        private static IEnumerable<WorkItem> GetWorkItems(WorkItemStore workItemStore, IEnumerable<int> idsss)
+        {
+            var userStories = workItemStore.Query(string.Format(@"
+                    SELECT *
+                    FROM WorkItems 
+                    WHERE [System.Id] in ({0})
+                ", string.Join(",", idsss))).Cast<WorkItem>().Distinct().ToList();
+
+            return userStories;
+        }
+
+        private static IEnumerable<WorkItemLinkInfo> GetParentIds(IEnumerable<int> ids, WorkItemStore workItemStore)
+        {
+            var queryy = string.Format(@"
+                    SELECT *
+                    FROM WorkItemLinks  
+                    WHERE ([Target].[System.Id] in ({0}))
+                    order by [System.Id] mode(mustcontain)
+                ", string.Join(",", ids));
+
+            var wiQuery = new Query(workItemStore, queryy);
+            var wiTrees = wiQuery.RunLinkQuery();
+            return wiTrees.Where(x => x.SourceId > 0).ToArray();
+            //var wiTrees2 =
+
+            //var idsss = wiTrees2.Select(x => x.SourceId).Distinct().ToArray();
+            //return idsss;
         }
 
 
