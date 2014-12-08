@@ -4,6 +4,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using BrightIdeasSoftware;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace WinFormsCandidateToMerge
 {
@@ -17,7 +19,12 @@ namespace WinFormsCandidateToMerge
 
         public CandidateToMerge()
         {
+
+            
             InitializeComponent();
+            _dataSerializer = new DataSerializer(dsCandidateToMerge1);
+            
+            IsMdiContainer = true;
 
             backgroundWorker1.DoWork += backgroundWorker1_DoWork;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
@@ -25,8 +32,17 @@ namespace WinFormsCandidateToMerge
             backgroundWorker1.WorkerReportsProgress = true;
             _dataSetManipulator = new DataSetManipulator(dsCandidateToMerge1);
             _uiSerializer = new UiSerializer(this);
-            _dataSerializer = new DataSerializer(dsCandidateToMerge1);
+
             _changesetVisualizer = new ChangesetVisualizer();
+
+            ParametersForms = new ParametersForms(_dataSetManipulator);
+
+            UsersFroms = new UsersForms(_dataSetManipulator);
+            ProjectForms = new ProjectsForms(_dataSetManipulator);
+            BranchsForms = new BranchsForms(_dataSetManipulator);
+            ChangesetForms = new ChangeSetFormsOld(_dataSetManipulator);
+
+
         }
 
         void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -66,7 +82,7 @@ namespace WinFormsCandidateToMerge
                 currentProject = list.ElementAt(0).Project;
                 backgroundWorker1.ReportProgress(0);
             }
-            var reponseOfMerge = new GetMergeCandidateProcess(txtTfsUrl.Text,
+            var reponseOfMerge = new GetMergeCandidateProcess(_dataSetManipulator.GetTfsUrl(),
                 list)
                 .GetMergeResult(x =>
                 {
@@ -95,155 +111,45 @@ namespace WinFormsCandidateToMerge
         {
             base.OnClosing(e);
 
-            _dataSetManipulator.SetTfsUrl(txtTfsUrl.Text);
             _uiSerializer.Save();
             _dataSerializer.Save();
         }
 
         protected override void OnLoad(EventArgs e)
         {
-            base.OnLoad(e);
-
             _dataSerializer.Restore();
             _uiSerializer.Restore();
-            txtTfsUrl.Text = _dataSetManipulator.GetTfsUrl();
 
-            dgvResult.DataSource = new DataView(dsCandidateToMerge1.MergeResult, "IsToDisplay = true", "", DataViewRowState.CurrentRows);
+            base.OnLoad(e);
+
+
+
+            if (UsersFroms.DockPanel == null)
+                UsersFroms.Show(dockPanel1, DockState.DockLeftAutoHide);
+            if (ParametersForms.DockPanel == null) 
+                ParametersForms.Show(dockPanel1, DockState.DockLeftAutoHide);
+            if (ProjectForms.DockPanel == null) 
+                ProjectForms.Show(dockPanel1, DockState.DockLeftAutoHide);
+            if (BranchsForms.DockPanel == null) 
+                BranchsForms.Show(dockPanel1, DockState.DockLeftAutoHide);
+            if (ChangesetForms.DockPanel == null) 
+                ChangesetForms.Show(dockPanel1, DockState.Document);
+
+            ParametersForms.Initialise();
+            ChangesetForms.Initialise();
+            UsersFroms.Initialise();
+            BranchsForms.Initialise();
+            ProjectForms.Initialise();
+
         }
 
-        private void dgvResult_DataSourceChanged(object sender, EventArgs e)
-        {
-            ChangeColorRowByOwner(userName);
-        }
-
-        private string userName;
-        private void dgvUsers_SelectionChanged(object sender, EventArgs e)
-        {
-            //userName = string.Empty;
-            //if (dgvUsers.SelectedRows.Count > 0)
-            //    userName = dgvUsers.SelectedRows[0]
-            //        .Cells[colName.Name].Value.ToString();
-
-            //ChangeColorRow(userName);
-        }
-
-        private void ChangeColorRowByProject(string projectName)
-        {
-            foreach (var row in dgvResult.Rows.Cast<DataGridViewRow>())
-            {
-                row.DefaultCellStyle.BackColor = row.Cells[projectDataGridViewTextBoxColumn1.Name].Value.ToString() == projectName
-                    ? Color.Khaki
-                    : Color.White;
-            }
-        }
-
-        private void ChangeColorRowByOwner(string name)
-        {
-            foreach (var row in dgvResult.Rows.Cast<DataGridViewRow>())
-            {
-                row.DefaultCellStyle.BackColor = row.Cells[colOwner.Name].Value.ToString() == name
-                    ? Color.Khaki
-                    : Color.White;
-            }
-        }
-
-        private void dgvUsers_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            userName = dgvUsers.Rows[e.RowIndex]
-                .Cells[colName.Name].Value.ToString();
-
-            ChangeColorRowByOwner(userName);
-        }
-
-        private void dgvUsers_CurrentCellChanged(object sender, EventArgs e)
-        {
-            userName = string.Empty;
-            if (dgvUsers.CurrentCell != null &&
-                dgvUsers.CurrentCell.RowIndex >= 0)
-                userName = dgvUsers.Rows[dgvUsers.CurrentCell.RowIndex]
-                    .Cells[colName.Name].Value.ToString();
-
-            ChangeColorRowByOwner(userName);
-        }
 
         private string project;
-        private void dgvProjects_CurrentCellChanged(object sender, EventArgs e)
-        {
-            project = string.Empty;
-            if (dgvProjects.CurrentCell != null &&
-                dgvProjects.CurrentCell.RowIndex >= 0)
-                project = dgvProjects.Rows[dgvProjects.CurrentCell.RowIndex]
-                    .Cells[projectDataGridViewTextBoxColumn.Name].Value.ToString();
-
-            ChangeColorRowByProject(project);
-        }
-
-        private void dgvResult_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (Ignore.DisplayIndex == e.ColumnIndex)
-                _dataSetManipulator.Ignore((DsCandidateToMerge.MergeResultRow)
-                    ((DataRowView)(dgvResult.CurrentRow.DataBoundItem)).Row);
-        }
-
-        private bool CanShowChangesetDetails()
-        {
-            var isOnlyOneRowSelected = dgvResult.SelectedRows.Count == 1;
-            var allCellsAreFromTheSameRow = dgvResult.SelectedCells.Cast<DataGridViewCell>().GroupBy(c => c.RowIndex).Count() == 1;
-
-            return isOnlyOneRowSelected || allCellsAreFromTheSameRow;
-        }
-
-
-        private bool TryGetSelectedChangetSetId(out int outChangesetId)
-        {
-            if (!CanShowChangesetDetails())
-            {
-                outChangesetId = 0;
-                return false;
-            }
-
-            int csId;
-            var tryGetSelectedChangetSetId = int.TryParse(dgvResult.CurrentRow.Cells[changesetIdDataGridViewTextBoxColumn.Name].Value.ToString(), out csId);
-            outChangesetId = csId;
-
-            return tryGetSelectedChangetSetId;
-        }
-
-        private bool IsHoveringSelectedRow(MouseEventArgs e)
-        {
-            return dgvResult.HitTest(e.X, e.Y).RowIndex == dgvResult.CurrentRow.Index;
-        }
-
-        private void dgvResult_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right &&
-                CanShowChangesetDetails() &&
-                IsHoveringSelectedRow(e) &&
-                _changesetVisualizer.IsVisualizerAvailable)
-            {
-                var menuItemCSDetails = new MenuItem("Changeset details");
-                menuItemCSDetails.Click += dgvResult_MenuItemCsDetailsOnClick;
-                var menu = new ContextMenu();
-                menu.MenuItems.Add(menuItemCSDetails);
-
-                menu.Show(dgvResult, new Point(e.X, e.Y));
-            }
-        }
-
-        private void dgvResult_MenuItemCsDetailsOnClick(object sender, EventArgs eventArgs)
-        {
-            int csId;
-            if (TryGetSelectedChangetSetId(out csId))
-            {
-                try
-                {
-                    _changesetVisualizer.Execute(csId);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error while starting tf.exe\r\n\r\n" + ex.ToString(), "Arf !");
-                }
-            }
-        }
+        public readonly ParametersForms ParametersForms;
+        public readonly UsersForms UsersFroms;
+        public readonly ProjectsForms ProjectForms;
+        public readonly BranchsForms BranchsForms;
+        public readonly ChangeSetFormsOld ChangesetForms;
     }
+
 }
