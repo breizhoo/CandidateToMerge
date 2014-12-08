@@ -6,11 +6,79 @@ using System.Net;
 using System.Text;
 using Microsoft.TeamFoundation;
 using Microsoft.TeamFoundation.Client;
+using Microsoft.TeamFoundation.Common.Internal;
 using Microsoft.TeamFoundation.VersionControl.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
 namespace WinFormsCandidateToMerge
 {
+    public class ChangesetInterne
+    {
+        public WorkItem[] UserStory { get; set; }
+
+        /// <summary>
+        /// Returns a limited set of information about the associated work items with this changeset. This property does not spin up a WorkItemStore. Therefore, it is very quick.
+        /// </summary>
+        public AssociatedWorkItemInfo[] AssociatedWorkItems { get; set; }
+        /// <summary>
+        /// Gets or sets the ID of this changeset.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The ID of this changeset.
+        /// </returns>
+        public int ChangesetId { get; set; }
+        /// <summary>
+        /// Gets or sets the check-in note of the changeset.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The check-in note of the changeset.
+        /// </returns>
+        public CheckinNote CheckinNote { get; set; }
+        /// <summary>
+        /// Gets or sets the comment of the changeset.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The comment of the changeset.
+        /// </returns>
+        public string Comment { get; set; }
+        /// <summary>
+        /// Gets or sets the user who committed this changeset.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The user who committed this changeset.
+        /// </returns>
+        public string Committer { get; set; }
+        /// <summary>
+        /// Display name of user who committed this change
+        /// </summary>
+        public string CommitterDisplayName { get; set; }
+        /// <summary>
+        /// Gets or sets the creation date of this changeset.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The creation date of this changeset.
+        /// </returns>
+        public DateTime CreationDate { get; set; }
+        /// <summary>
+        /// Gets or sets the owner of this changeset.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The owner of this changeset.
+        /// </returns>
+        public string Owner { get; set; }
+        /// <summary>
+        /// Display name of user who owns this change. May differ from Committer if the change was imported or committed on behalf of another user.
+        /// </summary>
+        public string OwnerDisplayName { get; set; }
+
+    }
+
     public class GetMergeCandidateProcess
     {
         private readonly IEnumerable<GetMergeCandidateRequest> _resquestOfMerge;
@@ -51,7 +119,18 @@ namespace WinFormsCandidateToMerge
                         listResponseProject.Add(new GetMergeCandidateResponse()
                         {
                             BranchName = branchName,
-                            MergeCandidates = mergeCandidates,
+                            MergeCandidates = mergeCandidates.Select(x => new ChangesetInterne
+                            {
+                                ChangesetId = x.Changeset.ChangesetId,
+                                CheckinNote = x.Changeset.CheckinNote,
+                                Comment = x.Changeset.Comment,
+                                Committer = x.Changeset.Committer,
+                                CommitterDisplayName = x.Changeset.CommitterDisplayName,
+                                CreationDate = x.Changeset.CreationDate,
+                                Owner = x.Changeset.Owner,
+                                OwnerDisplayName = x.Changeset.Owner,
+                                AssociatedWorkItems = x.Changeset.AssociatedWorkItems
+                            }).ToArray(),
                             Project = project
                         });
                     }
@@ -63,7 +142,7 @@ namespace WinFormsCandidateToMerge
             }
 
             var changeSetId = listResponseProject.SelectMany(x => x.MergeCandidates)
-                               .SelectMany(x => x.Changeset.AssociatedWorkItems)
+                               .SelectMany(x => x.AssociatedWorkItems)
                                .ToList();
 
 
@@ -84,7 +163,6 @@ namespace WinFormsCandidateToMerge
                     SELECT *
                     FROM WorkItemLinks  
                     WHERE ([Target].[System.Id] in ({0}))
-                    AND [System.Links.LinkType] = 'System.LinkTypes.Hierarchy-Forward'
                     order by [System.Id] mode(mustcontain)
                 ", string.Join(",", ids));
 
@@ -96,9 +174,24 @@ namespace WinFormsCandidateToMerge
                 var userStories = workItemStore.Query(string.Format(@"
                     SELECT *
                     FROM WorkItems 
-                    WHERE [System.WorkItemType] = 'User Story'
-                      AND [System.Id] in ({0})
+                    WHERE [System.Id] in ({0})
                 ", string.Join(",", idsss))).Cast<WorkItem>().Distinct().ToList();
+
+
+                foreach (var getMergeCandidateResponse in listResponseProject)
+                {
+                    foreach (var changesetInterne in getMergeCandidateResponse.MergeCandidates)
+                    {
+                        changesetInterne.UserStory = 
+                        wiTrees2
+                            .SelectMany(x => changesetInterne
+                                                 .AssociatedWorkItems.Where(y => y.Id == x.TargetId)
+                                                 .Select(y => x.SourceId)
+                            ).Select(j =>
+                                     userStories.FirstOrDefault(t => t.Id == j)
+                            ).ToArray();
+                    }
+                }
             }
             catch (Exception ex)
             {

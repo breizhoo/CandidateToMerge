@@ -65,10 +65,10 @@ namespace WinFormsCandidateToMerge
                 {
                     var row = _dsCandidateToMerge.MergeResult.NewMergeResultRow();
 
-                    row.ChangesetId = mergeCandidate.Changeset.ChangesetId;
-                    row.Owner = mergeCandidate.Changeset.Owner;
-                    row.CreationDate = mergeCandidate.Changeset.CreationDate;
-                    row.Comment = mergeCandidate.Changeset.Comment;
+                    row.ChangesetId = mergeCandidate.ChangesetId;
+                    row.Owner = mergeCandidate.Owner;
+                    row.CreationDate = mergeCandidate.CreationDate;
+                    row.Comment = mergeCandidate.Comment;
                     row.BranchName = resProj.BranchName;
                     row.Project = resProj.Project;
 

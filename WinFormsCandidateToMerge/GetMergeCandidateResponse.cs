@@ -8,6 +8,6 @@ namespace WinFormsCandidateToMerge
 
         public string Project { get; set; }
 
-        public MergeCandidate[] MergeCandidates { get; set; }
+        public ChangesetInterne[] MergeCandidates { get; set; }
     }
 }

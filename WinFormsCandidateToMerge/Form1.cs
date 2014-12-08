@@ -80,7 +80,7 @@ namespace WinFormsCandidateToMerge
 
             response.Owners = (from items in reponseOfMerge
                                from mergeItem in items.MergeCandidates
-                               select mergeItem.Changeset.Owner)
+                               select mergeItem.Owner)
                 .Distinct()
                 .ToList();
 
