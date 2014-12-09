@@ -102,6 +102,14 @@ namespace WinFormsCandidateToMerge
         }
     }
 
+    public class GetMergeResultResponse : List<GetMergeCandidateResponse>
+    {
+        public IEnumerable<WorkItem> WorkItems;
+
+        public IEnumerable<WorkItemLinkInfo> WorkItemLinkInfos;
+
+    }
+
     public class GetMergeCandidateProcess
     {
         private readonly IEnumerable<GetMergeCandidateRequest> _resquestOfMerge;
@@ -113,9 +121,9 @@ namespace WinFormsCandidateToMerge
             _resquestOfMerge = resquestOfMerge;
         }
 
-        public List<GetMergeCandidateResponse> GetMergeResult(Action<GetMergeCandidateRequest> processing = null)
+        public GetMergeResultResponse GetMergeResult(Action<GetMergeCandidateRequest> processing = null)
         {
-            var listResponseProject = new List<GetMergeCandidateResponse>();
+            var listResponseProject = new GetMergeResultResponse();
 
             var teamProjectCollection = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(new Uri(_tfsUrl));
             var workItemStore = teamProjectCollection.GetService<WorkItemStore>();
@@ -170,25 +178,52 @@ namespace WinFormsCandidateToMerge
 
             try
             {
-                //var ids = changeSetId
-                //    .Select(x => x.Id)
-                //    .Distinct()
-                //    .ToList();
+                var ids = changeSetId
+                    .Select(x => x.Id)
+                    .Distinct()
+                    .ToList();
 
-                //var wiTrees1 = GetParentIds(ids, workItemStore);
-                //var idsss1 = wiTrees1.Select(x => x.SourceId).Distinct();
-                //var wiTrees2 = GetParentIds(idsss1, workItemStore);
-                //var idsss2 = wiTrees2.Select(x => x.SourceId).Distinct();
 
-                //var allLiaison = wiTrees1.Union(wiTrees2).Distinct(
-                //    new LambdaComparer<WorkItemLinkInfo>((x1, x2) 
-                //        => x1.SourceId == x2.SourceId 
-                //        && x1.TargetId == x2.TargetId));
-                //var allWorkItems = allLiaison.Select(x => x.SourceId)
-                //    .Union(allLiaison.Select(x => x.TargetId))
-                //    .Distinct();
-                //var workItems = GetWorkItems(workItemStore, allWorkItems);
+                var wiTrees1 = GetParentIds(ids, workItemStore);
+                var idsss1 = wiTrees1.Select(x => x.SourceId).Distinct();
+                var wiTrees2 = GetParentIds(idsss1, workItemStore);
+                var idsss2 = wiTrees2.Select(x => x.SourceId).Distinct();
+                var wiTrees3 = GetParentIds(idsss2, workItemStore);
+                var idsss3 = wiTrees2.Select(x => x.SourceId).Distinct();
 
+
+                var dico2 = wiTrees2.ToLookup(x => x.TargetId);
+                var dico3 = wiTrees3.ToLookup(x => x.TargetId);
+                var wiTreesParent1 = wiTrees1.ToList();
+                var wiTreesParent2 = wiTrees1.SelectMany(x =>
+                    dico2[x.SourceId].Select(y => new WorkItemLinkInfo
+                    {
+                        TargetId = x.TargetId,
+                        SourceId = y.SourceId
+                    }));
+                var wiTreesParent3 = wiTreesParent2.SelectMany(x =>
+                    dico3[x.SourceId].Select(y => new WorkItemLinkInfo
+                    {
+                        TargetId = x.TargetId,
+                        SourceId = y.SourceId
+                    }));
+
+                //Ca !
+                var wiTreesParent = DistinctWorkItemLinkInfo(wiTreesParent1.Union(wiTreesParent2).Union(wiTreesParent3));
+
+                var allLiaison = DistinctWorkItemLinkInfo(wiTrees1.Union(wiTrees2).Union(wiTrees3));
+                        
+                var allWorkItems = allLiaison.Select(x => x.SourceId)
+                    .Union(allLiaison.Select(x => x.TargetId))
+                    .Except(ids) // except changSet already downloaded.
+                    .Distinct();
+
+                //Ca !
+                var workItems = GetWorkItems(workItemStore, allWorkItems);
+
+
+                listResponseProject.WorkItemLinkInfos = wiTreesParent;
+                listResponseProject.WorkItems = workItems;
 
 
                 //foreach (var getMergeCandidateResponse in listResponseProject)
@@ -213,6 +248,14 @@ namespace WinFormsCandidateToMerge
 
 
             return listResponseProject;
+        }
+
+        private IEnumerable<WorkItemLinkInfo> DistinctWorkItemLinkInfo(IEnumerable<WorkItemLinkInfo> workItemLinkInfos)
+        {
+            return workItemLinkInfos.Distinct(
+                    new LambdaComparer<WorkItemLinkInfo>((x1, x2)
+                        => x1.SourceId == x2.SourceId
+                        && x1.TargetId == x2.TargetId));
         }
 
         private static IEnumerable<WorkItem> GetWorkItems(WorkItemStore workItemStore, IEnumerable<int> idsss)

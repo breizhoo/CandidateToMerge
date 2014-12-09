@@ -6,7 +6,7 @@ namespace WinFormsCandidateToMerge
     {
         public List<string> Owners = new List<string>();
 
-        public List<GetMergeCandidateResponse> ResponseProjects = new List<GetMergeCandidateResponse>();
+        public GetMergeResultResponse ResponseProjects = new GetMergeResultResponse();
 
     }
 }

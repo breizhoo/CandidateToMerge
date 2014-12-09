@@ -67,6 +67,8 @@ namespace WinFormsCandidateToMerge
 
             _dataSetManipulator.AddUserIfNotExist(r.Owners);
             _dataSetManipulator.AddMergeCandidate(r.ResponseProjects);
+            _dataSetManipulator.AddMergeCandidate(r.ResponseProjects.WorkItems);
+            _dataSetManipulator.AddMergeCandidate(r.ResponseProjects.WorkItemLinkInfos);
 
             _waitForms.Close();
         }
@@ -84,7 +86,7 @@ namespace WinFormsCandidateToMerge
             }
             var reponseOfMerge = new GetMergeCandidateProcess(_dataSetManipulator.GetTfsUrl(),
                 list)
-                .GetMergeResult(x =>
+                .GetMergeResult(processing: x =>
                 {
                     var index = list.IndexOf(x);
                     var percent = (int)((decimal)100 / list.Count * index);

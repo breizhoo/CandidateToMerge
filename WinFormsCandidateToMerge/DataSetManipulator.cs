@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
 namespace WinFormsCandidateToMerge
 {
@@ -53,7 +54,11 @@ namespace WinFormsCandidateToMerge
         public void ClearMergeCandidate()
         {
             DsCandidateToMerge.MergeResult.Clear();
+            DsCandidateToMerge.WorkItems.Clear();
+            DsCandidateToMerge.WorkItemLinkInfos.Clear();
             DsCandidateToMerge.MergeResult.AcceptChanges();
+            DsCandidateToMerge.WorkItems.AcceptChanges();
+            DsCandidateToMerge.WorkItemLinkInfos.AcceptChanges();
         }
 
         public void Ignore(DsCandidateToMerge.MergeResultRow mergeCandidates)
@@ -80,6 +85,31 @@ namespace WinFormsCandidateToMerge
                     DsCandidateToMerge.MergeResult.AddMergeResultRow(row);
                 }
 
+            }
+            DsCandidateToMerge.AcceptChanges();
+        }
+
+        public void AddMergeCandidate(IEnumerable<WorkItem> workItems)
+        {
+            foreach (var workItem in workItems)
+            {
+                var row = DsCandidateToMerge.WorkItems.NewWorkItemsRow();
+                row.Id = workItem.Id;
+                row.Name = workItem.Title;
+                row.Type = workItem.Type.Name;
+                DsCandidateToMerge.WorkItems.AddWorkItemsRow(row);
+            }
+            DsCandidateToMerge.AcceptChanges();
+        }
+
+        public void AddMergeCandidate(IEnumerable<WorkItemLinkInfo> workItems)
+        {
+            foreach (var workItem in workItems)
+            {
+                var row = DsCandidateToMerge.WorkItemLinkInfos.NewWorkItemLinkInfosRow();
+                row.SourceId = workItem.SourceId;
+                row.TargetId = workItem.TargetId;
+                DsCandidateToMerge.WorkItemLinkInfos.AddWorkItemLinkInfosRow(row);
             }
             DsCandidateToMerge.AcceptChanges();
         }
