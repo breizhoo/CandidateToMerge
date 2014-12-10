@@ -142,7 +142,7 @@
     <Compile Include="ChangesetVisualizer.cs" />
     <Compile Include="DataSerializer.cs" />
     <Compile Include="DataSetManipulator.cs" />
-    <Compile Include="DsCandidateToMerge.Designer.cs">
+    <Compile Include="DsCandidateToMerge1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DsCandidateToMerge.xsd</DependentUpon>
@@ -225,7 +225,7 @@
     <None Include="DsCandidateToMerge.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DsCandidateToMerge.Designer.cs</LastGenOutput>
+      <LastGenOutput>DsCandidateToMerge1.Designer.cs</LastGenOutput>
     </None>
     <None Include="DsCandidateToMerge.xss">
       <DependentUpon>DsCandidateToMerge.xsd</DependentUpon>

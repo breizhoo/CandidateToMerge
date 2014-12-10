@@ -56,9 +56,14 @@ namespace WinFormsCandidateToMerge
             DsCandidateToMerge.MergeResult.Clear();
             DsCandidateToMerge.WorkItems.Clear();
             DsCandidateToMerge.WorkItemLinkInfos.Clear();
+            DsCandidateToMerge.WorkItemLinkInfosUserStory.Clear();
+            DsCandidateToMerge.WorkItemLinkInfosFeature.Clear();
+            
             DsCandidateToMerge.MergeResult.AcceptChanges();
             DsCandidateToMerge.WorkItems.AcceptChanges();
             DsCandidateToMerge.WorkItemLinkInfos.AcceptChanges();
+            DsCandidateToMerge.WorkItemLinkInfosUserStory.AcceptChanges();
+            DsCandidateToMerge.WorkItemLinkInfosFeature.AcceptChanges();
         }
 
         public void Ignore(DsCandidateToMerge.MergeResultRow mergeCandidates)
@@ -111,6 +116,25 @@ namespace WinFormsCandidateToMerge
                 row.TargetId = workItem.TargetId;
                 DsCandidateToMerge.WorkItemLinkInfos.AddWorkItemLinkInfosRow(row);
             }
+            DsCandidateToMerge.AcceptChanges();
+
+            foreach (var workItem in DsCandidateToMerge.WorkItemLinkInfos.Where(x => x.TargetType == "User Story"))
+            {
+                var row = DsCandidateToMerge.WorkItemLinkInfosUserStory.NewWorkItemLinkInfosUserStoryRow();
+                row.Id = workItem.TargetId;
+                row.ChangesetId = workItem.SourceId;
+                DsCandidateToMerge.WorkItemLinkInfosUserStory.AddWorkItemLinkInfosUserStoryRow(row);
+            }
+            DsCandidateToMerge.AcceptChanges();
+
+            foreach (var workItem in DsCandidateToMerge.WorkItemLinkInfos.Where(x => x.TargetType == "Feature"))
+            {
+                var row = DsCandidateToMerge.WorkItemLinkInfosFeature.NewWorkItemLinkInfosFeatureRow();
+                row.Id = workItem.TargetId;
+                row.ChangesetId = workItem.SourceId;
+                DsCandidateToMerge.WorkItemLinkInfosFeature.AddWorkItemLinkInfosFeatureRow(row);
+            }
+
             DsCandidateToMerge.AcceptChanges();
         }
 

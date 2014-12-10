@@ -40,17 +40,27 @@ namespace WinFormsCandidateToMerge {
         
         private WorkItemLinkInfosDataTable tableWorkItemLinkInfos;
         
-        private global::System.Data.DataRelation relationFK_Users_MergeResult;
+        private WorkItemLinkInfosUserStoryDataTable tableWorkItemLinkInfosUserStory;
+        
+        private WorkItemLinkInfosFeatureDataTable tableWorkItemLinkInfosFeature;
         
         private global::System.Data.DataRelation relationFK_Project_MergeResult;
+        
+        private global::System.Data.DataRelation relationFK_Users_MergeResult;
         
         private global::System.Data.DataRelation relationBranching_MergeResult;
         
         private global::System.Data.DataRelation relationMergeIgnore_MergeResult;
         
+        private global::System.Data.DataRelation relationWorkItems_WorkItemLinkInfosUserStory;
+        
+        private global::System.Data.DataRelation relationMergeResult_WorkItemLinkInfosUserStory;
+        
         private global::System.Data.DataRelation relationWorkItems_WorkItemLinkInfos;
         
-        private global::System.Data.DataRelation relationWorkItemLinkInfos_MergeResult;
+        private global::System.Data.DataRelation relationMergeResult_WorkItemLinkInfosFeature;
+        
+        private global::System.Data.DataRelation relationWorkItems_WorkItemLinkInfosFeature;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -107,6 +117,12 @@ namespace WinFormsCandidateToMerge {
                 }
                 if ((ds.Tables["WorkItemLinkInfos"] != null)) {
                     base.Tables.Add(new WorkItemLinkInfosDataTable(ds.Tables["WorkItemLinkInfos"]));
+                }
+                if ((ds.Tables["WorkItemLinkInfosUserStory"] != null)) {
+                    base.Tables.Add(new WorkItemLinkInfosUserStoryDataTable(ds.Tables["WorkItemLinkInfosUserStory"]));
+                }
+                if ((ds.Tables["WorkItemLinkInfosFeature"] != null)) {
+                    base.Tables.Add(new WorkItemLinkInfosFeatureDataTable(ds.Tables["WorkItemLinkInfosFeature"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -209,6 +225,26 @@ namespace WinFormsCandidateToMerge {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public WorkItemLinkInfosUserStoryDataTable WorkItemLinkInfosUserStory {
+            get {
+                return this.tableWorkItemLinkInfosUserStory;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public WorkItemLinkInfosFeatureDataTable WorkItemLinkInfosFeature {
+            get {
+                return this.tableWorkItemLinkInfosFeature;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -299,6 +335,12 @@ namespace WinFormsCandidateToMerge {
                 if ((ds.Tables["WorkItemLinkInfos"] != null)) {
                     base.Tables.Add(new WorkItemLinkInfosDataTable(ds.Tables["WorkItemLinkInfos"]));
                 }
+                if ((ds.Tables["WorkItemLinkInfosUserStory"] != null)) {
+                    base.Tables.Add(new WorkItemLinkInfosUserStoryDataTable(ds.Tables["WorkItemLinkInfosUserStory"]));
+                }
+                if ((ds.Tables["WorkItemLinkInfosFeature"] != null)) {
+                    base.Tables.Add(new WorkItemLinkInfosFeatureDataTable(ds.Tables["WorkItemLinkInfosFeature"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -380,12 +422,27 @@ namespace WinFormsCandidateToMerge {
                     this.tableWorkItemLinkInfos.InitVars();
                 }
             }
-            this.relationFK_Users_MergeResult = this.Relations["FK_Users_MergeResult"];
+            this.tableWorkItemLinkInfosUserStory = ((WorkItemLinkInfosUserStoryDataTable)(base.Tables["WorkItemLinkInfosUserStory"]));
+            if ((initTable == true)) {
+                if ((this.tableWorkItemLinkInfosUserStory != null)) {
+                    this.tableWorkItemLinkInfosUserStory.InitVars();
+                }
+            }
+            this.tableWorkItemLinkInfosFeature = ((WorkItemLinkInfosFeatureDataTable)(base.Tables["WorkItemLinkInfosFeature"]));
+            if ((initTable == true)) {
+                if ((this.tableWorkItemLinkInfosFeature != null)) {
+                    this.tableWorkItemLinkInfosFeature.InitVars();
+                }
+            }
             this.relationFK_Project_MergeResult = this.Relations["FK_Project_MergeResult"];
+            this.relationFK_Users_MergeResult = this.Relations["FK_Users_MergeResult"];
             this.relationBranching_MergeResult = this.Relations["Branching_MergeResult"];
             this.relationMergeIgnore_MergeResult = this.Relations["MergeIgnore_MergeResult"];
+            this.relationWorkItems_WorkItemLinkInfosUserStory = this.Relations["WorkItems_WorkItemLinkInfosUserStory"];
+            this.relationMergeResult_WorkItemLinkInfosUserStory = this.Relations["MergeResult_WorkItemLinkInfosUserStory"];
             this.relationWorkItems_WorkItemLinkInfos = this.Relations["WorkItems_WorkItemLinkInfos"];
-            this.relationWorkItemLinkInfos_MergeResult = this.Relations["WorkItemLinkInfos_MergeResult"];
+            this.relationMergeResult_WorkItemLinkInfosFeature = this.Relations["MergeResult_WorkItemLinkInfosFeature"];
+            this.relationWorkItems_WorkItemLinkInfosFeature = this.Relations["WorkItems_WorkItemLinkInfosFeature"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -412,14 +469,11 @@ namespace WinFormsCandidateToMerge {
             base.Tables.Add(this.tableWorkItems);
             this.tableWorkItemLinkInfos = new WorkItemLinkInfosDataTable(false);
             base.Tables.Add(this.tableWorkItemLinkInfos);
+            this.tableWorkItemLinkInfosUserStory = new WorkItemLinkInfosUserStoryDataTable(false);
+            base.Tables.Add(this.tableWorkItemLinkInfosUserStory);
+            this.tableWorkItemLinkInfosFeature = new WorkItemLinkInfosFeatureDataTable(false);
+            base.Tables.Add(this.tableWorkItemLinkInfosFeature);
             global::System.Data.ForeignKeyConstraint fkc;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_Users_MergeResult", new global::System.Data.DataColumn[] {
-                        this.tableUsers.NameColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMergeResult.OwnerColumn});
-            this.tableMergeResult.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.Cascade;
-            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_Project_MergeResult", new global::System.Data.DataColumn[] {
                         this.tableProjects.ProjectColumn}, new global::System.Data.DataColumn[] {
                         this.tableMergeResult.ProjectColumn});
@@ -427,14 +481,21 @@ namespace WinFormsCandidateToMerge {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            this.relationFK_Users_MergeResult = new global::System.Data.DataRelation("FK_Users_MergeResult", new global::System.Data.DataColumn[] {
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_Users_MergeResult", new global::System.Data.DataColumn[] {
                         this.tableUsers.NameColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMergeResult.OwnerColumn}, false);
-            this.Relations.Add(this.relationFK_Users_MergeResult);
+                        this.tableMergeResult.OwnerColumn});
+            this.tableMergeResult.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             this.relationFK_Project_MergeResult = new global::System.Data.DataRelation("FK_Project_MergeResult", new global::System.Data.DataColumn[] {
                         this.tableProjects.ProjectColumn}, new global::System.Data.DataColumn[] {
                         this.tableMergeResult.ProjectColumn}, false);
             this.Relations.Add(this.relationFK_Project_MergeResult);
+            this.relationFK_Users_MergeResult = new global::System.Data.DataRelation("FK_Users_MergeResult", new global::System.Data.DataColumn[] {
+                        this.tableUsers.NameColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMergeResult.OwnerColumn}, false);
+            this.Relations.Add(this.relationFK_Users_MergeResult);
             this.relationBranching_MergeResult = new global::System.Data.DataRelation("Branching_MergeResult", new global::System.Data.DataColumn[] {
                         this.tableBranchs.NameColumn}, new global::System.Data.DataColumn[] {
                         this.tableMergeResult.BranchNameColumn}, false);
@@ -447,14 +508,26 @@ namespace WinFormsCandidateToMerge {
                         this.tableMergeResult.BranchNameColumn,
                         this.tableMergeResult.ProjectColumn}, false);
             this.Relations.Add(this.relationMergeIgnore_MergeResult);
+            this.relationWorkItems_WorkItemLinkInfosUserStory = new global::System.Data.DataRelation("WorkItems_WorkItemLinkInfosUserStory", new global::System.Data.DataColumn[] {
+                        this.tableWorkItems.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableWorkItemLinkInfosUserStory.IdColumn}, false);
+            this.Relations.Add(this.relationWorkItems_WorkItemLinkInfosUserStory);
+            this.relationMergeResult_WorkItemLinkInfosUserStory = new global::System.Data.DataRelation("MergeResult_WorkItemLinkInfosUserStory", new global::System.Data.DataColumn[] {
+                        this.tableMergeResult.ChangesetIdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableWorkItemLinkInfosUserStory.ChangesetIdColumn}, false);
+            this.Relations.Add(this.relationMergeResult_WorkItemLinkInfosUserStory);
             this.relationWorkItems_WorkItemLinkInfos = new global::System.Data.DataRelation("WorkItems_WorkItemLinkInfos", new global::System.Data.DataColumn[] {
                         this.tableWorkItems.IdColumn}, new global::System.Data.DataColumn[] {
-                        this.tableWorkItemLinkInfos.SourceIdColumn}, false);
+                        this.tableWorkItemLinkInfos.TargetIdColumn}, false);
             this.Relations.Add(this.relationWorkItems_WorkItemLinkInfos);
-            this.relationWorkItemLinkInfos_MergeResult = new global::System.Data.DataRelation("WorkItemLinkInfos_MergeResult", new global::System.Data.DataColumn[] {
-                        this.tableWorkItemLinkInfos.TargetIdColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMergeResult.ChangesetIdColumn}, false);
-            this.Relations.Add(this.relationWorkItemLinkInfos_MergeResult);
+            this.relationMergeResult_WorkItemLinkInfosFeature = new global::System.Data.DataRelation("MergeResult_WorkItemLinkInfosFeature", new global::System.Data.DataColumn[] {
+                        this.tableMergeResult.ChangesetIdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableWorkItemLinkInfosFeature.ChangesetIdColumn}, false);
+            this.Relations.Add(this.relationMergeResult_WorkItemLinkInfosFeature);
+            this.relationWorkItems_WorkItemLinkInfosFeature = new global::System.Data.DataRelation("WorkItems_WorkItemLinkInfosFeature", new global::System.Data.DataColumn[] {
+                        this.tableWorkItems.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableWorkItemLinkInfosFeature.IdColumn}, false);
+            this.Relations.Add(this.relationWorkItems_WorkItemLinkInfosFeature);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -502,6 +575,18 @@ namespace WinFormsCandidateToMerge {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeWorkItemLinkInfos() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeWorkItemLinkInfosUserStory() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeWorkItemLinkInfosFeature() {
             return false;
         }
         
@@ -565,9 +650,16 @@ namespace WinFormsCandidateToMerge {
         private void InitExpressions() {
             this.MergeResult.IsToDisplayColumn.Expression = "Parent(FK_Users_MergeResult).IsToScan AND ISNULL(Parent(MergeIgnore_MergeResult)." +
                 "Ignore, 0) = 0";
-            this.MergeResult.StoryNameColumn.Expression = "Parent(WorkItemLinkInfos_MergeResult).SourceName";
-            this.WorkItemLinkInfos.SourceTypeColumn.Expression = "Parent(WorkItems_WorkItemLinkInfos).Type";
-            this.WorkItemLinkInfos.SourceNameColumn.Expression = "Parent(WorkItems_WorkItemLinkInfos).Name";
+            this.MergeResult.FeatureNameColumn.Expression = "iif(count(Child(MergeResult_WorkItemLinkInfosFeature).SourceName) = 1, Max(Child(" +
+                "MergeResult_WorkItemLinkInfosFeature).SourceName), \'Number of Feature : \' + coun" +
+                "t(Child(MergeResult_WorkItemLinkInfosFeature).SourceName))";
+            this.MergeResult.StoryNameColumn.Expression = "iif(count(Child(MergeResult_WorkItemLinkInfosUserStory).SourceName) = 1, Max(Chil" +
+                "d(MergeResult_WorkItemLinkInfosUserStory).SourceName), \'Number of UserStory : \' " +
+                "+ count(Child(MergeResult_WorkItemLinkInfosUserStory).SourceName))";
+            this.WorkItemLinkInfos.TargetTypeColumn.Expression = "Parent(WorkItems_WorkItemLinkInfos).Type";
+            this.WorkItemLinkInfos.TargetNameColumn.Expression = "Parent(WorkItems_WorkItemLinkInfos).Name";
+            this.WorkItemLinkInfosUserStory.SourceNameColumn.Expression = "Parent(WorkItems_WorkItemLinkInfosUserStory).Name";
+            this.WorkItemLinkInfosFeature.SourceNameColumn.Expression = "Parent(WorkItems_WorkItemLinkInfosFeature).Name";
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -593,6 +685,12 @@ namespace WinFormsCandidateToMerge {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void WorkItemLinkInfosRowChangeEventHandler(object sender, WorkItemLinkInfosRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void WorkItemLinkInfosUserStoryRowChangeEventHandler(object sender, WorkItemLinkInfosUserStoryRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void WorkItemLinkInfosFeatureRowChangeEventHandler(object sender, WorkItemLinkInfosFeatureRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -918,6 +1016,8 @@ namespace WinFormsCandidateToMerge {
             
             private global::System.Data.DataColumn columnIsToDisplay;
             
+            private global::System.Data.DataColumn columnFeatureName;
+            
             private global::System.Data.DataColumn columnStoryName;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1020,6 +1120,14 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FeatureNameColumn {
+                get {
+                    return this.columnFeatureName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn StoryNameColumn {
                 get {
                     return this.columnStoryName;
@@ -1063,20 +1171,18 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MergeResultRow AddMergeResultRow(WorkItemLinkInfosRow parentWorkItemLinkInfosRowByWorkItemLinkInfos_MergeResult, UsersRow parentUsersRowByFK_Users_MergeResult, System.DateTime CreationDate, string Comment, ProjectsRow parentProjectsRowByFK_Project_MergeResult, BranchsRow parentBranchsRowByBranching_MergeResult, string IsToDisplay, string StoryName) {
+            public MergeResultRow AddMergeResultRow(int ChangesetId, UsersRow parentUsersRowByFK_Users_MergeResult, System.DateTime CreationDate, string Comment, ProjectsRow parentProjectsRowByFK_Project_MergeResult, BranchsRow parentBranchsRowByBranching_MergeResult, string IsToDisplay, string FeatureName, string StoryName) {
                 MergeResultRow rowMergeResultRow = ((MergeResultRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
+                        ChangesetId,
                         null,
                         CreationDate,
                         Comment,
                         null,
                         null,
                         IsToDisplay,
+                        FeatureName,
                         StoryName};
-                if ((parentWorkItemLinkInfosRowByWorkItemLinkInfos_MergeResult != null)) {
-                    columnValuesArray[0] = parentWorkItemLinkInfosRowByWorkItemLinkInfos_MergeResult[1];
-                }
                 if ((parentUsersRowByFK_Users_MergeResult != null)) {
                     columnValuesArray[1] = parentUsersRowByFK_Users_MergeResult[0];
                 }
@@ -1093,20 +1199,18 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MergeResultRow AddMergeResultRow(WorkItemLinkInfosRow parentWorkItemLinkInfosRowByWorkItemLinkInfos_MergeResult, UsersRow parentUsersRowByFK_Users_MergeResult, System.DateTime CreationDate, string Comment, ProjectsRow parentProjectsRowByFK_Project_MergeResult, BranchsRow parentBranchsRowByBranching_MergeResult) {
+            public MergeResultRow AddMergeResultRow(int ChangesetId, UsersRow parentUsersRowByFK_Users_MergeResult, System.DateTime CreationDate, string Comment, ProjectsRow parentProjectsRowByFK_Project_MergeResult, BranchsRow parentBranchsRowByBranching_MergeResult) {
                 MergeResultRow rowMergeResultRow = ((MergeResultRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
+                        ChangesetId,
                         null,
                         CreationDate,
                         Comment,
                         null,
                         null,
                         null,
+                        null,
                         null};
-                if ((parentWorkItemLinkInfosRowByWorkItemLinkInfos_MergeResult != null)) {
-                    columnValuesArray[0] = parentWorkItemLinkInfosRowByWorkItemLinkInfos_MergeResult[1];
-                }
                 if ((parentUsersRowByFK_Users_MergeResult != null)) {
                     columnValuesArray[1] = parentUsersRowByFK_Users_MergeResult[0];
                 }
@@ -1154,6 +1258,7 @@ namespace WinFormsCandidateToMerge {
                 this.columnProject = base.Columns["Project"];
                 this.columnBranchName = base.Columns["BranchName"];
                 this.columnIsToDisplay = base.Columns["IsToDisplay"];
+                this.columnFeatureName = base.Columns["FeatureName"];
                 this.columnStoryName = base.Columns["StoryName"];
             }
             
@@ -1174,6 +1279,8 @@ namespace WinFormsCandidateToMerge {
                 base.Columns.Add(this.columnBranchName);
                 this.columnIsToDisplay = new global::System.Data.DataColumn("IsToDisplay", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIsToDisplay);
+                this.columnFeatureName = new global::System.Data.DataColumn("FeatureName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFeatureName);
                 this.columnStoryName = new global::System.Data.DataColumn("StoryName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnStoryName);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -1184,6 +1291,8 @@ namespace WinFormsCandidateToMerge {
                 this.columnProject.AllowDBNull = false;
                 this.columnBranchName.AllowDBNull = false;
                 this.columnIsToDisplay.ReadOnly = true;
+                this.columnFeatureName.ReadOnly = true;
+                this.columnFeatureName.Caption = "StoryName";
                 this.columnStoryName.ReadOnly = true;
             }
             
@@ -1210,7 +1319,12 @@ namespace WinFormsCandidateToMerge {
             private void InitExpressions() {
                 this.IsToDisplayColumn.Expression = "Parent(FK_Users_MergeResult).IsToScan AND ISNULL(Parent(MergeIgnore_MergeResult)." +
                     "Ignore, 0) = 0";
-                this.StoryNameColumn.Expression = "Parent(WorkItemLinkInfos_MergeResult).SourceName";
+                this.FeatureNameColumn.Expression = "iif(count(Child(MergeResult_WorkItemLinkInfosFeature).SourceName) = 1, Max(Child(" +
+                    "MergeResult_WorkItemLinkInfosFeature).SourceName), \'Number of Feature : \' + coun" +
+                    "t(Child(MergeResult_WorkItemLinkInfosFeature).SourceName))";
+                this.StoryNameColumn.Expression = "iif(count(Child(MergeResult_WorkItemLinkInfosUserStory).SourceName) = 1, Max(Chil" +
+                    "d(MergeResult_WorkItemLinkInfosUserStory).SourceName), \'Number of UserStory : \' " +
+                    "+ count(Child(MergeResult_WorkItemLinkInfosUserStory).SourceName))";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2618,6 +2732,7 @@ namespace WinFormsCandidateToMerge {
                 base.Columns.Add(this.columnName);
                 this.columnType = new global::System.Data.DataColumn("Type", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnType);
+                this.columnType.DefaultValue = ((string)("\'\'"));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2755,9 +2870,9 @@ namespace WinFormsCandidateToMerge {
             
             private global::System.Data.DataColumn columnTargetId;
             
-            private global::System.Data.DataColumn columnSourceType;
+            private global::System.Data.DataColumn columnTargetType;
             
-            private global::System.Data.DataColumn columnSourceName;
+            private global::System.Data.DataColumn columnTargetName;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -2819,17 +2934,17 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SourceTypeColumn {
+            public global::System.Data.DataColumn TargetTypeColumn {
                 get {
-                    return this.columnSourceType;
+                    return this.columnTargetType;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SourceNameColumn {
+            public global::System.Data.DataColumn TargetNameColumn {
                 get {
-                    return this.columnSourceName;
+                    return this.columnTargetName;
                 }
             }
             
@@ -2870,15 +2985,15 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public WorkItemLinkInfosRow AddWorkItemLinkInfosRow(WorkItemsRow parentWorkItemsRowByWorkItems_WorkItemLinkInfos, int TargetId, string SourceType, string SourceName) {
+            public WorkItemLinkInfosRow AddWorkItemLinkInfosRow(int SourceId, WorkItemsRow parentWorkItemsRowByWorkItems_WorkItemLinkInfos, string TargetType, string TargetName) {
                 WorkItemLinkInfosRow rowWorkItemLinkInfosRow = ((WorkItemLinkInfosRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
+                        SourceId,
                         null,
-                        TargetId,
-                        SourceType,
-                        SourceName};
+                        TargetType,
+                        TargetName};
                 if ((parentWorkItemsRowByWorkItems_WorkItemLinkInfos != null)) {
-                    columnValuesArray[0] = parentWorkItemsRowByWorkItems_WorkItemLinkInfos[0];
+                    columnValuesArray[1] = parentWorkItemsRowByWorkItems_WorkItemLinkInfos[0];
                 }
                 rowWorkItemLinkInfosRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowWorkItemLinkInfosRow);
@@ -2887,15 +3002,15 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public WorkItemLinkInfosRow AddWorkItemLinkInfosRow(WorkItemsRow parentWorkItemsRowByWorkItems_WorkItemLinkInfos, int TargetId) {
+            public WorkItemLinkInfosRow AddWorkItemLinkInfosRow(int SourceId, WorkItemsRow parentWorkItemsRowByWorkItems_WorkItemLinkInfos) {
                 WorkItemLinkInfosRow rowWorkItemLinkInfosRow = ((WorkItemLinkInfosRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
+                        SourceId,
                         null,
-                        TargetId,
                         null,
                         null};
                 if ((parentWorkItemsRowByWorkItems_WorkItemLinkInfos != null)) {
-                    columnValuesArray[0] = parentWorkItemsRowByWorkItems_WorkItemLinkInfos[0];
+                    columnValuesArray[1] = parentWorkItemsRowByWorkItems_WorkItemLinkInfos[0];
                 }
                 rowWorkItemLinkInfosRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowWorkItemLinkInfosRow);
@@ -2921,8 +3036,8 @@ namespace WinFormsCandidateToMerge {
             internal void InitVars() {
                 this.columnSourceId = base.Columns["SourceId"];
                 this.columnTargetId = base.Columns["TargetId"];
-                this.columnSourceType = base.Columns["SourceType"];
-                this.columnSourceName = base.Columns["SourceName"];
+                this.columnTargetType = base.Columns["TargetType"];
+                this.columnTargetName = base.Columns["TargetName"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2932,15 +3047,16 @@ namespace WinFormsCandidateToMerge {
                 base.Columns.Add(this.columnSourceId);
                 this.columnTargetId = new global::System.Data.DataColumn("TargetId", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTargetId);
-                this.columnSourceType = new global::System.Data.DataColumn("SourceType", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSourceType);
-                this.columnSourceName = new global::System.Data.DataColumn("SourceName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSourceName);
+                this.columnTargetType = new global::System.Data.DataColumn("TargetType", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTargetType);
+                this.columnTargetName = new global::System.Data.DataColumn("TargetName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTargetName);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("WorkItemLinkInfosKey1", new global::System.Data.DataColumn[] {
                                 this.columnSourceId,
                                 this.columnTargetId}, false));
-                this.columnSourceType.ReadOnly = true;
-                this.columnSourceName.ReadOnly = true;
+                this.columnTargetType.ReadOnly = true;
+                this.columnTargetType.DefaultValue = ((string)("\'\'"));
+                this.columnTargetName.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2964,8 +3080,8 @@ namespace WinFormsCandidateToMerge {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitExpressions() {
-                this.SourceTypeColumn.Expression = "Parent(WorkItems_WorkItemLinkInfos).Type";
-                this.SourceNameColumn.Expression = "Parent(WorkItems_WorkItemLinkInfos).Name";
+                this.TargetTypeColumn.Expression = "Parent(WorkItems_WorkItemLinkInfos).Type";
+                this.TargetNameColumn.Expression = "Parent(WorkItems_WorkItemLinkInfos).Name";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3034,6 +3150,648 @@ namespace WinFormsCandidateToMerge {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "WorkItemLinkInfosDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class WorkItemLinkInfosUserStoryDataTable : global::System.Data.TypedTableBase<WorkItemLinkInfosUserStoryRow> {
+            
+            private global::System.Data.DataColumn columnId;
+            
+            private global::System.Data.DataColumn columnChangesetId;
+            
+            private global::System.Data.DataColumn columnSourceName;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosUserStoryDataTable() : 
+                    this(false) {
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosUserStoryDataTable(bool initExpressions) {
+                this.TableName = "WorkItemLinkInfosUserStory";
+                this.BeginInit();
+                this.InitClass();
+                if ((initExpressions == true)) {
+                    this.InitExpressions();
+                }
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal WorkItemLinkInfosUserStoryDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected WorkItemLinkInfosUserStoryDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IdColumn {
+                get {
+                    return this.columnId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChangesetIdColumn {
+                get {
+                    return this.columnChangesetId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SourceNameColumn {
+                get {
+                    return this.columnSourceName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosUserStoryRow this[int index] {
+                get {
+                    return ((WorkItemLinkInfosUserStoryRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event WorkItemLinkInfosUserStoryRowChangeEventHandler WorkItemLinkInfosUserStoryRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event WorkItemLinkInfosUserStoryRowChangeEventHandler WorkItemLinkInfosUserStoryRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event WorkItemLinkInfosUserStoryRowChangeEventHandler WorkItemLinkInfosUserStoryRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event WorkItemLinkInfosUserStoryRowChangeEventHandler WorkItemLinkInfosUserStoryRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddWorkItemLinkInfosUserStoryRow(WorkItemLinkInfosUserStoryRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosUserStoryRow AddWorkItemLinkInfosUserStoryRow(WorkItemsRow parentWorkItemsRowByWorkItems_WorkItemLinkInfosUserStory, MergeResultRow parentMergeResultRowByMergeResult_WorkItemLinkInfosUserStory, string SourceName) {
+                WorkItemLinkInfosUserStoryRow rowWorkItemLinkInfosUserStoryRow = ((WorkItemLinkInfosUserStoryRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        SourceName};
+                if ((parentWorkItemsRowByWorkItems_WorkItemLinkInfosUserStory != null)) {
+                    columnValuesArray[0] = parentWorkItemsRowByWorkItems_WorkItemLinkInfosUserStory[0];
+                }
+                if ((parentMergeResultRowByMergeResult_WorkItemLinkInfosUserStory != null)) {
+                    columnValuesArray[1] = parentMergeResultRowByMergeResult_WorkItemLinkInfosUserStory[0];
+                }
+                rowWorkItemLinkInfosUserStoryRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowWorkItemLinkInfosUserStoryRow);
+                return rowWorkItemLinkInfosUserStoryRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosUserStoryRow AddWorkItemLinkInfosUserStoryRow(WorkItemsRow parentWorkItemsRowByWorkItems_WorkItemLinkInfosUserStory, MergeResultRow parentMergeResultRowByMergeResult_WorkItemLinkInfosUserStory) {
+                WorkItemLinkInfosUserStoryRow rowWorkItemLinkInfosUserStoryRow = ((WorkItemLinkInfosUserStoryRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        null};
+                if ((parentWorkItemsRowByWorkItems_WorkItemLinkInfosUserStory != null)) {
+                    columnValuesArray[0] = parentWorkItemsRowByWorkItems_WorkItemLinkInfosUserStory[0];
+                }
+                if ((parentMergeResultRowByMergeResult_WorkItemLinkInfosUserStory != null)) {
+                    columnValuesArray[1] = parentMergeResultRowByMergeResult_WorkItemLinkInfosUserStory[0];
+                }
+                rowWorkItemLinkInfosUserStoryRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowWorkItemLinkInfosUserStoryRow);
+                return rowWorkItemLinkInfosUserStoryRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                WorkItemLinkInfosUserStoryDataTable cln = ((WorkItemLinkInfosUserStoryDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new WorkItemLinkInfosUserStoryDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnId = base.Columns["Id"];
+                this.columnChangesetId = base.Columns["ChangesetId"];
+                this.columnSourceName = base.Columns["SourceName"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId);
+                this.columnChangesetId = new global::System.Data.DataColumn("ChangesetId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChangesetId);
+                this.columnSourceName = new global::System.Data.DataColumn("SourceName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSourceName);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("WorkItemLinkInfosKey1", new global::System.Data.DataColumn[] {
+                                this.columnId,
+                                this.columnChangesetId}, false));
+                this.columnId.Caption = "SourceId";
+                this.columnChangesetId.Caption = "TargetId";
+                this.columnSourceName.ReadOnly = true;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosUserStoryRow NewWorkItemLinkInfosUserStoryRow() {
+                return ((WorkItemLinkInfosUserStoryRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new WorkItemLinkInfosUserStoryRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(WorkItemLinkInfosUserStoryRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitExpressions() {
+                this.SourceNameColumn.Expression = "Parent(WorkItems_WorkItemLinkInfosUserStory).Name";
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.WorkItemLinkInfosUserStoryRowChanged != null)) {
+                    this.WorkItemLinkInfosUserStoryRowChanged(this, new WorkItemLinkInfosUserStoryRowChangeEvent(((WorkItemLinkInfosUserStoryRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.WorkItemLinkInfosUserStoryRowChanging != null)) {
+                    this.WorkItemLinkInfosUserStoryRowChanging(this, new WorkItemLinkInfosUserStoryRowChangeEvent(((WorkItemLinkInfosUserStoryRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.WorkItemLinkInfosUserStoryRowDeleted != null)) {
+                    this.WorkItemLinkInfosUserStoryRowDeleted(this, new WorkItemLinkInfosUserStoryRowChangeEvent(((WorkItemLinkInfosUserStoryRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.WorkItemLinkInfosUserStoryRowDeleting != null)) {
+                    this.WorkItemLinkInfosUserStoryRowDeleting(this, new WorkItemLinkInfosUserStoryRowChangeEvent(((WorkItemLinkInfosUserStoryRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveWorkItemLinkInfosUserStoryRow(WorkItemLinkInfosUserStoryRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DsCandidateToMerge ds = new DsCandidateToMerge();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "WorkItemLinkInfosUserStoryDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class WorkItemLinkInfosFeatureDataTable : global::System.Data.TypedTableBase<WorkItemLinkInfosFeatureRow> {
+            
+            private global::System.Data.DataColumn columnId;
+            
+            private global::System.Data.DataColumn columnChangesetId;
+            
+            private global::System.Data.DataColumn columnSourceName;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosFeatureDataTable() : 
+                    this(false) {
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosFeatureDataTable(bool initExpressions) {
+                this.TableName = "WorkItemLinkInfosFeature";
+                this.BeginInit();
+                this.InitClass();
+                if ((initExpressions == true)) {
+                    this.InitExpressions();
+                }
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal WorkItemLinkInfosFeatureDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected WorkItemLinkInfosFeatureDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IdColumn {
+                get {
+                    return this.columnId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChangesetIdColumn {
+                get {
+                    return this.columnChangesetId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SourceNameColumn {
+                get {
+                    return this.columnSourceName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosFeatureRow this[int index] {
+                get {
+                    return ((WorkItemLinkInfosFeatureRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event WorkItemLinkInfosFeatureRowChangeEventHandler WorkItemLinkInfosFeatureRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event WorkItemLinkInfosFeatureRowChangeEventHandler WorkItemLinkInfosFeatureRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event WorkItemLinkInfosFeatureRowChangeEventHandler WorkItemLinkInfosFeatureRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event WorkItemLinkInfosFeatureRowChangeEventHandler WorkItemLinkInfosFeatureRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddWorkItemLinkInfosFeatureRow(WorkItemLinkInfosFeatureRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosFeatureRow AddWorkItemLinkInfosFeatureRow(WorkItemsRow parentWorkItemsRowByWorkItems_WorkItemLinkInfosFeature, MergeResultRow parentMergeResultRowByMergeResult_WorkItemLinkInfosFeature, string SourceName) {
+                WorkItemLinkInfosFeatureRow rowWorkItemLinkInfosFeatureRow = ((WorkItemLinkInfosFeatureRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        SourceName};
+                if ((parentWorkItemsRowByWorkItems_WorkItemLinkInfosFeature != null)) {
+                    columnValuesArray[0] = parentWorkItemsRowByWorkItems_WorkItemLinkInfosFeature[0];
+                }
+                if ((parentMergeResultRowByMergeResult_WorkItemLinkInfosFeature != null)) {
+                    columnValuesArray[1] = parentMergeResultRowByMergeResult_WorkItemLinkInfosFeature[0];
+                }
+                rowWorkItemLinkInfosFeatureRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowWorkItemLinkInfosFeatureRow);
+                return rowWorkItemLinkInfosFeatureRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosFeatureRow AddWorkItemLinkInfosFeatureRow(WorkItemsRow parentWorkItemsRowByWorkItems_WorkItemLinkInfosFeature, MergeResultRow parentMergeResultRowByMergeResult_WorkItemLinkInfosFeature) {
+                WorkItemLinkInfosFeatureRow rowWorkItemLinkInfosFeatureRow = ((WorkItemLinkInfosFeatureRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        null};
+                if ((parentWorkItemsRowByWorkItems_WorkItemLinkInfosFeature != null)) {
+                    columnValuesArray[0] = parentWorkItemsRowByWorkItems_WorkItemLinkInfosFeature[0];
+                }
+                if ((parentMergeResultRowByMergeResult_WorkItemLinkInfosFeature != null)) {
+                    columnValuesArray[1] = parentMergeResultRowByMergeResult_WorkItemLinkInfosFeature[0];
+                }
+                rowWorkItemLinkInfosFeatureRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowWorkItemLinkInfosFeatureRow);
+                return rowWorkItemLinkInfosFeatureRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                WorkItemLinkInfosFeatureDataTable cln = ((WorkItemLinkInfosFeatureDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new WorkItemLinkInfosFeatureDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnId = base.Columns["Id"];
+                this.columnChangesetId = base.Columns["ChangesetId"];
+                this.columnSourceName = base.Columns["SourceName"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId);
+                this.columnChangesetId = new global::System.Data.DataColumn("ChangesetId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChangesetId);
+                this.columnSourceName = new global::System.Data.DataColumn("SourceName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSourceName);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("WorkItemLinkInfosKey1", new global::System.Data.DataColumn[] {
+                                this.columnId,
+                                this.columnChangesetId}, false));
+                this.columnId.Caption = "SourceId";
+                this.columnChangesetId.Caption = "TargetId";
+                this.columnSourceName.ReadOnly = true;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosFeatureRow NewWorkItemLinkInfosFeatureRow() {
+                return ((WorkItemLinkInfosFeatureRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new WorkItemLinkInfosFeatureRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(WorkItemLinkInfosFeatureRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitExpressions() {
+                this.SourceNameColumn.Expression = "Parent(WorkItems_WorkItemLinkInfosFeature).Name";
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.WorkItemLinkInfosFeatureRowChanged != null)) {
+                    this.WorkItemLinkInfosFeatureRowChanged(this, new WorkItemLinkInfosFeatureRowChangeEvent(((WorkItemLinkInfosFeatureRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.WorkItemLinkInfosFeatureRowChanging != null)) {
+                    this.WorkItemLinkInfosFeatureRowChanging(this, new WorkItemLinkInfosFeatureRowChangeEvent(((WorkItemLinkInfosFeatureRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.WorkItemLinkInfosFeatureRowDeleted != null)) {
+                    this.WorkItemLinkInfosFeatureRowDeleted(this, new WorkItemLinkInfosFeatureRowChangeEvent(((WorkItemLinkInfosFeatureRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.WorkItemLinkInfosFeatureRowDeleting != null)) {
+                    this.WorkItemLinkInfosFeatureRowDeleting(this, new WorkItemLinkInfosFeatureRowChangeEvent(((WorkItemLinkInfosFeatureRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveWorkItemLinkInfosFeatureRow(WorkItemLinkInfosFeatureRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DsCandidateToMerge ds = new DsCandidateToMerge();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "WorkItemLinkInfosFeatureDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -3291,6 +4049,22 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FeatureName {
+                get {
+                    try {
+                        return ((string)(this[this.tableMergeResult.FeatureNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FeatureName\' in table \'MergeResult\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMergeResult.FeatureNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string StoryName {
                 get {
                     try {
@@ -3307,23 +4081,23 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public UsersRow UsersRow {
-                get {
-                    return ((UsersRow)(this.GetParentRow(this.Table.ParentRelations["FK_Users_MergeResult"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Users_MergeResult"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ProjectsRow ProjectsRow {
                 get {
                     return ((ProjectsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Project_MergeResult"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Project_MergeResult"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public UsersRow UsersRow {
+                get {
+                    return ((UsersRow)(this.GetParentRow(this.Table.ParentRelations["FK_Users_MergeResult"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Users_MergeResult"]);
                 }
             }
             
@@ -3346,17 +4120,6 @@ namespace WinFormsCandidateToMerge {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["MergeIgnore_MergeResult"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public WorkItemLinkInfosRow WorkItemLinkInfosRow {
-                get {
-                    return ((WorkItemLinkInfosRow)(this.GetParentRow(this.Table.ParentRelations["WorkItemLinkInfos_MergeResult"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["WorkItemLinkInfos_MergeResult"]);
                 }
             }
             
@@ -3410,6 +4173,18 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFeatureNameNull() {
+                return this.IsNull(this.tableMergeResult.FeatureNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFeatureNameNull() {
+                this[this.tableMergeResult.FeatureNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsStoryNameNull() {
                 return this.IsNull(this.tableMergeResult.StoryNameColumn);
             }
@@ -3418,6 +4193,28 @@ namespace WinFormsCandidateToMerge {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetStoryNameNull() {
                 this[this.tableMergeResult.StoryNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosUserStoryRow[] GetWorkItemLinkInfosUserStoryRows() {
+                if ((this.Table.ChildRelations["MergeResult_WorkItemLinkInfosUserStory"] == null)) {
+                    return new WorkItemLinkInfosUserStoryRow[0];
+                }
+                else {
+                    return ((WorkItemLinkInfosUserStoryRow[])(base.GetChildRows(this.Table.ChildRelations["MergeResult_WorkItemLinkInfosUserStory"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosFeatureRow[] GetWorkItemLinkInfosFeatureRows() {
+                if ((this.Table.ChildRelations["MergeResult_WorkItemLinkInfosFeature"] == null)) {
+                    return new WorkItemLinkInfosFeatureRow[0];
+                }
+                else {
+                    return ((WorkItemLinkInfosFeatureRow[])(base.GetChildRows(this.Table.ChildRelations["MergeResult_WorkItemLinkInfosFeature"])));
+                }
             }
         }
         
@@ -3798,11 +4595,11 @@ namespace WinFormsCandidateToMerge {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Type {
                 get {
-                    try {
-                        return ((string)(this[this.tableWorkItems.TypeColumn]));
+                    if (this.IsTypeNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Type\' in table \'WorkItems\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableWorkItems.TypeColumn]));
                     }
                 }
                 set {
@@ -3848,12 +4645,34 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosUserStoryRow[] GetWorkItemLinkInfosUserStoryRows() {
+                if ((this.Table.ChildRelations["WorkItems_WorkItemLinkInfosUserStory"] == null)) {
+                    return new WorkItemLinkInfosUserStoryRow[0];
+                }
+                else {
+                    return ((WorkItemLinkInfosUserStoryRow[])(base.GetChildRows(this.Table.ChildRelations["WorkItems_WorkItemLinkInfosUserStory"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public WorkItemLinkInfosRow[] GetWorkItemLinkInfosRows() {
                 if ((this.Table.ChildRelations["WorkItems_WorkItemLinkInfos"] == null)) {
                     return new WorkItemLinkInfosRow[0];
                 }
                 else {
                     return ((WorkItemLinkInfosRow[])(base.GetChildRows(this.Table.ChildRelations["WorkItems_WorkItemLinkInfos"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosFeatureRow[] GetWorkItemLinkInfosFeatureRows() {
+                if ((this.Table.ChildRelations["WorkItems_WorkItemLinkInfosFeature"] == null)) {
+                    return new WorkItemLinkInfosFeatureRow[0];
+                }
+                else {
+                    return ((WorkItemLinkInfosFeatureRow[])(base.GetChildRows(this.Table.ChildRelations["WorkItems_WorkItemLinkInfosFeature"])));
                 }
             }
         }
@@ -3906,33 +4725,33 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string SourceType {
+            public string TargetType {
                 get {
-                    try {
-                        return ((string)(this[this.tableWorkItemLinkInfos.SourceTypeColumn]));
+                    if (this.IsTargetTypeNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SourceType\' in table \'WorkItemLinkInfos\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableWorkItemLinkInfos.TargetTypeColumn]));
                     }
                 }
                 set {
-                    this[this.tableWorkItemLinkInfos.SourceTypeColumn] = value;
+                    this[this.tableWorkItemLinkInfos.TargetTypeColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string SourceName {
+            public string TargetName {
                 get {
                     try {
-                        return ((string)(this[this.tableWorkItemLinkInfos.SourceNameColumn]));
+                        return ((string)(this[this.tableWorkItemLinkInfos.TargetNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SourceName\' in table \'WorkItemLinkInfos\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'TargetName\' in table \'WorkItemLinkInfos\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableWorkItemLinkInfos.SourceNameColumn] = value;
+                    this[this.tableWorkItemLinkInfos.TargetNameColumn] = value;
                 }
             }
             
@@ -3973,37 +4792,271 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSourceTypeNull() {
-                return this.IsNull(this.tableWorkItemLinkInfos.SourceTypeColumn);
+            public bool IsTargetTypeNull() {
+                return this.IsNull(this.tableWorkItemLinkInfos.TargetTypeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSourceTypeNull() {
-                this[this.tableWorkItemLinkInfos.SourceTypeColumn] = global::System.Convert.DBNull;
+            public void SetTargetTypeNull() {
+                this[this.tableWorkItemLinkInfos.TargetTypeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTargetNameNull() {
+                return this.IsNull(this.tableWorkItemLinkInfos.TargetNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTargetNameNull() {
+                this[this.tableWorkItemLinkInfos.TargetNameColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class WorkItemLinkInfosUserStoryRow : global::System.Data.DataRow {
+            
+            private WorkItemLinkInfosUserStoryDataTable tableWorkItemLinkInfosUserStory;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal WorkItemLinkInfosUserStoryRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableWorkItemLinkInfosUserStory = ((WorkItemLinkInfosUserStoryDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Id {
+                get {
+                    try {
+                        return ((int)(this[this.tableWorkItemLinkInfosUserStory.IdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Id\' in table \'WorkItemLinkInfosUserStory\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWorkItemLinkInfosUserStory.IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ChangesetId {
+                get {
+                    try {
+                        return ((int)(this[this.tableWorkItemLinkInfosUserStory.ChangesetIdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChangesetId\' in table \'WorkItemLinkInfosUserStory\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableWorkItemLinkInfosUserStory.ChangesetIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string SourceName {
+                get {
+                    try {
+                        return ((string)(this[this.tableWorkItemLinkInfosUserStory.SourceNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SourceName\' in table \'WorkItemLinkInfosUserStory\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tableWorkItemLinkInfosUserStory.SourceNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemsRow WorkItemsRow {
+                get {
+                    return ((WorkItemsRow)(this.GetParentRow(this.Table.ParentRelations["WorkItems_WorkItemLinkInfosUserStory"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["WorkItems_WorkItemLinkInfosUserStory"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MergeResultRow MergeResultRow {
+                get {
+                    return ((MergeResultRow)(this.GetParentRow(this.Table.ParentRelations["MergeResult_WorkItemLinkInfosUserStory"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["MergeResult_WorkItemLinkInfosUserStory"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIdNull() {
+                return this.IsNull(this.tableWorkItemLinkInfosUserStory.IdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIdNull() {
+                this[this.tableWorkItemLinkInfosUserStory.IdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsChangesetIdNull() {
+                return this.IsNull(this.tableWorkItemLinkInfosUserStory.ChangesetIdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetChangesetIdNull() {
+                this[this.tableWorkItemLinkInfosUserStory.ChangesetIdColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsSourceNameNull() {
-                return this.IsNull(this.tableWorkItemLinkInfos.SourceNameColumn);
+                return this.IsNull(this.tableWorkItemLinkInfosUserStory.SourceNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetSourceNameNull() {
-                this[this.tableWorkItemLinkInfos.SourceNameColumn] = global::System.Convert.DBNull;
+                this[this.tableWorkItemLinkInfosUserStory.SourceNameColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class WorkItemLinkInfosFeatureRow : global::System.Data.DataRow {
+            
+            private WorkItemLinkInfosFeatureDataTable tableWorkItemLinkInfosFeature;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal WorkItemLinkInfosFeatureRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableWorkItemLinkInfosFeature = ((WorkItemLinkInfosFeatureDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MergeResultRow[] GetMergeResultRows() {
-                if ((this.Table.ChildRelations["WorkItemLinkInfos_MergeResult"] == null)) {
-                    return new MergeResultRow[0];
+            public int Id {
+                get {
+                    try {
+                        return ((int)(this[this.tableWorkItemLinkInfosFeature.IdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Id\' in table \'WorkItemLinkInfosFeature\' is DBNull.", e);
+                    }
                 }
-                else {
-                    return ((MergeResultRow[])(base.GetChildRows(this.Table.ChildRelations["WorkItemLinkInfos_MergeResult"])));
+                set {
+                    this[this.tableWorkItemLinkInfosFeature.IdColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ChangesetId {
+                get {
+                    try {
+                        return ((int)(this[this.tableWorkItemLinkInfosFeature.ChangesetIdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChangesetId\' in table \'WorkItemLinkInfosFeature\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableWorkItemLinkInfosFeature.ChangesetIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string SourceName {
+                get {
+                    try {
+                        return ((string)(this[this.tableWorkItemLinkInfosFeature.SourceNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SourceName\' in table \'WorkItemLinkInfosFeature\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableWorkItemLinkInfosFeature.SourceNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MergeResultRow MergeResultRow {
+                get {
+                    return ((MergeResultRow)(this.GetParentRow(this.Table.ParentRelations["MergeResult_WorkItemLinkInfosFeature"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["MergeResult_WorkItemLinkInfosFeature"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemsRow WorkItemsRow {
+                get {
+                    return ((WorkItemsRow)(this.GetParentRow(this.Table.ParentRelations["WorkItems_WorkItemLinkInfosFeature"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["WorkItems_WorkItemLinkInfosFeature"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIdNull() {
+                return this.IsNull(this.tableWorkItemLinkInfosFeature.IdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIdNull() {
+                this[this.tableWorkItemLinkInfosFeature.IdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsChangesetIdNull() {
+                return this.IsNull(this.tableWorkItemLinkInfosFeature.ChangesetIdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetChangesetIdNull() {
+                this[this.tableWorkItemLinkInfosFeature.ChangesetIdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSourceNameNull() {
+                return this.IsNull(this.tableWorkItemLinkInfosFeature.SourceNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSourceNameNull() {
+                this[this.tableWorkItemLinkInfosFeature.SourceNameColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4265,6 +5318,74 @@ namespace WinFormsCandidateToMerge {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public WorkItemLinkInfosRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class WorkItemLinkInfosUserStoryRowChangeEvent : global::System.EventArgs {
+            
+            private WorkItemLinkInfosUserStoryRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosUserStoryRowChangeEvent(WorkItemLinkInfosUserStoryRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosUserStoryRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class WorkItemLinkInfosFeatureRowChangeEvent : global::System.EventArgs {
+            
+            private WorkItemLinkInfosFeatureRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosFeatureRowChangeEvent(WorkItemLinkInfosFeatureRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public WorkItemLinkInfosFeatureRow Row {
                 get {
                     return this.eventRow;
                 }
