@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.TeamFoundation;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.Common.Internal;
@@ -129,48 +130,62 @@ namespace WinFormsCandidateToMerge
             var workItemStore = teamProjectCollection.GetService<WorkItemStore>();
             var versionControl = teamProjectCollection.GetService<VersionControlServer>();
             var linking = teamProjectCollection.GetService<ILinking>();
-
-            foreach (var resquestOfMerge in _resquestOfMerge)
+            var option = new ParallelOptions
             {
-                if (processing != null)
-                    processing(resquestOfMerge);
+                MaxDegreeOfParallelism = 4
+            };
 
-                var project = resquestOfMerge.Project;
-                var branchDestination = resquestOfMerge.BranchDestination;
-                var branchSource = resquestOfMerge.BranchSource;
-                var branchName = resquestOfMerge.BranchName;
+            Parallel.ForEach(_resquestOfMerge,
+                             option,
+                             resquestOfMerge =>
+                             //foreach (var resquestOfMerge in _resquestOfMerge)
+                             {
+                                 if (processing != null)
+                                     processing(resquestOfMerge);
 
-                try
-                {
-                    if (versionControl.ServerItemExists(project + branchDestination, VersionSpec.Latest, DeletedState.NonDeleted, ItemType.Any))
-                    {
-                        var mergeCandidates = versionControl.GetMergeCandidates(project + branchSource, project + branchDestination, RecursionType.Full);
+                                 var project = resquestOfMerge.Project;
+                                 var branchDestination = resquestOfMerge.BranchDestination;
+                                 var branchSource = resquestOfMerge.BranchSource;
+                                 var branchName = resquestOfMerge.BranchName;
+
+                                 try
+                                 {
+                                     if (versionControl.ServerItemExists(project + branchDestination,
+                                                                         VersionSpec.Latest,
+                                                                         DeletedState.NonDeleted,
+                                                                         ItemType.Any))
+                                     {
+                                         var mergeCandidates = versionControl.GetMergeCandidates(
+                                                                                                 project + branchSource,
+                                                                                                 project +
+                                                                                                 branchDestination,
+                                                                                                 RecursionType.Full);
 
 
-                        listResponseProject.Add(new GetMergeCandidateResponse()
-                        {
-                            BranchName = branchName,
-                            MergeCandidates = mergeCandidates.Select(x => new ChangesetInterne
-                            {
-                                ChangesetId = x.Changeset.ChangesetId,
-                                CheckinNote = x.Changeset.CheckinNote,
-                                Comment = x.Changeset.Comment,
-                                Committer = x.Changeset.Committer,
-                                CommitterDisplayName = x.Changeset.CommitterDisplayName,
-                                CreationDate = x.Changeset.CreationDate,
-                                Owner = x.Changeset.Owner,
-                                OwnerDisplayName = x.Changeset.Owner,
-                                AssociatedWorkItems = x.Changeset.AssociatedWorkItems
-                            }).ToArray(),
-                            Project = project
-                        });
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Trace.WriteLine(ex.Message);
-                }
-            }
+                                         listResponseProject.Add(new GetMergeCandidateResponse()
+                                         {
+                                             BranchName = branchName,
+                                             MergeCandidates = mergeCandidates.Select(x => new ChangesetInterne
+                                             {
+                                                 ChangesetId = x.Changeset.ChangesetId,
+                                                 CheckinNote = x.Changeset.CheckinNote,
+                                                 Comment = x.Changeset.Comment,
+                                                 Committer = x.Changeset.Committer,
+                                                 CommitterDisplayName = x.Changeset.CommitterDisplayName,
+                                                 CreationDate = x.Changeset.CreationDate,
+                                                 Owner = x.Changeset.Owner,
+                                                 OwnerDisplayName = x.Changeset.Owner,
+                                                 AssociatedWorkItems = x.Changeset.AssociatedWorkItems
+                                             }).ToArray(),
+                                             Project = project
+                                         });
+                                     }
+                                 }
+                                 catch (Exception ex)
+                                 {
+                                     Trace.WriteLine(ex.Message);
+                                 }
+                             });
 
             var changeSetId = listResponseProject.SelectMany(x => x.MergeCandidates)
                                .SelectMany(x => x.AssociatedWorkItems.Select(y => new WorkItemLinkInfo

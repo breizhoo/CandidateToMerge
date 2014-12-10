@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -84,12 +85,14 @@ namespace WinFormsCandidateToMerge
                 currentProject = list.ElementAt(0).Project;
                 backgroundWorker1.ReportProgress(0);
             }
+            var listProcessed = new List<GetMergeCandidateRequest>();
             var reponseOfMerge = new GetMergeCandidateProcess(_dataSetManipulator.GetTfsUrl(),
                 list)
                 .GetMergeResult(processing: x =>
                 {
+                    listProcessed.Add(x);
                     var index = list.IndexOf(x);
-                    var percent = (int)((decimal)100 / list.Count * index);
+                    var percent = (int)((decimal)100 / list.Count * listProcessed.Count());
                     currentProject = list.ElementAt(index).Project;
                     if (percent > 0)
                         backgroundWorker1.ReportProgress(percent);
