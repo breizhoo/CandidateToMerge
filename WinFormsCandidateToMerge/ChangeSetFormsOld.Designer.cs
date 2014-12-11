@@ -98,6 +98,7 @@
             this.dataListView1.AllColumns.Add(this.olvColumn7);
             this.dataListView1.AllColumns.Add(this.olvColumn8);
             this.dataListView1.AllowColumnReorder = true;
+            this.dataListView1.AlternateRowBackColor = System.Drawing.Color.Gainsboro;
             this.dataListView1.AutoGenerateColumns = false;
             this.dataListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
@@ -113,11 +114,14 @@
             this.dataListView1.FullRowSelect = true;
             this.dataListView1.Location = new System.Drawing.Point(0, 0);
             this.dataListView1.Name = "dataListView1";
+            this.dataListView1.PersistentCheckBoxes = false;
             this.dataListView1.ShowCommandMenuOnRightClick = true;
             this.dataListView1.ShowItemCountOnGroups = true;
             this.dataListView1.Size = new System.Drawing.Size(1276, 523);
+            this.dataListView1.SortGroupItemsByPrimaryColumn = false;
             this.dataListView1.TabIndex = 3;
             this.dataListView1.UseCompatibleStateImageBehavior = false;
+            this.dataListView1.UseFilterIndicator = true;
             this.dataListView1.UseFiltering = true;
             this.dataListView1.View = System.Windows.Forms.View.Details;
             this.dataListView1.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.dataListView1_CellRightClick);
@@ -143,21 +147,18 @@
             // olvColumn3
             // 
             this.olvColumn3.AspectName = "Comment";
-            this.olvColumn3.Groupable = false;
             this.olvColumn3.Text = "Comment";
             this.olvColumn3.Width = 300;
             // 
             // olvColumn4
             // 
             this.olvColumn4.AspectName = "ChangesetId";
-            this.olvColumn4.Groupable = false;
             this.olvColumn4.Text = "ChangesetId";
             this.olvColumn4.Width = 75;
             // 
             // olvColumn5
             // 
             this.olvColumn5.AspectName = "CreationDate";
-            this.olvColumn5.Groupable = false;
             this.olvColumn5.Text = "Creation date";
             this.olvColumn5.Width = 120;
             // 
