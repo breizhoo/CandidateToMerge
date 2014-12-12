@@ -34,7 +34,6 @@
             this.toolStripSeparatorDetail = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.mergeResultBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dsCandidateToMerge2 = new System.Windows.Forms.BindingSource(this.components);
             this.dataListView1 = new BrightIdeasSoftware.DataListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -44,10 +43,13 @@
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.dsCandidateToMerge2 = new System.Windows.Forms.BindingSource(this.components);
+            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mergeResultBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataListView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge2)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -82,11 +84,6 @@
             this.mergeResultBindingSource.DataMember = "MergeResult";
             this.mergeResultBindingSource.DataSource = this.dsCandidateToMerge2;
             // 
-            // dsCandidateToMerge2
-            // 
-            this.dsCandidateToMerge2.DataSource = typeof(WinFormsCandidateToMerge.DsCandidateToMerge);
-            this.dsCandidateToMerge2.Position = 0;
-            // 
             // dataListView1
             // 
             this.dataListView1.AllColumns.Add(this.olvColumn1);
@@ -97,6 +94,8 @@
             this.dataListView1.AllColumns.Add(this.olvColumn5);
             this.dataListView1.AllColumns.Add(this.olvColumn7);
             this.dataListView1.AllColumns.Add(this.olvColumn8);
+            this.dataListView1.AllColumns.Add(this.olvColumn9);
+            this.dataListView1.AllColumns.Add(this.olvColumn10);
             this.dataListView1.AllowColumnReorder = true;
             this.dataListView1.AlternateRowBackColor = System.Drawing.Color.Gainsboro;
             this.dataListView1.AutoGenerateColumns = false;
@@ -108,7 +107,9 @@
             this.olvColumn4,
             this.olvColumn5,
             this.olvColumn7,
-            this.olvColumn8});
+            this.olvColumn8,
+            this.olvColumn9,
+            this.olvColumn10});
             this.dataListView1.DataSource = this.mergeResultBindingSource;
             this.dataListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataListView1.FullRowSelect = true;
@@ -171,6 +172,22 @@
             // 
             this.olvColumn8.AspectName = "StoryName";
             this.olvColumn8.Text = "User Story";
+            this.olvColumn8.Width = 83;
+            // 
+            // dsCandidateToMerge2
+            // 
+            this.dsCandidateToMerge2.DataSource = typeof(WinFormsCandidateToMerge.DsCandidateToMerge);
+            this.dsCandidateToMerge2.Position = 0;
+            // 
+            // olvColumn9
+            // 
+            this.olvColumn9.AspectName = "FeatureId";
+            this.olvColumn9.Text = "FeatureId";
+            // 
+            // olvColumn10
+            // 
+            this.olvColumn10.AspectName = "StoryId";
+            this.olvColumn10.Text = "StoryId";
             // 
             // ChangeSetFormsOld
             // 
@@ -183,8 +200,8 @@
             this.Text = "ChangeSet Results";
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mergeResultBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataListView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsCandidateToMerge2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -206,5 +223,7 @@
         public BrightIdeasSoftware.DataListView dataListView1;
         private BrightIdeasSoftware.OLVColumn olvColumn7;
         private BrightIdeasSoftware.OLVColumn olvColumn8;
+        private BrightIdeasSoftware.OLVColumn olvColumn9;
+        private BrightIdeasSoftware.OLVColumn olvColumn10;
     }
 }

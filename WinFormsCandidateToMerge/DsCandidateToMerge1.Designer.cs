@@ -44,9 +44,9 @@ namespace WinFormsCandidateToMerge {
         
         private WorkItemLinkInfosFeatureDataTable tableWorkItemLinkInfosFeature;
         
-        private global::System.Data.DataRelation relationFK_Project_MergeResult;
-        
         private global::System.Data.DataRelation relationFK_Users_MergeResult;
+        
+        private global::System.Data.DataRelation relationFK_Project_MergeResult;
         
         private global::System.Data.DataRelation relationBranching_MergeResult;
         
@@ -434,8 +434,8 @@ namespace WinFormsCandidateToMerge {
                     this.tableWorkItemLinkInfosFeature.InitVars();
                 }
             }
-            this.relationFK_Project_MergeResult = this.Relations["FK_Project_MergeResult"];
             this.relationFK_Users_MergeResult = this.Relations["FK_Users_MergeResult"];
+            this.relationFK_Project_MergeResult = this.Relations["FK_Project_MergeResult"];
             this.relationBranching_MergeResult = this.Relations["Branching_MergeResult"];
             this.relationMergeIgnore_MergeResult = this.Relations["MergeIgnore_MergeResult"];
             this.relationWorkItems_WorkItemLinkInfosUserStory = this.Relations["WorkItems_WorkItemLinkInfosUserStory"];
@@ -474,13 +474,6 @@ namespace WinFormsCandidateToMerge {
             this.tableWorkItemLinkInfosFeature = new WorkItemLinkInfosFeatureDataTable(false);
             base.Tables.Add(this.tableWorkItemLinkInfosFeature);
             global::System.Data.ForeignKeyConstraint fkc;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_Project_MergeResult", new global::System.Data.DataColumn[] {
-                        this.tableProjects.ProjectColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMergeResult.ProjectColumn});
-            this.tableMergeResult.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.Cascade;
-            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_Users_MergeResult", new global::System.Data.DataColumn[] {
                         this.tableUsers.NameColumn}, new global::System.Data.DataColumn[] {
                         this.tableMergeResult.OwnerColumn});
@@ -488,14 +481,21 @@ namespace WinFormsCandidateToMerge {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            this.relationFK_Project_MergeResult = new global::System.Data.DataRelation("FK_Project_MergeResult", new global::System.Data.DataColumn[] {
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_Project_MergeResult", new global::System.Data.DataColumn[] {
                         this.tableProjects.ProjectColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMergeResult.ProjectColumn}, false);
-            this.Relations.Add(this.relationFK_Project_MergeResult);
+                        this.tableMergeResult.ProjectColumn});
+            this.tableMergeResult.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             this.relationFK_Users_MergeResult = new global::System.Data.DataRelation("FK_Users_MergeResult", new global::System.Data.DataColumn[] {
                         this.tableUsers.NameColumn}, new global::System.Data.DataColumn[] {
                         this.tableMergeResult.OwnerColumn}, false);
             this.Relations.Add(this.relationFK_Users_MergeResult);
+            this.relationFK_Project_MergeResult = new global::System.Data.DataRelation("FK_Project_MergeResult", new global::System.Data.DataColumn[] {
+                        this.tableProjects.ProjectColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMergeResult.ProjectColumn}, false);
+            this.Relations.Add(this.relationFK_Project_MergeResult);
             this.relationBranching_MergeResult = new global::System.Data.DataRelation("Branching_MergeResult", new global::System.Data.DataColumn[] {
                         this.tableBranchs.NameColumn}, new global::System.Data.DataColumn[] {
                         this.tableMergeResult.BranchNameColumn}, false);
@@ -650,9 +650,13 @@ namespace WinFormsCandidateToMerge {
         private void InitExpressions() {
             this.MergeResult.IsToDisplayColumn.Expression = "Parent(FK_Users_MergeResult).IsToScan AND ISNULL(Parent(MergeIgnore_MergeResult)." +
                 "Ignore, 0) = 0";
+            this.MergeResult.FeatureIdColumn.Expression = "iif(count(Child(MergeResult_WorkItemLinkInfosFeature).Id) = 1, Max(Child(MergeRes" +
+                "ult_WorkItemLinkInfosFeature).Id), 0)";
             this.MergeResult.FeatureNameColumn.Expression = "iif(count(Child(MergeResult_WorkItemLinkInfosFeature).SourceName) = 1, Max(Child(" +
                 "MergeResult_WorkItemLinkInfosFeature).SourceName), \'Number of Feature : \' + coun" +
                 "t(Child(MergeResult_WorkItemLinkInfosFeature).SourceName))";
+            this.MergeResult.StoryIdColumn.Expression = "iif(count(Child(MergeResult_WorkItemLinkInfosUserStory).Id) = 1, Max(Child(MergeR" +
+                "esult_WorkItemLinkInfosUserStory).Id), 0)";
             this.MergeResult.StoryNameColumn.Expression = "iif(count(Child(MergeResult_WorkItemLinkInfosUserStory).SourceName) = 1, Max(Chil" +
                 "d(MergeResult_WorkItemLinkInfosUserStory).SourceName), \'Number of UserStory : \' " +
                 "+ count(Child(MergeResult_WorkItemLinkInfosUserStory).SourceName))";
@@ -1016,7 +1020,11 @@ namespace WinFormsCandidateToMerge {
             
             private global::System.Data.DataColumn columnIsToDisplay;
             
+            private global::System.Data.DataColumn columnFeatureId;
+            
             private global::System.Data.DataColumn columnFeatureName;
+            
+            private global::System.Data.DataColumn columnStoryId;
             
             private global::System.Data.DataColumn columnStoryName;
             
@@ -1120,9 +1128,25 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FeatureIdColumn {
+                get {
+                    return this.columnFeatureId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn FeatureNameColumn {
                 get {
                     return this.columnFeatureName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn StoryIdColumn {
+                get {
+                    return this.columnStoryId;
                 }
             }
             
@@ -1171,7 +1195,7 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MergeResultRow AddMergeResultRow(int ChangesetId, UsersRow parentUsersRowByFK_Users_MergeResult, System.DateTime CreationDate, string Comment, ProjectsRow parentProjectsRowByFK_Project_MergeResult, BranchsRow parentBranchsRowByBranching_MergeResult, string IsToDisplay, string FeatureName, string StoryName) {
+            public MergeResultRow AddMergeResultRow(int ChangesetId, UsersRow parentUsersRowByFK_Users_MergeResult, System.DateTime CreationDate, string Comment, ProjectsRow parentProjectsRowByFK_Project_MergeResult, BranchsRow parentBranchsRowByBranching_MergeResult, string IsToDisplay, int FeatureId, string FeatureName, int StoryId, string StoryName) {
                 MergeResultRow rowMergeResultRow = ((MergeResultRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ChangesetId,
@@ -1181,7 +1205,9 @@ namespace WinFormsCandidateToMerge {
                         null,
                         null,
                         IsToDisplay,
+                        FeatureId,
                         FeatureName,
+                        StoryId,
                         StoryName};
                 if ((parentUsersRowByFK_Users_MergeResult != null)) {
                     columnValuesArray[1] = parentUsersRowByFK_Users_MergeResult[0];
@@ -1206,6 +1232,8 @@ namespace WinFormsCandidateToMerge {
                         null,
                         CreationDate,
                         Comment,
+                        null,
+                        null,
                         null,
                         null,
                         null,
@@ -1258,7 +1286,9 @@ namespace WinFormsCandidateToMerge {
                 this.columnProject = base.Columns["Project"];
                 this.columnBranchName = base.Columns["BranchName"];
                 this.columnIsToDisplay = base.Columns["IsToDisplay"];
+                this.columnFeatureId = base.Columns["FeatureId"];
                 this.columnFeatureName = base.Columns["FeatureName"];
+                this.columnStoryId = base.Columns["StoryId"];
                 this.columnStoryName = base.Columns["StoryName"];
             }
             
@@ -1279,8 +1309,12 @@ namespace WinFormsCandidateToMerge {
                 base.Columns.Add(this.columnBranchName);
                 this.columnIsToDisplay = new global::System.Data.DataColumn("IsToDisplay", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIsToDisplay);
+                this.columnFeatureId = new global::System.Data.DataColumn("FeatureId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFeatureId);
                 this.columnFeatureName = new global::System.Data.DataColumn("FeatureName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFeatureName);
+                this.columnStoryId = new global::System.Data.DataColumn("StoryId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStoryId);
                 this.columnStoryName = new global::System.Data.DataColumn("StoryName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnStoryName);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -1291,8 +1325,9 @@ namespace WinFormsCandidateToMerge {
                 this.columnProject.AllowDBNull = false;
                 this.columnBranchName.AllowDBNull = false;
                 this.columnIsToDisplay.ReadOnly = true;
+                this.columnFeatureId.ReadOnly = true;
                 this.columnFeatureName.ReadOnly = true;
-                this.columnFeatureName.Caption = "StoryName";
+                this.columnStoryId.ReadOnly = true;
                 this.columnStoryName.ReadOnly = true;
             }
             
@@ -1319,9 +1354,13 @@ namespace WinFormsCandidateToMerge {
             private void InitExpressions() {
                 this.IsToDisplayColumn.Expression = "Parent(FK_Users_MergeResult).IsToScan AND ISNULL(Parent(MergeIgnore_MergeResult)." +
                     "Ignore, 0) = 0";
+                this.FeatureIdColumn.Expression = "iif(count(Child(MergeResult_WorkItemLinkInfosFeature).Id) = 1, Max(Child(MergeRes" +
+                    "ult_WorkItemLinkInfosFeature).Id), 0)";
                 this.FeatureNameColumn.Expression = "iif(count(Child(MergeResult_WorkItemLinkInfosFeature).SourceName) = 1, Max(Child(" +
                     "MergeResult_WorkItemLinkInfosFeature).SourceName), \'Number of Feature : \' + coun" +
                     "t(Child(MergeResult_WorkItemLinkInfosFeature).SourceName))";
+                this.StoryIdColumn.Expression = "iif(count(Child(MergeResult_WorkItemLinkInfosUserStory).Id) = 1, Max(Child(MergeR" +
+                    "esult_WorkItemLinkInfosUserStory).Id), 0)";
                 this.StoryNameColumn.Expression = "iif(count(Child(MergeResult_WorkItemLinkInfosUserStory).SourceName) = 1, Max(Chil" +
                     "d(MergeResult_WorkItemLinkInfosUserStory).SourceName), \'Number of UserStory : \' " +
                     "+ count(Child(MergeResult_WorkItemLinkInfosUserStory).SourceName))";
@@ -4049,6 +4088,22 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int FeatureId {
+                get {
+                    try {
+                        return ((int)(this[this.tableMergeResult.FeatureIdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FeatureId\' in table \'MergeResult\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMergeResult.FeatureIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string FeatureName {
                 get {
                     try {
@@ -4060,6 +4115,22 @@ namespace WinFormsCandidateToMerge {
                 }
                 set {
                     this[this.tableMergeResult.FeatureNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int StoryId {
+                get {
+                    try {
+                        return ((int)(this[this.tableMergeResult.StoryIdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'StoryId\' in table \'MergeResult\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMergeResult.StoryIdColumn] = value;
                 }
             }
             
@@ -4081,23 +4152,23 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ProjectsRow ProjectsRow {
-                get {
-                    return ((ProjectsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Project_MergeResult"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Project_MergeResult"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public UsersRow UsersRow {
                 get {
                     return ((UsersRow)(this.GetParentRow(this.Table.ParentRelations["FK_Users_MergeResult"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Users_MergeResult"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ProjectsRow ProjectsRow {
+                get {
+                    return ((ProjectsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Project_MergeResult"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Project_MergeResult"]);
                 }
             }
             
@@ -4173,6 +4244,18 @@ namespace WinFormsCandidateToMerge {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFeatureIdNull() {
+                return this.IsNull(this.tableMergeResult.FeatureIdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFeatureIdNull() {
+                this[this.tableMergeResult.FeatureIdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsFeatureNameNull() {
                 return this.IsNull(this.tableMergeResult.FeatureNameColumn);
             }
@@ -4181,6 +4264,18 @@ namespace WinFormsCandidateToMerge {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetFeatureNameNull() {
                 this[this.tableMergeResult.FeatureNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsStoryIdNull() {
+                return this.IsNull(this.tableMergeResult.StoryIdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetStoryIdNull() {
+                this[this.tableMergeResult.StoryIdColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
