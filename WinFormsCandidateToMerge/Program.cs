@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BootStrapper;
-using WinFormsCandidateToMerge.Interface;
 
 namespace WinFormsCandidateToMerge
 {
@@ -22,7 +21,7 @@ namespace WinFormsCandidateToMerge
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var mainForms = ioc.GetInstance<IMainForm>();
+            var mainForms = ioc.GetInstance<CandidateToMerge>();
             Application.Run((Form)mainForms);
         }
     }

@@ -9,11 +9,10 @@ using BootStrapper;
 using BrightIdeasSoftware;
 using Core.Interface;
 using WeifenLuo.WinFormsUI.Docking;
-using WinFormsCandidateToMerge.Interface;
 
 namespace WinFormsCandidateToMerge
 {
-    public partial class CandidateToMerge : Form, IMainForm
+    public partial class CandidateToMerge : Form
     {
         private readonly IDataSetManipulator _dataSetManipulator;
         private WaitForms _waitForms;

@@ -4,7 +4,6 @@ using Core.Implementation;
 using Core.Interface;
 using Microsoft.Practices.ServiceLocation;
 using WinFormsCandidateToMerge;
-using WinFormsCandidateToMerge.Interface;
 
 namespace BootStrapper
 {
@@ -16,7 +15,6 @@ namespace BootStrapper
             {
                 x.For<IChangesetVisualizer>().Use<ChangesetVisualizer>();
                 x.For<IServiceLocator>().Use(() => this);
-                x.For<IMainForm>().Use<CandidateToMerge>();
                 x.For<IDataSetManipulator>().Use<DataSetManipulator>().Singleton();
 
                 x.Scan(s => s.Assembly("WindowsFormsLibrarie"));

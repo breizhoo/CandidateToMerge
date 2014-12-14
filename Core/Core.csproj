@@ -115,13 +115,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDataSetManipulator.cs" />
+    <Compile Include="Interface\IDataSetManipulator.cs" />
     <Compile Include="LambdaComparer.cs" />
     <Compile Include="Model\GetMergeResultResponse.cs" />
     <Compile Include="Model\ChangesetInterne.cs" />
     <Compile Include="Implementation\ChangesetVisualizer.cs" />
     <Compile Include="DataExchangeBackgroundWorker.cs" />
-    <Compile Include="DataSerializer.cs" />
+    <Compile Include="Implementation\DataSerializer.cs" />
     <Compile Include="DataSetManipulator.cs" />
     <Compile Include="DsCandidateToMerge.cs">
       <DependentUpon>DsCandidateToMerge.xsd</DependentUpon>
