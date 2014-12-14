@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BootStrapper;
-using WinFormsCandidateToMerge.Interface;
 
-namespace WinFormsCandidateToMerge
+namespace UI
 {
     static class Program
     {
@@ -16,14 +14,9 @@ namespace WinFormsCandidateToMerge
         [STAThread]
         static void Main()
         {
-            var ioc = new Ioc();
-            ioc.Initialization();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            var mainForms = ioc.GetInstance<IMainForm>();
-            Application.Run((Form)mainForms);
+            Application.Run(new Form1());
         }
     }
 }
